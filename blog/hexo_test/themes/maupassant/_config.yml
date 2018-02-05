@@ -1,4 +1,4 @@
-fancybox: true ## If you want to use fancybox please set the value to true.
+fancybox: false ## If you want to use fancybox please set the value to true.
 disqus: ## Your disqus_shortname, e.g. username
 gitment:
   enable: false ## If you want to use Gitment comment system please set the value to true.
@@ -49,16 +49,16 @@ donate:
   paypal_url: ## Paypal URL, e.g. https://paypal.me/tufu9441
 
 menu:
-  - page: Home
+  - page: 首页
     directory: .
     icon: fa-home
-  - page: Archives
+  - page: 文章列表
     directory: archives/
     icon: fa-archive
-  - page: About
+  - page: 关于
     directory: about/
     icon: fa-user
-  - page: RSS
+  - page: 订阅
     directory: atom.xml
     icon: fa-rss
 
