@@ -7,3 +7,7 @@ tags:
 category: 
 - javascript
 ---
+
+### 计划内容
+- 经典问题for循环
+- 函数式编程、柯里化

@@ -6,3 +6,10 @@ tags:
 category: 
 - 自动化
 ---
+
+### 计划写的内容
+- publicPath
+- outputPath
+- contentBase
+- webpack runtime code 
+- 等

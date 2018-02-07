@@ -7,3 +7,7 @@ tags:
 category: 
 - javascript
 ---
+
+### 计划内容
+- bind
+- es5里的，es6里的

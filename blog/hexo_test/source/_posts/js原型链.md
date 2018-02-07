@@ -7,3 +7,7 @@ tags:
 category: 
 - javascript
 ---
+
+- prototype
+- constructor
+- new

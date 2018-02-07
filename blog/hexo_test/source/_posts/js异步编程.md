@@ -7,3 +7,12 @@ tags:
 category: 
 - javascript
 ---
+
+### 计划内容
+- 单线程
+- 事件驱动
+- callback
+- setTimeout、setInterval
+- Promise
+- generator
+- asyn/await
