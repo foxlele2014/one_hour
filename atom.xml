@@ -6,7 +6,7 @@
   <link href="/one_hour/atom.xml" rel="self"/>
   
   <link href="http://www.timeisgone.com/one_hour/"/>
-  <updated>2018-02-07T08:16:37.000Z</updated>
+  <updated>2018-02-07T08:55:07.000Z</updated>
   <id>http://www.timeisgone.com/one_hour/</id>
   
   <author>
@@ -21,9 +21,21 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/js原型链/</id>
     <published>2018-02-07T08:13:17.000Z</published>
-    <updated>2018-02-07T08:16:37.000Z</updated>
+    <updated>2018-02-07T08:55:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>prototype</li><li>constructor</li><li>new</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;prototype&lt;/li&gt;
+&lt;li&gt;constructor&lt;/li&gt;
+&lt;li&gt;new&lt;/li&gt;
+&lt;/ul&gt;
+
+      
     
     </summary>
     
@@ -41,9 +53,22 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/js异步编程/</id>
     <published>2018-02-07T08:11:29.000Z</published>
-    <updated>2018-02-07T08:16:30.000Z</updated>
+    <updated>2018-02-07T08:49:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="计划内容">计划内容</span></h3><ul><li>单线程</li><li>事件驱动</li><li>callback</li><li>setTimeout、setInterval</li><li>Promise</li><li>generator</li><li>asyn/await</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;计划内容&quot;&gt;计划内容&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;单线程&lt;/li&gt;
+&lt;li&gt;事件驱动&lt;/li&gt;
+&lt;li&gt;callback&lt;/li&gt;
+&lt;li&gt;setTimeout、setInterval&lt;/li&gt;
+&lt;li&gt;Promise&lt;/li&gt;
+&lt;li&gt;g
+      
     
     </summary>
     
@@ -61,9 +86,20 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E9%87%8C%E7%9A%84this/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/js里的this/</id>
     <published>2018-02-07T08:09:51.000Z</published>
-    <updated>2018-02-07T08:16:22.000Z</updated>
+    <updated>2018-02-07T08:49:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="计划内容">计划内容</span></h3><ul><li>bind</li><li>es5里的，es6里的</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;计划内容&quot;&gt;计划内容&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;bind&lt;/li&gt;
+&lt;li&gt;es5里的，es6里的&lt;/li&gt;
+&lt;/ul&gt;
+
+      
     
     </summary>
     
@@ -81,9 +117,20 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E9%97%AD%E5%8C%85/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/js闭包/</id>
     <published>2018-02-07T08:09:41.000Z</published>
-    <updated>2018-02-07T08:16:46.000Z</updated>
+    <updated>2018-02-07T08:55:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="计划内容">计划内容</span></h3><ul><li>经典问题for循环</li><li>函数式编程、柯里化</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;计划内容&quot;&gt;计划内容&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;经典问题for循环&lt;/li&gt;
+&lt;li&gt;函数式编程、柯里化&lt;/li&gt;
+&lt;/ul&gt;
+
+      
     
     </summary>
     
@@ -101,9 +148,21 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E4%BA%8B%E4%BB%B6%E6%B5%81/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/事件流/</id>
     <published>2018-02-07T08:09:10.000Z</published>
-    <updated>2018-02-07T08:16:59.000Z</updated>
+    <updated>2018-02-07T08:51:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>冒泡</li><li>捕获</li><li>target、currentTarget</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;冒泡&lt;/li&gt;
+&lt;li&gt;捕获&lt;/li&gt;
+&lt;li&gt;target、currentTarget&lt;/li&gt;
+&lt;/ul&gt;
+
+      
     
     </summary>
     
@@ -121,9 +180,19 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/基础算法/</id>
     <published>2018-02-07T07:43:14.000Z</published>
-    <updated>2018-02-07T07:46:09.000Z</updated>
+    <updated>2018-02-07T08:54:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>快速排序</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;快速排序&lt;/li&gt;
+&lt;/ul&gt;
+
+      
     
     </summary>
     
@@ -139,9 +208,21 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/webpack%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/webpack注意事项/</id>
     <published>2018-02-07T07:40:59.000Z</published>
-    <updated>2018-02-07T07:46:16.000Z</updated>
+    <updated>2018-02-07T08:47:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="计划写的内容">计划写的内容</span></h3><ul><li>publicPath</li><li>outputPath</li><li>contentBase</li><li>webpack runtime code </li><li>等</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;计划写的内容&quot;&gt;计划写的内容&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;publicPath&lt;/li&gt;
+&lt;li&gt;outputPath&lt;/li&gt;
+&lt;li&gt;contentBase&lt;/li&gt;
+&lt;li&gt;webpack runtime code &lt;/li&gt;
+&lt;li
+      
     
     </summary>
     
@@ -157,9 +238,21 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/web%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/web常见的安全问题/</id>
     <published>2018-02-07T07:38:28.000Z</published>
-    <updated>2018-02-07T08:17:11.000Z</updated>
+    <updated>2018-02-07T08:51:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>xss</li><li>csrf</li><li>等</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;xss&lt;/li&gt;
+&lt;li&gt;csrf&lt;/li&gt;
+&lt;li&gt;等&lt;/li&gt;
+&lt;/ul&gt;
+
+      
     
     </summary>
     
@@ -175,9 +268,22 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/在浏览器输入URL后发生了什么/</id>
     <published>2018-02-07T07:37:32.000Z</published>
-    <updated>2018-02-07T07:45:47.000Z</updated>
+    <updated>2018-02-07T08:54:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>相对路径、绝对路径</li><li>http(请求头、状态码)</li><li>dns</li><li>tcp三次握手<br>-</li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;相对路径、绝对路径&lt;/li&gt;
+&lt;li&gt;http(请求头、状态码)&lt;/li&gt;
+&lt;li&gt;dns&lt;/li&gt;
+&lt;li&gt;tcp三次握手&lt;br&gt;-&lt;/li&gt;
+&lt;/ul&gt;
+
+      
     
     </summary>
     
@@ -193,15 +299,21 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/图片格式的区别/</id>
     <published>2018-02-07T07:04:34.000Z</published>
-    <updated>2018-02-07T07:08:35.000Z</updated>
+    <updated>2018-02-07T08:52:37.000Z</updated>
     
-    <content type="html"><![CDATA[<h1><span id="暂存">暂存</span></h1>]]></content>
+    <content type="html"><![CDATA[<ul><li>png（还分几位)</li><li>jpg</li><li>jpeg</li><li>gif</li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1&gt;&lt;span id=&quot;暂存&quot;&gt;暂存&lt;/span&gt;&lt;/h1&gt;
+        &lt;ul&gt;
+&lt;li&gt;png（还分几位)&lt;/li&gt;
+&lt;li&gt;jpg&lt;/li&gt;
+&lt;li&gt;jpeg&lt;/li&gt;
+&lt;li&gt;gif&lt;/li&gt;
+&lt;/ul&gt;
+
       
     
     </summary>
@@ -218,15 +330,18 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/css%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/css奇淫技巧/</id>
     <published>2018-02-07T07:03:22.000Z</published>
-    <updated>2018-02-07T07:10:16.000Z</updated>
+    <updated>2018-02-07T08:48:09.000Z</updated>
     
-    <content type="html"><![CDATA[<h1><span id="暂存">暂存</span></h1>]]></content>
+    <content type="html"><![CDATA[<h3><span id="计划内容">计划内容</span></h3><ul><li>border实现三角小图标</li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1&gt;&lt;span id=&quot;暂存&quot;&gt;暂存&lt;/span&gt;&lt;/h1&gt;
+        &lt;h3&gt;&lt;span id=&quot;计划内容&quot;&gt;计划内容&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;border实现三角小图标&lt;/li&gt;
+&lt;/ul&gt;
+
       
     
     </summary>
@@ -243,15 +358,20 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/css%E5%9F%BA%E7%A1%80%E5%B1%9E%E6%80%A7%E8%A7%A3%E6%9E%90/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/css基础属性解析/</id>
     <published>2018-02-07T07:02:38.000Z</published>
-    <updated>2018-02-07T07:08:51.000Z</updated>
+    <updated>2018-02-07T08:55:42.000Z</updated>
     
-    <content type="html"><![CDATA[<h1><span id="暂存">暂存</span></h1>]]></content>
+    <content type="html"><![CDATA[<h3><span id="计划内容">计划内容</span></h3><ul><li>line-height</li><li>px、em、</li><li>text-align</li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1&gt;&lt;span id=&quot;暂存&quot;&gt;暂存&lt;/span&gt;&lt;/h1&gt;
+        &lt;h3&gt;&lt;span id=&quot;计划内容&quot;&gt;计划内容&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;line-height&lt;/li&gt;
+&lt;li&gt;px、em、&lt;/li&gt;
+&lt;li&gt;text-align&lt;/li&gt;
+&lt;/ul&gt;
+
       
     
     </summary>
