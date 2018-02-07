@@ -4,7 +4,7 @@ date: 2018-02-07 17:03:45
 tags:
 - debug 
 category: 
-- javascript
+- debug
 ---
 
 - wireshark
