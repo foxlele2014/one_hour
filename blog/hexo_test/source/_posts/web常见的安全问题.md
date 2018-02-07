@@ -10,3 +10,4 @@ category:
 - xss
 - csrf
 - 等
+- 解决方法
