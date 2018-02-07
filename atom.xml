@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>一个博客</title>
+  
+  <subtitle>After all,tomorrow is another day.</subtitle>
+  <link href="/one_hour/atom.xml" rel="self"/>
+  
+  <link href="http://www.timeisgone.com/one_hour/"/>
+  <updated>2018-02-07T08:16:37.000Z</updated>
+  <id>http://www.timeisgone.com/one_hour/</id>
+  
+  <author>
+    <name>limin</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js原型链</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/js原型链/</id>
+    <published>2018-02-07T08:13:17.000Z</published>
+    <updated>2018-02-07T08:16:37.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://www.timeisgone.com/one_hour/categories/javascript/"/>
+    
+    
+      <category term="js" scheme="http://www.timeisgone.com/one_hour/tags/js/"/>
+    
+      <category term="原型链" scheme="http://www.timeisgone.com/one_hour/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js异步编程</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/js异步编程/</id>
+    <published>2018-02-07T08:11:29.000Z</published>
+    <updated>2018-02-07T08:16:30.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://www.timeisgone.com/one_hour/categories/javascript/"/>
+    
+    
+      <category term="js" scheme="http://www.timeisgone.com/one_hour/tags/js/"/>
+    
+      <category term="异步编程" scheme="http://www.timeisgone.com/one_hour/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js里的this</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E9%87%8C%E7%9A%84this/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/js里的this/</id>
+    <published>2018-02-07T08:09:51.000Z</published>
+    <updated>2018-02-07T08:16:22.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://www.timeisgone.com/one_hour/categories/javascript/"/>
+    
+    
+      <category term="js" scheme="http://www.timeisgone.com/one_hour/tags/js/"/>
+    
+      <category term="this" scheme="http://www.timeisgone.com/one_hour/tags/this/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js闭包</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/js%E9%97%AD%E5%8C%85/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/js闭包/</id>
+    <published>2018-02-07T08:09:41.000Z</published>
+    <updated>2018-02-07T08:16:46.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://www.timeisgone.com/one_hour/categories/javascript/"/>
+    
+    
+      <category term="js" scheme="http://www.timeisgone.com/one_hour/tags/js/"/>
+    
+      <category term="闭包" scheme="http://www.timeisgone.com/one_hour/tags/%E9%97%AD%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>事件流</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E4%BA%8B%E4%BB%B6%E6%B5%81/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/事件流/</id>
+    <published>2018-02-07T08:09:10.000Z</published>
+    <updated>2018-02-07T08:16:59.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://www.timeisgone.com/one_hour/categories/javascript/"/>
+    
+    
+      <category term="js" scheme="http://www.timeisgone.com/one_hour/tags/js/"/>
+    
+      <category term="事件流" scheme="http://www.timeisgone.com/one_hour/tags/%E4%BA%8B%E4%BB%B6%E6%B5%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基础算法</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/基础算法/</id>
+    <published>2018-02-07T07:43:14.000Z</published>
+    <updated>2018-02-07T07:46:09.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="算法" scheme="http://www.timeisgone.com/one_hour/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构" scheme="http://www.timeisgone.com/one_hour/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack注意事项</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/webpack%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/webpack注意事项/</id>
+    <published>2018-02-07T07:40:59.000Z</published>
+    <updated>2018-02-07T07:46:16.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="自动化" scheme="http://www.timeisgone.com/one_hour/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+    
+      <category term="webpack" scheme="http://www.timeisgone.com/one_hour/tags/webpack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web常见的安全问题</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/web%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/web常见的安全问题/</id>
+    <published>2018-02-07T07:38:28.000Z</published>
+    <updated>2018-02-07T08:17:11.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="web安全" scheme="http://www.timeisgone.com/one_hour/categories/web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="web安全" scheme="http://www.timeisgone.com/one_hour/tags/web%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在浏览器输入URL后发生了什么</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/在浏览器输入URL后发生了什么/</id>
+    <published>2018-02-07T07:37:32.000Z</published>
+    <updated>2018-02-07T07:45:47.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="科普" scheme="http://www.timeisgone.com/one_hour/categories/%E7%A7%91%E6%99%AE/"/>
+    
+    
+      <category term="http" scheme="http://www.timeisgone.com/one_hour/tags/http/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图片格式的区别</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/图片格式的区别/</id>
+    <published>2018-02-07T07:04:34.000Z</published>
+    <updated>2018-02-07T07:08:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1><span id="暂存">暂存</span></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;&lt;span id=&quot;暂存&quot;&gt;暂存&lt;/span&gt;&lt;/h1&gt;
+      
+    
+    </summary>
+    
+      <category term="科普" scheme="http://www.timeisgone.com/one_hour/categories/%E7%A7%91%E6%99%AE/"/>
+    
+    
+      <category term="图片" scheme="http://www.timeisgone.com/one_hour/tags/%E5%9B%BE%E7%89%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css奇淫技巧</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/css%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/css奇淫技巧/</id>
+    <published>2018-02-07T07:03:22.000Z</published>
+    <updated>2018-02-07T07:10:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1><span id="暂存">暂存</span></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;&lt;span id=&quot;暂存&quot;&gt;暂存&lt;/span&gt;&lt;/h1&gt;
+      
+    
+    </summary>
+    
+      <category term="css" scheme="http://www.timeisgone.com/one_hour/categories/css/"/>
+    
+    
+      <category term="奇淫技巧" scheme="http://www.timeisgone.com/one_hour/tags/%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css基础属性解析</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/css%E5%9F%BA%E7%A1%80%E5%B1%9E%E6%80%A7%E8%A7%A3%E6%9E%90/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/css基础属性解析/</id>
+    <published>2018-02-07T07:02:38.000Z</published>
+    <updated>2018-02-07T07:08:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1><span id="暂存">暂存</span></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;&lt;span id=&quot;暂存&quot;&gt;暂存&lt;/span&gt;&lt;/h1&gt;
+      
+    
+    </summary>
+    
+      <category term="css" scheme="http://www.timeisgone.com/one_hour/categories/css/"/>
+    
+    
+      <category term="基础属性" scheme="http://www.timeisgone.com/one_hour/tags/%E5%9F%BA%E7%A1%80%E5%B1%9E%E6%80%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>页面布局</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/07/页面布局/</id>
+    <published>2018-02-07T03:32:38.000Z</published>
+    <updated>2018-02-07T08:18:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h3><span id="盒模型">盒模型</span></h3><h3><span id="flex布局">flex布局</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">display</span><span class="selector-pseudo">:flex</span>;</span><br></pre></td></tr></table></figure><h3><span id="定位">定位</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*relative|fixed|static*/</span></span><br><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>;</span><br></pre></td></tr></table></figure><h3><span id="float布局">float布局</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*right|none*/</span></span><br><span class="line"><span class="selector-tag">float</span><span class="selector-pseudo">:left</span>;</span><br></pre></td></tr></table></figure><h4><span id="bfc">BFC</span></h4><h4><span id="清除浮动">清除浮动</span></h4><h3><span id="圣杯布局">圣杯布局</span></h3><h3><span id="双飞翼布局">双飞翼布局</span></h3><h3><span id="响应式布局">响应式布局</span></h3><h3><span id="元素居中">元素居中</span></h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h3&gt;&lt;span id=&quot;盒模型&quot;&gt;盒模型&lt;/span&gt;&lt;/h3&gt;&lt;h3&gt;&lt;span id=&quot;flex布局&quot;&gt;flex布局&lt;/span&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
+      
+    
+    </summary>
+    
+      <category term="css" scheme="http://www.timeisgone.com/one_hour/categories/css/"/>
+    
+    
+      <category term="flex" scheme="http://www.timeisgone.com/one_hour/tags/flex/"/>
+    
+      <category term="float" scheme="http://www.timeisgone.com/one_hour/tags/float/"/>
+    
+      <category term="前端" scheme="http://www.timeisgone.com/one_hour/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="布局" scheme="http://www.timeisgone.com/one_hour/tags/%E5%B8%83%E5%B1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>test hexo</title>
+    <link href="http://www.timeisgone.com/one_hour/2018/02/05/test/"/>
+    <id>http://www.timeisgone.com/one_hour/2018/02/05/test/</id>
+    <published>2018-02-05T06:53:58.000Z</published>
+    <updated>2018-02-07T07:48:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>诞生日：2018/02/05<br><img src="/one_hour/img/girl.jpeg" alt="image"></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;诞生日：2018/02/05&lt;br&gt;&lt;img src=&quot;/one_hour/img/girl.jpeg&quot; alt=&quot;image&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      
+    
+    </summary>
+    
+      <category term="test" scheme="http://www.timeisgone.com/one_hour/categories/test/"/>
+    
+    
+      <category term="test" scheme="http://www.timeisgone.com/one_hour/tags/test/"/>
+    
+  </entry>
+  
+</feed>
