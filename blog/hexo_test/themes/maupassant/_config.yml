@@ -68,15 +68,11 @@ widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts
   - tag
   - recent_posts
 ##  - recent_comments
- ## - links
+  - links
 
 links:
-  - title: site-name1
-    url: http://www.example1.com/
-  - title: site-name2
-    url: http://www.example2.com/
-  - title: site-name3
-    url: http://www.example3.com/
+  - title: 一丝冰凉
+    url: http://www.iyunlu.com/view/
 
 timeline:
   - num: 1
