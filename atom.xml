@@ -487,9 +487,9 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/css%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/css奇淫技巧/</id>
     <published>2018-02-07T07:03:22.000Z</published>
-    <updated>2018-02-07T08:48:09.000Z</updated>
+    <updated>2018-02-07T09:35:19.000Z</updated>
     
-    <content type="html"><![CDATA[<h3><span id="计划内容">计划内容</span></h3><ul><li>border实现三角小图标</li></ul>]]></content>
+    <content type="html"><![CDATA[<h3><span id="计划内容">计划内容</span></h3><ul><li>border实现三角小图标</li><li>display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果</li></ul>]]></content>
     
     <summary type="html">
     
@@ -497,6 +497,7 @@
       
         &lt;h3&gt;&lt;span id=&quot;计划内容&quot;&gt;计划内容&lt;/span&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;border实现三角小图标&lt;/li&gt;
+&lt;li&gt;display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果&lt;/li&gt;
 &lt;/ul&gt;
 
       
@@ -545,9 +546,9 @@
     <link href="http://www.timeisgone.com/one_hour/2018/02/07/%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/"/>
     <id>http://www.timeisgone.com/one_hour/2018/02/07/页面布局/</id>
     <published>2018-02-07T03:32:38.000Z</published>
-    <updated>2018-02-07T08:18:45.000Z</updated>
+    <updated>2018-02-08T07:17:34.000Z</updated>
     
-    <content type="html"><![CDATA[<p>[TOC]</p><h3><span id="盒模型">盒模型</span></h3><h3><span id="flex布局">flex布局</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">display</span><span class="selector-pseudo">:flex</span>;</span><br></pre></td></tr></table></figure><h3><span id="定位">定位</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*relative|fixed|static*/</span></span><br><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>;</span><br></pre></td></tr></table></figure><h3><span id="float布局">float布局</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*right|none*/</span></span><br><span class="line"><span class="selector-tag">float</span><span class="selector-pseudo">:left</span>;</span><br></pre></td></tr></table></figure><h4><span id="bfc">BFC</span></h4><h4><span id="清除浮动">清除浮动</span></h4><h3><span id="圣杯布局">圣杯布局</span></h3><h3><span id="双飞翼布局">双飞翼布局</span></h3><h3><span id="响应式布局">响应式布局</span></h3><h3><span id="元素居中">元素居中</span></h3>]]></content>
+    <content type="html"><![CDATA[<p>[TOC]</p><h3><span id="盒模型">盒模型</span></h3><h3><span id="flex布局">flex布局</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">display</span><span class="selector-pseudo">:flex</span>;</span><br></pre></td></tr></table></figure><h3><span id="定位">定位</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*relative|fixed|static*/</span></span><br><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:absolute</span>;</span><br></pre></td></tr></table></figure><h3><span id="float布局">float布局</span></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*right|none*/</span></span><br><span class="line"><span class="selector-tag">float</span><span class="selector-pseudo">:left</span>;</span><br></pre></td></tr></table></figure><h4><span id="bfc">BFC</span></h4><h4><span id="闭合浮动">闭合浮动</span></h4><h3><span id="圣杯布局">圣杯布局</span></h3><h3><span id="双飞翼布局">双飞翼布局</span></h3><h3><span id="响应式布局">响应式布局</span></h3><h3><span id="元素居中">元素居中</span></h3>]]></content>
     
     <summary type="html">
     
