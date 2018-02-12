@@ -7,6 +7,6 @@ category:
 - debug
 ---
 
-- wireshark
-- pc端和移动端调试
-- node调试方法
+- [ ] wireshark
+- [ ] pc端和移动端调试
+- [ ] node调试方法

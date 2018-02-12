@@ -7,6 +7,8 @@ category:
 - css
 ---
 
-### 计划内容
-- border实现三角小图标
-- display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果
+### border实现三角小图标
+- 原理
+
+### display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果
+
