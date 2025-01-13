@@ -155,6 +155,200 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
+            <a href="/one_hour/2025/01/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/">数据分析的学习路径</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="发表于 2025.01.13"><i class="far fa-calendar-alt"></i> 2025.01.13</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="更新于 2025.01.13"><i class="far fa-calendar-check"></i> 2025.01.13</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">254 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><ol>
+<li><p>数据的收集和预处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例：文本数据处理</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_text</span>(<span class="params">text</span>):</span><br><span class="line">    <span class="comment"># 分词</span></span><br><span class="line">    tokens = nltk.word_tokenize(text)</span><br><span class="line">    <span class="comment"># 词性标注</span></span><br><span class="line">    tagged = nltk.pos_tag(tokens)</span><br><span class="line">    <span class="keyword">return</span> tagged</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取语料库</span></span><br><span class="line">  data = pd.read_csv(<span class="string">&#x27;corpus.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语法规则分析</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 统计语法模式</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">analyze_patterns</span>(<span class="params">sentences</span>):</span><br><span class="line">    patterns = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> sent <span class="keyword">in</span> sentences:</span><br><span class="line">        <span class="comment"># 例如：分析 &quot;is + article + noun&quot; 模式</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;is a teacher&quot;</span> <span class="keyword">in</span> sent:</span><br><span class="line">            patterns[<span class="string">&#x27;is_a_noun&#x27;</span>] = patterns.get(<span class="string">&#x27;is_a_noun&#x27;</span>, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> patterns</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>机器学习模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文本向量化</span></span><br><span class="line">vectorizer = TfidfVectorizer()</span><br><span class="line">X = vectorizer.fit_transform(texts)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练测试集分割</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用工具和库：<br>数据处理：Pandas, NumPy<br>文本处理：NLTK, SpaCy<br>机器学习：Scikit-learn<br>深度学习：PyTorch, TensorFlow</p>
+</li>
+</ol>
+<h2 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h2><ol>
+<li>网络爬虫采集</li>
+<li>官网开放数据集<br>Common Crawl（网页数据）<br>Wikipedia dumps（维基百科数据）<br>各国政府开放数据平台<br>研究机构发布的语料库</li>
+<li>付费数据服务<br>API 服务<br>数据供应商<br>专业数据平台</li>
+</ol>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
+            <a href="/one_hour/2025/01/13/%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D%E8%AE%B0%E5%BD%951/">英语单词记录1</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="发表于 2025.01.13"><i class="far fa-calendar-alt"></i> 2025.01.13</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="更新于 2025.01.13"><i class="far fa-calendar-check"></i> 2025.01.13</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E8%8B%B1%E8%AF%AD/">英语</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.9k 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">7 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <p>老外常说的I have company是啥意思？<br>01<br> company</p>
+<p>经常看美剧的同学一定遇到过一句台词：<br>I have company.</p>
+<p>这是啥意思？我有一家公司吗？</p>
+<p>这么理解的话就大错特错了。<br>company 作「公司」讲时，是可数名词。<br>而可数名词不能裸奔，使用时前面要么加上a &#x2F; an &#x2F; the或物主代词（比如my），要么后面加s，以复数形式出现。</p>
+<p>因此「我有公司」的正确写法是：I have a company. 或者 I have companies.</p>
+<p>而I have company 中的company 是不可数名词。</p>
+<p>company 作不可数名词时，是「陪伴」的意思。<br>图片<br>I have company 直译就是：我有陪伴了。<br>说人话就是：我有人陪。我有客人。</p>
+<p>我们来看两个美剧里的例子：图片Would you put on some pants? We have company.<br>图片Now? You want to come over now? You have company.<br>我把《绝望的主妇》这个片段剪辑下来，大家看一看~<br>再比如《经济学人》一篇关于老龄化的文章有这样一句话：<br>Nearly half of Britons over the age of 65 say that television or pets are their main form of company.<br>近一半65岁以上的英国人称陪伴自己最多的是电视机或宠物。<br>很多同学经常问我：明明文章都读懂了，为什么还是做不对题？<br>但如果你回头仔细精读原文，就会发现，99%的情况都是——你误以为自己读懂了文章，但其实很多细节都完全理解错了。<br>其中，最容易出错的地方之一就是「熟词僻义」或者说「一词多义」。 </p>
+<p>一些看似简单的词有着你完全陌生的意思，一旦理解错，整个句子就变得不知所云。</p>
+<p>因此，我们在积累单词的时候，不仅要追求词汇的广度，也要关注词汇的深度，要把高频词的常见意思都记一记，而且要放在语境里去记忆。<br>我们再回到company这个词：<br>company 作此义讲时，还有几个高频搭配：<br>enjoy one’s company 喜欢某人的陪伴，喜欢和某人在一起<br>keep sb’s company 陪伴某人<br>in the company of sb 和某人在一起，相当于with sb。</p>
+<p>再提醒一下大家，背单词要以词组为单位，不要一个词一个词去记，而是要一个词组、一个词组去记。</p>
+<p>背单词的时候就要把一个词常见的搭配（尤其是介词搭配）都记一记、有个印象，放在语境里才能快速识别出来。</p>
+<p>我们来看几个例句：<br>I felt nervous in the company of such an important man.<br>和这么一个重要人物在一起我感到很不自在。<br>图片Did you tell Clara that you enjoyed the dog’s company more than hers?<br>图片And I was wondering if you’d like to keep her company this evening?</p>
+<p>再分享一句我很喜欢的台词：<br>图片You can never be lonely with the company of a good book.</p>
+<p>再给同学们讲一讲它的同根词，大家串联起来一起记忆，事半功倍：</p>
+<p>02<br> companion</p>
+<p>companion [kəmˈpænjən] 为可数名词，指「同伴，伴侣」(someone you spend a lot of time with, especially a friend)，有时候可以替换friend。<br>举个BBC版《小妇人》里的例子：<br>图片And she says that she needs a companion for her daughter Florence.<br>图片<br>Almost as soon as I entered the house, I singled you out as the companion of my future life.</p>
+<p>我们在可爱又心酸，做纸板狗的中国大学生 | 外媒说里也遇见过这个词：<br>In an attempt to ease their woes, students across the nation have begun making handicraft animal companions out of recycled cardboard.<br>为排解苦闷，全国各地的大学生开始利用废纸箱，制作手工宠物玩伴。</p>
+<p>考研英语2005年Text 1的一个选项里也出现过这个词：<br>图片<br>[D] more generous than their male companions.比她们的雄性同伴更慷慨</p>
+<p>03<br> companionship</p>
+<p>companionship [kəmˈpænjənʃɪp] 为不可数名词，指「友谊，情谊」(Companionship is having someone you know and like with you, rather than being on your own)。</p>
+<p>与company相比，companionship 描述人与人之间更深层次的情感纽带，比如家人、朋友、恋人间的关系。</p>
+<p>而 company 既可以指家人、朋友、恋人的陪伴，也可以指临时的陪伴。</p>
+<p>我们来看几个英美剧里的例子，体会一下：<br>图片Look, all I am saying is (that) wanting companionship is not shameful.<br>图片<br>You live alone, Mr Knightley and I do not think it possible for a man to appreciate how much a woman needs the companionship of another woman. Emma will miss company dreadfully.<br>我们在缅北诈骗集团猖獗，外媒如何报道？也遇见过这个词：<br>The financial victims of the online scams, which revolve around illusory promises of love and companionship, are global.<br>这些网络骗局的受害者遍布全球。骗子会假装与受害人交朋友、谈恋爱，然后再进行诈骗。</p>
+<p>考研英语二2015年 Part B也考过这个词：<br>You may have a circle of friends who provide constant good humor, help and companionship.<br>你身边可能有一个朋友圈子，给你持续提供好心情，帮助以及陪伴。</p>
+<p>04<br> accompany</p>
+<p>accompany [əˈkʌmpəni] 为动词，后面跟人时，指「陪伴某人」，跟物时，指「伴随，与…同时发生」。<br>比如《经济学人》一篇关于医疗技术的文章有这样一句话：<br>As with all new technologies, pitfalls accompany the promise.<br>和所有的新技术一样，陷阱总是与希望相伴而来。</p>
+<p>这句话可以背下来，用来作为论述科技的好处到科技的坏处的过渡句。<br>图片I had DJ very young, so as a child, she always accompanied me on the road.<br>图片<br>Aunt March is very ill, so Laurie will accompany them.</p>
+<p>关于accompany 还有一个高频句式：<br>A，accompanied with &#x2F; by B, does sth. 表示「A，加上B，如何如何」。注意谓语动词的单复数由主语A决定。<br>比如《经济学人》一篇关于中国人口下降的文章有这样一句话：<br>This relaxation—accompanied by a slew of incentives to have children, ranging from cash handouts to tax breaks and longer maternity leave—has had little impact.<br>和政策一同到来的还有现金补贴、减税、产假延长等一系列生娃激励举措。但几乎并未溅起什么水花。<br>我们在第5季还讲过一系列类似的表达，大家顺便复习一下：<br>A, coupled with B, does sth.<br>A, combined with B, does sth.<br>A, paired with B, does sth.</p>
+<p>accompany sb 还可以指「为…伴奏」。<br>图片Edie is going to accompany me on guitar.<br>图片Not exactly. I am accompanying the first graders.</p>
+<p>05<br> accompanying</p>
+<p>accompanying [əˈkʌmpəniɪŋ] 是个形容词，指「随之而来的，附带的」。</p>
+<p>我们来看个剑桥雅思7里的例子：<br>The road improvements and accompanying maintenance system had helped make the district centre accessible throughout the year.<br>道路状况的改善以及配套的道路养护制度已经使得人们全年都可到达地区中心。<br>再来看两个考研英语里的例子：<br>Finally, the public （including other scientists） receives the new discovery and possibly accompanying technology.<br>最后，公众（包括其他科学家）接受这个新发现以及可能随之而来的技术。（考研英语一 2012年 Text 3）<br>Nearly 40% of the roughly 350 people who responded to an accompanying poll said, they had collaborated with artists；and almost all said they would consider doing so in future.<br>在大约350名接受随文所附问卷调查的人中，有近40%的人表示，他们曾与艺术家合作过；而且几乎所有人都表示他们会考虑在未来与艺术家合作。（考研英语一 2022年 Text 3）</p>
+<p>来源：独霸上海的妖怪</p>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
+            <a href="/one_hour/2025/01/13/%E8%B0%B7%E6%AD%8C%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99/">谷歌插件编写</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="发表于 2025.01.13"><i class="far fa-calendar-alt"></i> 2025.01.13</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="更新于 2025.01.13"><i class="far fa-calendar-check"></i> 2025.01.13</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">367 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <ol>
+<li><p>配置manifest.json 文件（必需）<br>a. 主要是包含基础信息，权限，以及功能组件等<br>b. 插件的配置文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;GitHub Issue Creator&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;快速将选中文本添加到 GitHub Issues&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;storage&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;activeTab&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;contextMenus&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;scripting&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;host_permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;&lt;all_urls&gt;&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;default_popup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.html&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;service_worker&quot;</span><span class="punctuation">:</span> <span class="string">&quot;background.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;module&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;icons&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icons/icon48.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icons/icon128.png&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span> </span><br></pre></td></tr></table></figure></li>
+<li><p>popup相关文件（可选， 假如需要点击插件图标弹出页面）<br>a. popup.html 文件：插件的弹出页面<br>b. popup.js 文件：插件的弹出页面逻辑</p>
+</li>
+<li><p>配置background.js 文件（可选）<br>a. 插件的背景脚本，用于处理插件的后台逻辑<br>b.</p>
+</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li>chrome.storage 类似localStorage， 但是可以跨域， 跨设备， 跨会话（local本地存储，sync同步存储，managed托管存储，大小是100kb，存储操作时异步的）</li>
+<li>chrome.runtime.sendMessage 和 chrome.runtime.onMessage.addListener 用于在插件和后台脚本之间通信</li>
+<li>chrome.runtime.onInstalled.addListener 用于在插件安装时执行一些操作</li>
+<li>chrome.runtime.onStartup.addListener 用于在插件启动时执行一些操作</li>
+<li>chrome.runtime.onConnect.addListener 用于在插件和后台脚本之间建立连接</li>
+<li>chrome.runtime.onConnect.addListener 用于在插件和后台脚本之间建立连接</li>
+</ol>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
             <a href="/one_hour/2025/01/13/cron%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%AE%B0%E5%BD%95/">cron时间格式的记录</a>
           </div>
           <div class="post-meta">
@@ -491,150 +685,6 @@
         
     </div>
     
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/one_hour/2018/02/07/js%E5%8E%9F%E5%9E%8B%E9%93%BE/">js原型链</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/javascript/">javascript</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">3 字</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <ul>
-<li>prototype</li>
-<li>constructor</li>
-<li>new</li>
-</ul>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/one_hour/2018/02/07/js%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">js异步编程</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/javascript/">javascript</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">19 字</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <h3 id="计划内容"><a href="#计划内容" class="headerlink" title="计划内容"></a>计划内容</h3><ul>
-<li>单线程</li>
-<li>事件驱动</li>
-<li>callback</li>
-<li>setTimeout、setInterval</li>
-<li>Promise</li>
-<li>generator</li>
-<li>asyn&#x2F;await</li>
-</ul>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/one_hour/2018/02/07/js%E9%87%8C%E7%9A%84this/">js里的this</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/javascript/">javascript</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">11 字</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <h3 id="计划内容"><a href="#计划内容" class="headerlink" title="计划内容"></a>计划内容</h3><ul>
-<li>bind</li>
-<li>es5里的，es6里的</li>
-</ul>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-    </div>
-    
   </div>
 
 
@@ -657,7 +707,7 @@
 
     <div id="bottom-outer">
   <div id="bottom-inner">
-    © 2024 <i class="fa fa-heart" id="heart"></i> limin
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
     <br />
     Powered by
     <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
