@@ -160,7 +160,7 @@
         <span title="发表于 2025.01.02"><i class="far fa-calendar-alt"></i> 2025.01.02</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="更新于 2025.01.03"><i class="far fa-calendar-check"></i> 2025.01.03</span>
+        <span title="更新于 2025.01.06"><i class="far fa-calendar-check"></i> 2025.01.06</span>
       </div>
      
     
@@ -173,7 +173,7 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">277 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">329 字</span>
            
         
           <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
@@ -188,7 +188,12 @@
         <div><h2 id="数据作为电信号存在哪里"><a href="#数据作为电信号存在哪里" class="headerlink" title="数据作为电信号存在哪里"></a>数据作为电信号存在哪里</h2><ol>
 <li>最基础的存储单元：晶体管和电容器组合<br>  a. 晶体管：能够放大或者控制电流的元器件。三大区域，中间有两个PN结。通过控制一个区域的电压，来达到控制其他两个区域的电流。<br>  b. 电容器：能够存储电荷的元器件。两个电极，中间有一层介质。电容器通电时，电荷会在电极之间的介质积聚。</li>
 <li>内存（RAM）<br>  a. 使用DRAM（动态随机存取存储器）<br>  b. 每个位（bit），由一个晶体管和电容器组成<br>  c. 电容器充电表示1， 放电表示0<br>  d. 需要定期刷新</li>
-<li>怎么定期刷新？（我的疑问是刷新的时候数据不会丢失吗，可能就相当于打扫一样，先将里边的东西放到某个地方，打扫完，再放回去。这个就叫刷新）</li>
+<li>怎么定期刷新？<br>  a. DRAM的刷新过程是通过”读取-重写”操作完成的<br>  b. 刷新时，内存控制器会：<ul>
+<li>读取内存单元中的数据</li>
+<li>立即将数据重新写回该单元</li>
+<li>这个过程会重新给电容充电，防止数据丢失<br>  c. 刷新频率通常是每64ms刷新一次<br>  d. 刷新过程是自动进行的，不会影响正常的数据访问</li>
+</ul>
+</li>
 <li>为什么需要定期刷新？</li>
 <li>那假如我一台电脑很久很久不使用，那里边的数据按理论是会丢失的？</li>
 </ol>
@@ -206,6 +211,10 @@
       
     </div>
     <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/one_hour/2025/01/13/cron%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%AE%B0%E5%BD%95/" >cron时间格式的记录<i class="fa fa-chevron-left"></i></a>
+        </div>
       
       
         <div class="post-nav-next post-nav-item">
