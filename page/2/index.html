@@ -155,7 +155,7 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
-            <a href="/one_hour/2018/02/07/js%E5%8E%9F%E5%9E%8B%E9%93%BE/">js原型链</a>
+            <a href="/one_hour/2018/02/07/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">跨域问题</a>
           </div>
           <div class="post-meta">
             
@@ -177,10 +177,56 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">3 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">6 字</span>
                    
                 
                   <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <ul>
+<li>原理</li>
+<li>解决方法</li>
+</ul>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
+            <a href="/one_hour/2018/02/07/js%E5%8E%9F%E5%9E%8B%E9%93%BE/">js原型链</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="更新于 2025.01.14"><i class="far fa-calendar-check"></i> 2025.01.14</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/javascript/">javascript</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">544 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                        
               </div>
              
@@ -192,6 +238,35 @@
 <li>constructor</li>
 <li>new</li>
 </ul>
+<h2 id="原型链的构成"><a href="#原型链的构成" class="headerlink" title="原型链的构成"></a>原型链的构成</h2><p>对象.<strong>proto</strong> -&gt; 原型对象<br>原型对象.constructor -&gt; 构造函数<br>构造函数.prototype -&gt; 原型对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;张三&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">__proto__</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>);  <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> === <span class="title class_">Person</span>);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原型继承</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">eat</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&#x27; eating&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Dog</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="title class_">Animal</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name);  <span class="comment">// 继承属性</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 继承方法</span></span><br><span class="line"><span class="title class_">Dog</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line"><span class="title class_">Dog</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Dog</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查原型链</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(obj)    <span class="comment">// 获取原型</span></span><br><span class="line">obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;prop&#x27;</span>)    <span class="comment">// 是否自身属性</span></span><br><span class="line">obj <span class="keyword">instanceof</span> <span class="title class_">Constructor</span>     <span class="comment">// 是否在原型链上</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">create</span>(proto)          <span class="comment">// 创建指定原型的对象</span></span><br></pre></td></tr></table></figure>
+<h2 id="属性查找过程"><a href="#属性查找过程" class="headerlink" title="属性查找过程"></a>属性查找过程</h2><p>obj.prop<br>-&gt; obj自身属性<br>-&gt; obj.__proto__属性<br>-&gt; obj.<strong>proto</strong>.__proto__属性<br>-&gt; … 直到null</p>
+<h3 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h3><ul>
+<li>标识对象由哪个构造函数创建</li>
+<li>维护正确的原型链关系</li>
+<li>方便实例识别其构造函数</li>
+</ul>
+<h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><ul>
+<li>创建空对象</li>
+<li>将空对象的__proto__指向构造函数的prototype</li>
+<li>将构造函数的this指向空对象</li>
+<li>执行构造函数</li>
+<li>返回空对象</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// new Person(&#x27;张三&#x27;) 实际上做了：</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">newOperator</span>(<span class="params">Constructor, ...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 1. 创建一个空对象，原型指向构造函数的prototype</span></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Constructor</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 将构造函数的this指向这个对象</span></span><br><span class="line">    <span class="comment">// 3. 执行构造函数</span></span><br><span class="line">    <span class="keyword">const</span> result = <span class="title class_">Constructor</span>.<span class="title function_">apply</span>(obj, args);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 如果构造函数返回对象，则返回该对象</span></span><br><span class="line">    <span class="comment">// 否则返回第一步创建的对象</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">typeof</span> result === <span class="string">&#x27;object&#x27;</span> &amp;&amp; result !== <span class="literal">null</span>) ? result : obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>函数都可以作为构造函数，但是箭头函数不行</li>
+<li>箭头函数没有自己的this</li>
+<li>箭头函数的this是在定义时就确定的，指向外层作用域的this</li>
+<li>箭头函数没有prototype属性</li>
+<li>不能通过call&#x2F;apply&#x2F;bind改变箭头函数的this</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call：立即执行，参数列表</span></span><br><span class="line"><span class="keyword">function</span>.<span class="title function_">call</span>(thisArg, arg1, arg2, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment">// apply：立即执行，参数数组</span></span><br><span class="line"><span class="keyword">function</span>.<span class="title function_">apply</span>(thisArg, [arg1, arg2, ...])</span><br><span class="line"></span><br><span class="line"><span class="comment">// bind：返回新函数，参数列表</span></span><br><span class="line"><span class="keyword">function</span>.<span class="title function_">bind</span>(thisArg, arg1, arg2, ...)</span><br></pre></td></tr></table></figure>
+
+<h2 id="类和原型"><a href="#类和原型" class="headerlink" title="类和原型"></a>类和原型</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6 class</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
              
           </div>
@@ -262,7 +337,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.01.14"><i class="far fa-calendar-check"></i> 2025.01.14</span>
               </div>
              
             
@@ -275,7 +350,7 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">11 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">361 字</span>
                    
                 
                   <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
@@ -288,6 +363,29 @@
                   <h3 id="计划内容"><a href="#计划内容" class="headerlink" title="计划内容"></a>计划内容</h3><ul>
 <li>bind</li>
 <li>es5里的，es6里的</li>
+</ul>
+<h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非严格模式下，this指向全局对象</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);  <span class="comment">// window/global</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 严格模式下，this指向undefined</span></span><br><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);  <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 作为对象方法调用时，this指向该对象</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="title function_">sayHi</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();  <span class="comment">// &#x27;张三&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：方法单独使用会丢失this</span></span><br><span class="line"><span class="keyword">const</span> say = obj.<span class="property">sayHi</span>;</span><br><span class="line"><span class="title function_">say</span>();  <span class="comment">// undefined，this指向全局</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="显式绑定"><a href="#显式绑定" class="headerlink" title="显式绑定"></a>显式绑定</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call/apply/bind 可以指定this</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">greet</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123; <span class="attr">name</span>: <span class="string">&#x27;李四&#x27;</span> &#125;;</span><br><span class="line">greet.<span class="title function_">call</span>(person);    <span class="comment">// &#x27;李四&#x27;</span></span><br><span class="line">greet.<span class="title function_">apply</span>(person);   <span class="comment">// &#x27;李四&#x27;</span></span><br><span class="line">greet.<span class="title function_">bind</span>(person)();  <span class="comment">// &#x27;李四&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数中的this指向新创建的实例</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;王五&#x27;</span>);  <span class="comment">// this指向p</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数没有自己的this，它的this继承自外层作用域的this。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);  <span class="comment">// undefined，this指向全局</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>假如想要在sayHi里读取到obj的name</p>
+<ol>
+<li>使用普通函数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);  <span class="comment">// &#x27;张三&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();  <span class="comment">// &#x27;张三&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>保存外部引用<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;赵六&#x27;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="property">name</span>);  <span class="comment">// 直接引用obj</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><ul>
+<li>new绑定</li>
+<li>显式绑定（call&#x2F;apply&#x2F;bind）</li>
+<li>隐式绑定（对象方法）</li>
+<li>默认绑定（全局&#x2F;undefined）</li>
 </ul>
 
              
@@ -572,54 +670,6 @@
 <li>dns</li>
 <li>tcp三次握手</li>
 <li></li>
-</ul>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/one_hour/2018/02/07/%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/">图片格式的区别</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E7%A7%91%E6%99%AE/">科普</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">8 字</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <ul>
-<li>png（还分几位)</li>
-<li>jpg</li>
-<li>jpeg</li>
-<li>gif</li>
 </ul>
 
              
