@@ -753,7 +753,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.01.17"><i class="far fa-calendar-check"></i> 2025.01.17</span>
               </div>
              
             
@@ -766,10 +766,10 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">13 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">613 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                        
               </div>
              
@@ -782,6 +782,82 @@
 <li>contentBase</li>
 <li>webpack runtime code </li>
 <li>等</li>
+</ul>
+<h3 id="Webpack配置核心概念"><a href="#Webpack配置核心概念" class="headerlink" title="Webpack配置核心概念"></a>Webpack配置核心概念</h3><h4 id="1-路径配置"><a href="#1-路径配置" class="headerlink" title="1. 路径配置"></a>1. 路径配置</h4><h5 id="publicPath（公共路径）"><a href="#publicPath（公共路径）" class="headerlink" title="publicPath（公共路径）"></a>publicPath（公共路径）</h5><ul>
+<li>作用：指定资源的访问路径前缀</li>
+<li>配置位置：output.publicPath<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">  <span class="attr">publicPath</span>: <span class="string">&#x27;/assets/&#x27;</span>, <span class="comment">// 生产环境</span></span><br><span class="line">  <span class="comment">// publicPath: &#x27;/&#x27;, // 开发环境</span></span><br><span class="line">  <span class="comment">// publicPath: &#x27;https://cdn.example.com/&#x27; // CDN环境</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="outputPath（输出路径）"><a href="#outputPath（输出路径）" class="headerlink" title="outputPath（输出路径）"></a>outputPath（输出路径）</h5><ul>
+<li>作用：指定打包文件的输出目录</li>
+<li>配置位置：output.path<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="contentBase（开发服务器静态资源目录）"><a href="#contentBase（开发服务器静态资源目录）" class="headerlink" title="contentBase（开发服务器静态资源目录）"></a>contentBase（开发服务器静态资源目录）</h5><ul>
+<li>作用：配置开发服务器的静态资源访问</li>
+<li>配置位置：devServer.contentBase<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">  <span class="attr">contentBase</span>: path.<span class="title function_">join</span>(dirname, <span class="string">&#x27;public&#x27;</span>),</span><br><span class="line">  <span class="comment">// 支持多个静态资源目录</span></span><br><span class="line">  <span class="attr">contentBase</span>: [</span><br><span class="line">      path.<span class="title function_">join</span>(dirname, <span class="string">&#x27;public&#x27;</span>),</span><br><span class="line">      path.<span class="title function_">join</span>(dirname, <span class="string">&#x27;assets&#x27;</span>)</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-Webpack-Runtime-Code"><a href="#2-Webpack-Runtime-Code" class="headerlink" title="2. Webpack Runtime Code"></a>2. Webpack Runtime Code</h4><h5 id="运行时代码"><a href="#运行时代码" class="headerlink" title="运行时代码"></a>运行时代码</h5><ul>
+<li>作用：管理模块的加载和依赖关系</li>
+<li>优化方案:<ul>
+<li>使用SplitChunksPlugin</li>
+<li>使用DllPlugin</li>
+<li>使用externals</li>
+<li>使用import()</li>
+<li>使用require.ensure</li>
+<li>使用require.include</li>
+<li>使用require.ensure</li>
+<li>使用require.include</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="comment">// 提取运行时代码</span></span><br><span class="line">    <span class="attr">runtimeChunk</span>: &#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;runtime&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 持久化缓存</span></span><br><span class="line">    <span class="attr">moduleIds</span>: <span class="string">&#x27;deterministic&#x27;</span>,</span><br><span class="line">    <span class="attr">chunkIds</span>: <span class="string">&#x27;deterministic&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-常见优化配置"><a href="#3-常见优化配置" class="headerlink" title="3. 常见优化配置"></a>3. 常见优化配置</h4><h5 id="1-分包策略"><a href="#1-分包策略" class="headerlink" title="1. 分包策略"></a>1. 分包策略</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">      <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">      <span class="attr">minSize</span>: <span class="number">20000</span>,</span><br><span class="line">      <span class="attr">minRemainingSize</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">minChunks</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">maxAsyncRequests</span>: <span class="number">30</span>,</span><br><span class="line">      <span class="attr">maxInitialRequests</span>: <span class="number">30</span>,</span><br><span class="line">      <span class="attr">automaticNameDelimiter</span>: <span class="string">&#x27;~&#x27;</span>,</span><br><span class="line">      <span class="attr">enforceSizeThreshold</span>: <span class="number">50000</span>,</span><br><span class="line">      <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">        <span class="attr">vendors</span>: &#123;</span><br><span class="line">          <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">          <span class="attr">priority</span>: -<span class="number">10</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="2-缓存优化"><a href="#2-缓存优化" class="headerlink" title="2. 缓存优化"></a>2. 缓存优化</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].[contenthash].js&#x27;</span>,</span><br><span class="line">    <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name].[contenthash].chunk.js&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 持久化缓存</span></span><br><span class="line">  <span class="attr">cache</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;filesystem&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-开发体验优化"><a href="#3-开发体验优化" class="headerlink" title="3. 开发体验优化"></a>3. 开发体验优化</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">hot</span>: <span class="literal">true</span>, <span class="comment">// 热更新</span></span><br><span class="line">    <span class="attr">open</span>: <span class="literal">true</span>, <span class="comment">// 自动打开浏览器</span></span><br><span class="line">    <span class="attr">compress</span>: <span class="literal">true</span>, <span class="comment">// gzip压缩</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123; <span class="comment">// 接口代理</span></span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;http://localhost:3000&#x27;</span>,</span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123;<span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4-常见问题解决"><a href="#4-常见问题解决" class="headerlink" title="4. 常见问题解决"></a>4. 常见问题解决</h4><h5 id="1-路径问题"><a href="#1-路径问题" class="headerlink" title="1. 路径问题"></a>1. 路径问题</h5><ul>
+<li>publicPath配置不当导致资源404</li>
+<li>开发环境和生产环境路径不一致</li>
+<li>静态资源访问路径错误</li>
+</ul>
+<h5 id="2-缓存问题"><a href="#2-缓存问题" class="headerlink" title="2. 缓存问题"></a>2. 缓存问题</h5><ul>
+<li>文件名hash不更新</li>
+<li>浏览器缓存未清除</li>
+<li>运行时代码频繁变化</li>
+</ul>
+<h5 id="3-性能问题"><a href="#3-性能问题" class="headerlink" title="3. 性能问题"></a>3. 性能问题</h5><ul>
+<li>包体积过大</li>
+<li>首屏加载慢</li>
+<li>重复打包</li>
+</ul>
+<h4 id="5-最佳实践"><a href="#5-最佳实践" class="headerlink" title="5. 最佳实践"></a>5. 最佳实践</h4><ol>
+<li><strong>路径配置</strong></li>
+</ol>
+<ul>
+<li>开发环境使用相对路径</li>
+<li>生产环境根据部署策略配置</li>
+<li>CDN路径配置时注意版本控制</li>
+</ul>
+<ol start="2">
+<li><strong>缓存策略</strong></li>
+</ol>
+<ul>
+<li>合理使用contenthash</li>
+<li>提取运行时代码</li>
+<li>配置持久化缓存</li>
+</ul>
+<ol start="3">
+<li><strong>开发优化</strong></li>
+</ol>
+<ul>
+<li>启用热更新</li>
+<li>配置合适的source-map</li>
+<li>使用webpack-bundle-analyzer分析包体积</li>
 </ul>
 
              
@@ -802,7 +878,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.01.17"><i class="far fa-calendar-check"></i> 2025.01.17</span>
               </div>
              
             
@@ -815,10 +891,10 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">7 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">773 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">3 分钟</span>
                                        
               </div>
              
@@ -830,6 +906,105 @@
 <li>csrf</li>
 <li>等</li>
 <li>解决方法</li>
+</ul>
+<h3 id="Web安全问题及防范"><a href="#Web安全问题及防范" class="headerlink" title="Web安全问题及防范"></a>Web安全问题及防范</h3><h4 id="1-XSS（跨站脚本攻击）"><a href="#1-XSS（跨站脚本攻击）" class="headerlink" title="1. XSS（跨站脚本攻击）"></a>1. XSS（跨站脚本攻击）</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><ul>
+<li>攻击者将恶意脚本注入到网页中</li>
+<li>当用户访问页面时，恶意脚本被执行</li>
+<li>可能窃取用户信息、篡改页面内容等</li>
+</ul>
+<h5 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h5><ol>
+<li><strong>存储型XSS</strong></li>
+</ol>
+<ul>
+<li>恶意脚本存储在服务器端</li>
+<li>用户提交数据时，恶意脚本被存储</li>
+<li>其他用户访问页面时，恶意脚本被执行<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例如：用户评论中包含恶意脚本</span></span><br><span class="line"><span class="keyword">const</span> comment = <span class="string">&#x27;&lt;script&gt;alert(&quot;已窃取cookie:&quot; + document.cookie)&lt;/script&gt;&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li><p><strong>反射型XSS</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例如：用户点击恶意链接，恶意脚本被反射到页面</span></span><br><span class="line"><span class="keyword">const</span> url = <span class="string">&#x27;https://example.com?comment=&lt;script&gt;alert(&quot;已窃取cookie:&quot; + document.cookie)&lt;/script&gt;&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p><strong>DOM型XSS</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例如：用户输入恶意脚本，直接在DOM中执行</span></span><br><span class="line"><span class="keyword">const</span> input = <span class="string">&#x27;&lt;script&gt;alert(&quot;已窃取cookie:&quot; + document.cookie)&lt;/script&gt;&#x27;</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;input&#x27;</span>).<span class="property">value</span> = input;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="防范措施"><a href="#防范措施" class="headerlink" title="防范措施"></a>防范措施</h5><ol>
+<li><p>输入过滤</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 过滤特殊字符，如&lt;、&gt;、script等</span></span><br><span class="line"><span class="keyword">const</span> input = input.<span class="title function_">replace</span>(<span class="regexp">/&lt;|&gt;/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出编码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将用户输入的数据进行编码，如HTML实体编码</span></span><br><span class="line"><span class="keyword">const</span> comment = comment.<span class="title function_">replace</span>(<span class="regexp">/&amp;/g</span>, <span class="string">&#x27;&amp;amp;&#x27;</span>).<span class="title function_">replace</span>(<span class="regexp">/&lt;/g</span>, <span class="string">&#x27;&amp;lt;&#x27;</span>).<span class="title function_">replace</span>(<span class="regexp">/&gt;/g</span>, <span class="string">&#x27;&amp;gt;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用CSP（内容安全策略）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 限制允许执行的脚本类型</span></span><br><span class="line"><span class="keyword">const</span> cspHeader = <span class="string">&quot;Content-Security-Policy: script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://apis.example.com&quot;</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="2-CSRF（跨站请求伪造）"><a href="#2-CSRF（跨站请求伪造）" class="headerlink" title="2. CSRF（跨站请求伪造）"></a>2. CSRF（跨站请求伪造）</h4><h5 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h5><ul>
+<li>攻击者诱导用户访问恶意网站</li>
+<li>利用用户已登录的身份发起请求</li>
+<li>在用户不知情的情况下执行操作</li>
+</ul>
+<h5 id="攻击示例"><a href="#攻击示例" class="headerlink" title="攻击示例"></a>攻击示例</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 恶意网站中的图片 --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;http://bank.example.com/transfer?amount=1000&amp;to=attacker&quot;</span> /&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+<h5 id="防范措施-1"><a href="#防范措施-1" class="headerlink" title="防范措施"></a>防范措施</h5><ol>
+<li>CSRF Token<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务端生成token</span></span><br><span class="line"><span class="keyword">const</span> csrfToken = <span class="title function_">generateToken</span>();</span><br><span class="line"><span class="comment">// 在表单中包含token</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;csrf&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;csrfToken&#125;&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+<li>Same-Site Cookie<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置Cookie</span></span><br><span class="line"><span class="title class_">Set</span>-<span class="title class_">Cookie</span>: sessionId=abc123; <span class="title class_">SameSite</span>=<span class="title class_">Strict</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="3-SQL注入"><a href="#3-SQL注入" class="headerlink" title="3. SQL注入"></a>3. SQL注入</h4><h5 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h5><ul>
+<li>将SQL命令插入到输入字段中</li>
+<li>破坏原有SQL语句结构</li>
+<li>执行恶意SQL命令</li>
+</ul>
+<h5 id="攻击示例-1"><a href="#攻击示例-1" class="headerlink" title="攻击示例"></a>攻击示例</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span></span><br><span class="line"><span class="comment">-- 原始查询</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="operator">=</span> <span class="string">&#x27;input&#x27;</span> <span class="keyword">AND</span> password <span class="operator">=</span> <span class="string">&#x27;password&#x27;</span></span><br><span class="line"><span class="comment">-- 注入后</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span><span class="comment">--&#x27; AND password = &#x27;anything&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4-其他安全问题"><a href="#4-其他安全问题" class="headerlink" title="4. 其他安全问题"></a>4. 其他安全问题</h4><h5 id="1-点击劫持"><a href="#1-点击劫持" class="headerlink" title="1. 点击劫持"></a>1. 点击劫持</h5><p>防范：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置X-Frame-Options</span></span><br><span class="line">response.<span class="title function_">setHeader</span>(<span class="string">&#x27;X-Frame-Options&#x27;</span>, <span class="string">&#x27;DENY&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="2-中间人攻击"><a href="#2-中间人攻击" class="headerlink" title="2. 中间人攻击"></a>2. 中间人攻击</h5><p>防范：</p>
+<ul>
+<li>使用HTTPS</li>
+<li>证书校验</li>
+<li>HSTS策略</li>
+</ul>
+<h5 id="3-文件上传漏洞"><a href="#3-文件上传漏洞" class="headerlink" title="3. 文件上传漏洞"></a>3. 文件上传漏洞</h5><p>防范：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 限制文件类型和大小</span></span><br><span class="line"><span class="keyword">const</span> allowedTypes = [<span class="string">&#x27;image/jpeg&#x27;</span>, <span class="string">&#x27;image/png&#x27;</span>];</span><br><span class="line"><span class="keyword">const</span> maxSize = <span class="number">1024</span> * <span class="number">1024</span>; <span class="comment">// 1MB</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-安全最佳实践"><a href="#5-安全最佳实践" class="headerlink" title="5. 安全最佳实践"></a>5. 安全最佳实践</h4><ol>
+<li><strong>通用防护措施</strong></li>
+</ol>
+<ul>
+<li>及时更新依赖包</li>
+<li>使用安全的框架</li>
+<li>开启安全相关的HTTP头部</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常用安全头部</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">helmet</span>()); <span class="comment">// 使用helmet中间件</span></span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li><strong>身份认证</strong></li>
+</ol>
+<ul>
+<li>使用强密码策略</li>
+<li>实现登录失败次数限制</li>
+<li>双因素认证</li>
+</ul>
+<ol start="3">
+<li><strong>数据保护</strong></li>
+</ol>
+<ul>
+<li>敏感数据加密存储</li>
+<li>使用HTTPS传输</li>
+<li>实现适当的访问控制</li>
+</ul>
+<ol start="4">
+<li><strong>日志监控</strong></li>
+</ol>
+<ul>
+<li>记录所有安全事件</li>
+<li>定期审计日志</li>
+<li>实现实时监控和报警</li>
 </ul>
 
              
