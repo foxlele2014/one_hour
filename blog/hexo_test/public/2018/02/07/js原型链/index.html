@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/one_hour/img/favicon.png">
+  
+  
+      <meta name="author" content="limin">
+  
+  
+      <meta name="subtitle" content="After all,tomorrow is another day.">
+  
+  
+      <meta name="description" content="无聊的博客">
+  
+  
+  
+    <link rel="alternate" href="/one_hour/atom.xml " title="一个博客" type="application/atom+xml">
+  
+
+  
+
+  <title>js原型链 | 一个博客</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/one_hour/css/style.css" >
+  <link rel="stylesheet" href="/one_hour/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/one_hour/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/one_hour/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/one_hour/" title="一个博客">一个博客</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">归档</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/tags/ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/about ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/one_hour/"><img src="https://github.com/foxlele2014/boring/assets/7221466/471fdf61-ccc9-4049-9c15-e035936329c3" onerror=this.onerror=null,this.src="/one_hour/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>After all, tomorrow is another day.</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://github.com/foxlele2014" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="mailto:503275769@qq.com" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">js原型链</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="更新于 2025.01.14"><i class="far fa-calendar-check"></i> 2025.01.14</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/javascript/">javascript</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">544 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><ul>
+<li>prototype</li>
+<li>constructor</li>
+<li>new</li>
+</ul>
+<h2 id="原型链的构成"><a href="#原型链的构成" class="headerlink" title="原型链的构成"></a>原型链的构成</h2><p>对象.<strong>proto</strong> -&gt; 原型对象<br>原型对象.constructor -&gt; 构造函数<br>构造函数.prototype -&gt; 原型对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;张三&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p1.<span class="property">__proto__</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>);  <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> === <span class="title class_">Person</span>);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原型继承</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">eat</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&#x27; eating&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Dog</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="title class_">Animal</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name);  <span class="comment">// 继承属性</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 继承方法</span></span><br><span class="line"><span class="title class_">Dog</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line"><span class="title class_">Dog</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Dog</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查原型链</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(obj)    <span class="comment">// 获取原型</span></span><br><span class="line">obj.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;prop&#x27;</span>)    <span class="comment">// 是否自身属性</span></span><br><span class="line">obj <span class="keyword">instanceof</span> <span class="title class_">Constructor</span>     <span class="comment">// 是否在原型链上</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">create</span>(proto)          <span class="comment">// 创建指定原型的对象</span></span><br></pre></td></tr></table></figure>
+<h2 id="属性查找过程"><a href="#属性查找过程" class="headerlink" title="属性查找过程"></a>属性查找过程</h2><p>obj.prop<br>-&gt; obj自身属性<br>-&gt; obj.__proto__属性<br>-&gt; obj.<strong>proto</strong>.__proto__属性<br>-&gt; … 直到null</p>
+<h3 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h3><ul>
+<li>标识对象由哪个构造函数创建</li>
+<li>维护正确的原型链关系</li>
+<li>方便实例识别其构造函数</li>
+</ul>
+<h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><ul>
+<li>创建空对象</li>
+<li>将空对象的__proto__指向构造函数的prototype</li>
+<li>将构造函数的this指向空对象</li>
+<li>执行构造函数</li>
+<li>返回空对象</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// new Person(&#x27;张三&#x27;) 实际上做了：</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">newOperator</span>(<span class="params">Constructor, ...args</span>) &#123;</span><br><span class="line">    <span class="comment">// 1. 创建一个空对象，原型指向构造函数的prototype</span></span><br><span class="line">    <span class="keyword">const</span> obj = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Constructor</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 将构造函数的this指向这个对象</span></span><br><span class="line">    <span class="comment">// 3. 执行构造函数</span></span><br><span class="line">    <span class="keyword">const</span> result = <span class="title class_">Constructor</span>.<span class="title function_">apply</span>(obj, args);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 如果构造函数返回对象，则返回该对象</span></span><br><span class="line">    <span class="comment">// 否则返回第一步创建的对象</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">typeof</span> result === <span class="string">&#x27;object&#x27;</span> &amp;&amp; result !== <span class="literal">null</span>) ? result : obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>函数都可以作为构造函数，但是箭头函数不行</li>
+<li>箭头函数没有自己的this</li>
+<li>箭头函数的this是在定义时就确定的，指向外层作用域的this</li>
+<li>箭头函数没有prototype属性</li>
+<li>不能通过call&#x2F;apply&#x2F;bind改变箭头函数的this</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call：立即执行，参数列表</span></span><br><span class="line"><span class="keyword">function</span>.<span class="title function_">call</span>(thisArg, arg1, arg2, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment">// apply：立即执行，参数数组</span></span><br><span class="line"><span class="keyword">function</span>.<span class="title function_">apply</span>(thisArg, [arg1, arg2, ...])</span><br><span class="line"></span><br><span class="line"><span class="comment">// bind：返回新函数，参数列表</span></span><br><span class="line"><span class="keyword">function</span>.<span class="title function_">bind</span>(thisArg, arg1, arg2, ...)</span><br></pre></td></tr></table></figure>
+
+<h2 id="类和原型"><a href="#类和原型" class="headerlink" title="类和原型"></a>类和原型</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6 class</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">name</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+        
+  </div>
+
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/js/" class="tag">js</a>
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="tag">原型链</a>
+      
+    </div>
+    <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/one_hour/2018/02/07/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" >跨域问题<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/one_hour/2018/02/07/js%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/" >js异步编程<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    <div id="bottom-outer">
+  <div id="bottom-inner">
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
+    <br />
+    Powered by
+    <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
+    <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/"
+      >blank</a
+    >
+    
+    <div class="icp-info">
+      
+      <a href="" target="_blank"> </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/one_hour/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+  <script src="/one_hour/js/local-search.js"></script>
+<script type="text/javascript">      
+  var search_path = "search.xml";
+if (search_path.length == 0) {
+  search_path = "search.xml";
+}
+var path = "/one_hour/" + search_path;
+  searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+  
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/js/firework.js"></script>
+  
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+</html>

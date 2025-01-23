@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/one_hour/img/favicon.png">
+  
+  
+      <meta name="author" content="limin">
+  
+  
+      <meta name="subtitle" content="After all,tomorrow is another day.">
+  
+  
+      <meta name="description" content="无聊的博客">
+  
+  
+  
+    <link rel="alternate" href="/one_hour/atom.xml " title="一个博客" type="application/atom+xml">
+  
+
+  
+
+  <title>页面布局 | 一个博客</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/one_hour/css/style.css" >
+  <link rel="stylesheet" href="/one_hour/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/one_hour/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/one_hour/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/one_hour/" title="一个博客">一个博客</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">归档</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/tags/ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/about ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/one_hour/"><img src="https://github.com/foxlele2014/boring/assets/7221466/471fdf61-ccc9-4049-9c15-e035936329c3" onerror=this.onerror=null,this.src="/one_hour/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>After all, tomorrow is another day.</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://github.com/foxlele2014" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="mailto:503275769@qq.com" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">页面布局</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/css/">css</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">325 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><p><img src= "/one_hour/img/loading.gif" data-src="/one_hour/images/box_pattern.jpeg" alt="box"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* content-box */</span></span><br><span class="line"><span class="attribute">box-sizing</span>:border-box;</span><br></pre></td></tr></table></figure>
+<p>故名思议就是我们在页面定义<code>width</code>以及<code>height</code>的时候如何计算。<br>默认的模型<code>content-box</code>,即定义的就是content里的<code>width</code>、<code>height</code>.<br>IE里的诡异模型即<code>border-box</code>，即定义的<code>width = content+padding+border</code><br><code>height</code>同理。</p>
+<h3 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h3><p><code>vertical-align</code>会失效</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">display</span>:flex;</span><br><span class="line"><span class="comment">/*flex:flex-grow,flex-shrink,flex-basis*/</span></span><br><span class="line"><span class="attribute">flex</span>: <span class="number">2</span> <span class="number">2</span> <span class="number">10%</span>;</span><br><span class="line"><span class="comment">/* 属性</span></span><br><span class="line"><span class="comment">flex-direction</span></span><br><span class="line"><span class="comment">flex-wrap</span></span><br><span class="line"><span class="comment">flex-flow</span></span><br><span class="line"><span class="comment">justify-content</span></span><br><span class="line"><span class="comment">align-items</span></span><br><span class="line"><span class="comment">align-content</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*作用于item</span></span><br><span class="line"><span class="comment">order</span></span><br><span class="line"><span class="comment">flex-grow</span></span><br><span class="line"><span class="comment">flex-shrink</span></span><br><span class="line"><span class="comment">flex-basis</span></span><br><span class="line"><span class="comment">flex</span></span><br><span class="line"><span class="comment">align-self</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*relative|fixed|static*/</span></span><br><span class="line"><span class="attribute">position</span>:absolute;</span><br></pre></td></tr></table></figure>
+<p><code>relative</code>相对于自身，但是自己的位置依旧霸占着<br><code>fixed</code>相对于浏览器窗口<br><code>absolute</code>相对于离他最近的有定位的父元素<br><code>z-index很关键</code></p>
+<h3 id="float布局"><a href="#float布局" class="headerlink" title="float布局"></a>float布局</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*right|none*/</span></span><br><span class="line"><span class="attribute">float</span><span class="selector-pseudo">:left</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h4><h4 id="闭合浮动"><a href="#闭合浮动" class="headerlink" title="闭合浮动"></a>闭合浮动</h4><h3 id="圣杯布局、双飞翼布局"><a href="#圣杯布局、双飞翼布局" class="headerlink" title="圣杯布局、双飞翼布局"></a>圣杯布局、双飞翼布局</h3><p>三栏布局，左右两边固定，中间自适应<br>浮动+负margin</p>
+<h3 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h3><ul>
+<li>Css3 Media Queries<br><code>max-width,min-width,max-device-width</code><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 大于1200px的屏幕则这样子显示 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>:<span class="number">1200px</span>)&#123; </span><br><span class="line">   <span class="selector-class">.style</span>  &#123;</span><br><span class="line">        <span class="attribute">background</span>:<span class="number">#ccc</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>link里的media来指定使用条件<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel= &quot;stylesheet&quot;  media= &quot;only screen and (-webkit-min-device-pixel-ratio: <span class="number">2</span>)<span class="string">&quot;  type= &quot;</span>text/css<span class="string">&quot;  href= &quot;</span>style.css<span class="string">&quot;  /&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>viewport<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; <span class="attribute">content</span>=&quot;<span class="attribute">width</span>=device-<span class="attribute">width</span>, initial-scale=<span class="number">1.0</span>&quot;&gt;</span><br></pre></td></tr></table></figure></li>
+<li>使用百分比定义宽度、em定义字体大小</li>
+</ul>
+<h3 id="元素居中"><a href="#元素居中" class="headerlink" title="元素居中"></a>元素居中</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">flex布局属性介绍</a></p>
+</blockquote>
+</div>
+        
+  </div>
+
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/flex/" class="tag">flex</a>
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/float/" class="tag">float</a>
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/%E5%89%8D%E7%AB%AF/" class="tag">前端</a>
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/%E5%B8%83%E5%B1%80/" class="tag">布局</a>
+      
+    </div>
+    <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/one_hour/2018/02/07/css%E5%9F%BA%E7%A1%80%E5%B1%9E%E6%80%A7%E8%A7%A3%E6%9E%90/" >css基础属性解析<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/one_hour/2018/02/05/test/" >test hexo<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    <div id="bottom-outer">
+  <div id="bottom-inner">
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
+    <br />
+    Powered by
+    <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
+    <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/"
+      >blank</a
+    >
+    
+    <div class="icp-info">
+      
+      <a href="" target="_blank"> </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/one_hour/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+  <script src="/one_hour/js/local-search.js"></script>
+<script type="text/javascript">      
+  var search_path = "search.xml";
+if (search_path.length == 0) {
+  search_path = "search.xml";
+}
+var path = "/one_hour/" + search_path;
+  searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+  
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/js/firework.js"></script>
+  
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+</html>

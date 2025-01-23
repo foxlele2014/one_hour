@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/one_hour/img/favicon.png">
+  
+  
+      <meta name="author" content="limin">
+  
+  
+      <meta name="subtitle" content="After all,tomorrow is another day.">
+  
+  
+      <meta name="description" content="无聊的博客">
+  
+  
+  
+    <link rel="alternate" href="/one_hour/atom.xml " title="一个博客" type="application/atom+xml">
+  
+
+  
+
+  <title>webpack注意事项 | 一个博客</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/one_hour/css/style.css" >
+  <link rel="stylesheet" href="/one_hour/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/one_hour/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/one_hour/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/one_hour/" title="一个博客">一个博客</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">归档</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/tags/ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/about ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/one_hour/"><img src="https://github.com/foxlele2014/boring/assets/7221466/471fdf61-ccc9-4049-9c15-e035936329c3" onerror=this.onerror=null,this.src="/one_hour/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>After all, tomorrow is another day.</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://github.com/foxlele2014" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="mailto:503275769@qq.com" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">webpack注意事项</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="更新于 2025.01.20"><i class="far fa-calendar-check"></i> 2025.01.20</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/">自动化</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.1k 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">5 分钟</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><h3 id="计划写的内容"><a href="#计划写的内容" class="headerlink" title="计划写的内容"></a>计划写的内容</h3><ul>
+<li>publicPath</li>
+<li>outputPath</li>
+<li>contentBase</li>
+<li>webpack runtime code </li>
+<li>等</li>
+</ul>
+<h3 id="Webpack配置核心概念"><a href="#Webpack配置核心概念" class="headerlink" title="Webpack配置核心概念"></a>Webpack配置核心概念</h3><h4 id="1-路径配置"><a href="#1-路径配置" class="headerlink" title="1. 路径配置"></a>1. 路径配置</h4><h5 id="publicPath（公共路径）"><a href="#publicPath（公共路径）" class="headerlink" title="publicPath（公共路径）"></a>publicPath（公共路径）</h5><ul>
+<li>作用：指定资源的访问路径前缀</li>
+<li>配置位置：output.publicPath<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">  <span class="attr">publicPath</span>: <span class="string">&#x27;/assets/&#x27;</span>, <span class="comment">// 生产环境</span></span><br><span class="line">  <span class="comment">// publicPath: &#x27;/&#x27;, // 开发环境</span></span><br><span class="line">  <span class="comment">// publicPath: &#x27;https://cdn.example.com/&#x27; // CDN环境</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="outputPath（输出路径）"><a href="#outputPath（输出路径）" class="headerlink" title="outputPath（输出路径）"></a>outputPath（输出路径）</h5><ul>
+<li>作用：指定打包文件的输出目录</li>
+<li>配置位置：output.path<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="contentBase（开发服务器静态资源目录）"><a href="#contentBase（开发服务器静态资源目录）" class="headerlink" title="contentBase（开发服务器静态资源目录）"></a>contentBase（开发服务器静态资源目录）</h5><ul>
+<li>作用：配置开发服务器的静态资源访问</li>
+<li>配置位置：devServer.contentBase<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">  <span class="attr">contentBase</span>: path.<span class="title function_">join</span>(dirname, <span class="string">&#x27;public&#x27;</span>),</span><br><span class="line">  <span class="comment">// 支持多个静态资源目录</span></span><br><span class="line">  <span class="attr">contentBase</span>: [</span><br><span class="line">      path.<span class="title function_">join</span>(dirname, <span class="string">&#x27;public&#x27;</span>),</span><br><span class="line">      path.<span class="title function_">join</span>(dirname, <span class="string">&#x27;assets&#x27;</span>)</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-Webpack-Runtime-Code"><a href="#2-Webpack-Runtime-Code" class="headerlink" title="2. Webpack Runtime Code"></a>2. Webpack Runtime Code</h4><h5 id="运行时代码"><a href="#运行时代码" class="headerlink" title="运行时代码"></a>运行时代码</h5><ul>
+<li>作用：管理模块的加载和依赖关系</li>
+<li>优化方案:<ul>
+<li>使用SplitChunksPlugin</li>
+<li>使用DllPlugin</li>
+<li>使用externals</li>
+<li>使用import()</li>
+<li>使用require.ensure</li>
+<li>使用require.include</li>
+<li>使用require.ensure</li>
+<li>使用require.include</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="comment">// 提取运行时代码</span></span><br><span class="line">    <span class="attr">runtimeChunk</span>: &#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;runtime&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 持久化缓存</span></span><br><span class="line">    <span class="attr">moduleIds</span>: <span class="string">&#x27;deterministic&#x27;</span>,</span><br><span class="line">    <span class="attr">chunkIds</span>: <span class="string">&#x27;deterministic&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-常见优化配置"><a href="#3-常见优化配置" class="headerlink" title="3. 常见优化配置"></a>3. 常见优化配置</h4><h5 id="1-分包策略"><a href="#1-分包策略" class="headerlink" title="1. 分包策略"></a>1. 分包策略</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">      <span class="attr">chunks</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">      <span class="attr">minSize</span>: <span class="number">20000</span>,</span><br><span class="line">      <span class="attr">minRemainingSize</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">minChunks</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">maxAsyncRequests</span>: <span class="number">30</span>,</span><br><span class="line">      <span class="attr">maxInitialRequests</span>: <span class="number">30</span>,</span><br><span class="line">      <span class="attr">automaticNameDelimiter</span>: <span class="string">&#x27;~&#x27;</span>,</span><br><span class="line">      <span class="attr">enforceSizeThreshold</span>: <span class="number">50000</span>,</span><br><span class="line">      <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">        <span class="attr">vendors</span>: &#123;</span><br><span class="line">          <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">          <span class="attr">priority</span>: -<span class="number">10</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="2-缓存优化"><a href="#2-缓存优化" class="headerlink" title="2. 缓存优化"></a>2. 缓存优化</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].[contenthash].js&#x27;</span>,</span><br><span class="line">    <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name].[contenthash].chunk.js&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 持久化缓存</span></span><br><span class="line">  <span class="attr">cache</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;filesystem&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-开发体验优化"><a href="#3-开发体验优化" class="headerlink" title="3. 开发体验优化"></a>3. 开发体验优化</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">hot</span>: <span class="literal">true</span>, <span class="comment">// 热更新</span></span><br><span class="line">    <span class="attr">open</span>: <span class="literal">true</span>, <span class="comment">// 自动打开浏览器</span></span><br><span class="line">    <span class="attr">compress</span>: <span class="literal">true</span>, <span class="comment">// gzip压缩</span></span><br><span class="line">    <span class="attr">proxy</span>: &#123; <span class="comment">// 接口代理</span></span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;http://localhost:3000&#x27;</span>,</span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123;<span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4-常见问题解决"><a href="#4-常见问题解决" class="headerlink" title="4. 常见问题解决"></a>4. 常见问题解决</h4><h5 id="1-路径问题"><a href="#1-路径问题" class="headerlink" title="1. 路径问题"></a>1. 路径问题</h5><ul>
+<li>publicPath配置不当导致资源404</li>
+<li>开发环境和生产环境路径不一致</li>
+<li>静态资源访问路径错误</li>
+</ul>
+<h5 id="2-缓存问题"><a href="#2-缓存问题" class="headerlink" title="2. 缓存问题"></a>2. 缓存问题</h5><ul>
+<li>文件名hash不更新</li>
+<li>浏览器缓存未清除</li>
+<li>运行时代码频繁变化</li>
+</ul>
+<h5 id="3-性能问题"><a href="#3-性能问题" class="headerlink" title="3. 性能问题"></a>3. 性能问题</h5><ul>
+<li>包体积过大</li>
+<li>首屏加载慢</li>
+<li>重复打包</li>
+</ul>
+<h4 id="5-最佳实践"><a href="#5-最佳实践" class="headerlink" title="5. 最佳实践"></a>5. 最佳实践</h4><ol>
+<li><strong>路径配置</strong></li>
+</ol>
+<ul>
+<li>开发环境使用相对路径</li>
+<li>生产环境根据部署策略配置</li>
+<li>CDN路径配置时注意版本控制</li>
+</ul>
+<ol start="2">
+<li><strong>缓存策略</strong></li>
+</ol>
+<ul>
+<li>合理使用contenthash</li>
+<li>提取运行时代码</li>
+<li>配置持久化缓存</li>
+</ul>
+<ol start="3">
+<li><strong>开发优化</strong></li>
+</ol>
+<ul>
+<li>启用热更新</li>
+<li>配置合适的source-map</li>
+<li>使用webpack-bundle-analyzer分析包体积</li>
+</ul>
+<h3 id="Webpack运行原理及中间件实现"><a href="#Webpack运行原理及中间件实现" class="headerlink" title="Webpack运行原理及中间件实现"></a>Webpack运行原理及中间件实现</h3><h4 id="1-Webpack运行原理"><a href="#1-Webpack运行原理" class="headerlink" title="1. Webpack运行原理"></a>1. Webpack运行原理</h4><h5 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简化版的webpack工作流程</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Webpack</span> &#123;</span><br><span class="line"><span class="title function_">constructor</span>(<span class="params">options</span>) &#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">options</span> = options;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">hooks</span> = &#123;</span><br><span class="line"><span class="comment">// 定义各个生命周期钩子</span></span><br><span class="line"><span class="attr">run</span>: <span class="keyword">new</span> <span class="title class_">SyncHook</span>(),</span><br><span class="line"><span class="attr">emit</span>: <span class="keyword">new</span> <span class="title class_">SyncHook</span>(),</span><br><span class="line"><span class="attr">done</span>: <span class="keyword">new</span> <span class="title class_">SyncHook</span>()</span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="comment">// 1. 读取入口文件</span></span><br><span class="line"><span class="keyword">const</span> entry = <span class="variable language_">this</span>.<span class="property">options</span>.<span class="property">entry</span>;</span><br><span class="line"><span class="comment">// 2. 解析依赖</span></span><br><span class="line"><span class="keyword">const</span> dependencies = <span class="variable language_">this</span>.<span class="title function_">parse</span>(entry);</span><br><span class="line"><span class="comment">// 3. 转换代码</span></span><br><span class="line"><span class="keyword">const</span> transformedCode = <span class="variable language_">this</span>.<span class="title function_">transform</span>(dependencies);</span><br><span class="line"><span class="comment">// 4. 生成bundle</span></span><br><span class="line"><span class="variable language_">this</span>.<span class="title function_">emit</span>(transformedCode);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="中间件机制"><a href="#中间件机制" class="headerlink" title="中间件机制"></a>中间件机制</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Webpack中间件实现</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WebpackMiddleware</span> &#123;</span><br><span class="line"><span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">middlewares</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">use</span>(<span class="params">middleware</span>) &#123;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">middlewares</span>.<span class="title function_">push</span>(middleware);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="title function_">execute</span>(<span class="params">context</span>) &#123;</span><br><span class="line"><span class="comment">// 洋葱模型实现</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">dispatch</span> = <span class="keyword">async</span> (<span class="params">i</span>) =&gt; &#123;</span><br><span class="line"><span class="keyword">if</span> (i === <span class="variable language_">this</span>.<span class="property">middlewares</span>.<span class="property">length</span>) <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">const</span> middleware = <span class="variable language_">this</span>.<span class="property">middlewares</span>[i];</span><br><span class="line"><span class="keyword">await</span> <span class="title function_">middleware</span>(context, <span class="function">() =&gt;</span> <span class="title function_">dispatch</span>(i + <span class="number">1</span>));</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">await</span> <span class="title function_">dispatch</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-自定义Webpack中间件示例"><a href="#2-自定义Webpack中间件示例" class="headerlink" title="2. 自定义Webpack中间件示例"></a>2. 自定义Webpack中间件示例</h4><ul>
+<li>通过tapAsync或tap注册到具体的钩子上</li>
+<li>处理完成后调用callback()继续下一个中间件</li>
+<li>同步操作用tap</li>
+<li>回调式异步用tapAsync</li>
+<li>Promise式异步用tapPromise<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 文件处理中间件</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fileProcessMiddleware</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">async</span> (context, next) =&gt; &#123;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;开始处理文件&#x27;</span>);</span><br><span class="line"><span class="comment">// 处理文件逻辑</span></span><br><span class="line"><span class="keyword">await</span> <span class="title function_">next</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;文件处理完成&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用中间件</span></span><br><span class="line"><span class="keyword">const</span> compiler = <span class="keyword">new</span> <span class="title class_">WebpackMiddleware</span>();</span><br><span class="line">compiler.<span class="title function_">use</span>(<span class="title function_">fileProcessMiddleware</span>());</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 标准的Webpack中间件写法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyMiddleware</span> &#123;</span><br><span class="line">    <span class="title function_">apply</span>(<span class="params">compiler</span>) &#123;</span><br><span class="line">        <span class="comment">// 在不同的钩子上注册处理函数</span></span><br><span class="line">        compiler.<span class="property">hooks</span>.<span class="property">beforeCompile</span>.<span class="title function_">tapAsync</span>(<span class="string">&#x27;MyMiddleware&#x27;</span>, <span class="function">(<span class="params">params, callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 在这里处理beforeCompile阶段的逻辑</span></span><br><span class="line">            <span class="title function_">callback</span>();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        compiler.<span class="property">hooks</span>.<span class="property">emit</span>.<span class="title function_">tapAsync</span>(<span class="string">&#x27;MyMiddleware&#x27;</span>, <span class="function">(<span class="params">compilation, callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 在这里处理emit阶段的逻辑</span></span><br><span class="line">            <span class="title function_">callback</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 使用中间件</span></span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    <span class="comment">// webpack配置</span></span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyMiddleware</span>()</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. Webpack插件标准写法（使用apply）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">WebpackPlugin</span> &#123;</span><br><span class="line">    <span class="title function_">apply</span>(<span class="params">compiler</span>) &#123;</span><br><span class="line">        compiler.<span class="property">hooks</span>.<span class="property">emit</span>.<span class="title function_">tapAsync</span>(<span class="string">&#x27;MyPlugin&#x27;</span>, <span class="function">(<span class="params">compilation, callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 处理逻辑</span></span><br><span class="line">            <span class="title function_">callback</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 函数式中间件写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">webpackMiddleware</span> = (<span class="params">compiler</span>) =&gt; &#123;</span><br><span class="line">    compiler.<span class="property">hooks</span>.<span class="property">emit</span>.<span class="title function_">tapAsync</span>(<span class="string">&#x27;MyMiddleware&#x27;</span>, <span class="function">(<span class="params">compilation, callback</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 处理逻辑</span></span><br><span class="line">        <span class="title function_">callback</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 使用Generator的中间件写法</span></span><br><span class="line"><span class="keyword">function</span>* <span class="title function_">webpackMiddleware</span>(<span class="params">compiler</span>) &#123;</span><br><span class="line">    <span class="comment">// 在不同阶段执行</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        compiler.<span class="property">hooks</span>.<span class="property">emit</span>.<span class="title function_">tapAsync</span>(<span class="string">&#x27;MyMiddleware&#x27;</span>, <span class="function">(<span class="params">compilation, callback</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 处理逻辑</span></span><br><span class="line">            <span class="title function_">callback</span>();</span><br><span class="line">            <span class="title function_">resolve</span>();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 简单函数写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">simpleMiddleware</span> = (<span class="params">options</span>) =&gt; <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理逻辑</span></span><br><span class="line">    <span class="title function_">next</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</div>
+        
+  </div>
+
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/webpack/" class="tag">webpack</a>
+      
+    </div>
+    <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/one_hour/2018/02/07/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" >基础算法<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/one_hour/2018/02/07/web%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/" >web常见的安全问题<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    <div id="bottom-outer">
+  <div id="bottom-inner">
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
+    <br />
+    Powered by
+    <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
+    <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/"
+      >blank</a
+    >
+    
+    <div class="icp-info">
+      
+      <a href="" target="_blank"> </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/one_hour/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+  <script src="/one_hour/js/local-search.js"></script>
+<script type="text/javascript">      
+  var search_path = "search.xml";
+if (search_path.length == 0) {
+  search_path = "search.xml";
+}
+var path = "/one_hour/" + search_path;
+  searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+  
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/js/firework.js"></script>
+  
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+</html>

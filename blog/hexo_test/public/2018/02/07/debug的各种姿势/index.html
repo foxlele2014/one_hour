@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/one_hour/img/favicon.png">
+  
+  
+      <meta name="author" content="limin">
+  
+  
+      <meta name="subtitle" content="After all,tomorrow is another day.">
+  
+  
+      <meta name="description" content="无聊的博客">
+  
+  
+  
+    <link rel="alternate" href="/one_hour/atom.xml " title="一个博客" type="application/atom+xml">
+  
+
+  
+
+  <title>debug的各种姿势 | 一个博客</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/one_hour/css/style.css" >
+  <link rel="stylesheet" href="/one_hour/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/one_hour/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/one_hour/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/one_hour/" title="一个博客">一个博客</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">归档</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/tags/ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/about ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/one_hour/"><img src="https://github.com/foxlele2014/boring/assets/7221466/471fdf61-ccc9-4049-9c15-e035936329c3" onerror=this.onerror=null,this.src="/one_hour/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>After all, tomorrow is another day.</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://github.com/foxlele2014" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="mailto:503275769@qq.com" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">debug的各种姿势</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="更新于 2025.01.14"><i class="far fa-calendar-check"></i> 2025.01.14</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/debug/">debug</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">653 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><ul>
+<li><input disabled="" type="checkbox"> wireshark</li>
+<li><input disabled="" type="checkbox"> pc端和移动端调试</li>
+<li><input disabled="" type="checkbox"> node调试方法</li>
+</ul>
+<h2 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h2><h3 id="过滤器使用："><a href="#过滤器使用：" class="headerlink" title="过滤器使用："></a>过滤器使用：</h3><p>常用过滤语法：</p>
+<ul>
+<li>ip.addr &#x3D;&#x3D; 192.168.1.1    &#x2F;&#x2F; 指定IP</li>
+<li>tcp.port &#x3D;&#x3D; 80            &#x2F;&#x2F; 指定端口</li>
+<li>http                      &#x2F;&#x2F; HTTP协议</li>
+<li>tcp.flags.syn &#x3D;&#x3D; 1        &#x2F;&#x2F; TCP SYN包</li>
+<li>frame contains “password”  &#x2F;&#x2F; 包含关键字</li>
+</ul>
+<h3 id="抓包技巧"><a href="#抓包技巧" class="headerlink" title="抓包技巧"></a>抓包技巧</h3><p>定位问题：</p>
+<ul>
+<li>使用颜色标记重要数据包</li>
+<li>跟踪TCP流</li>
+<li>查看协议层级</li>
+<li>分析握手过程</li>
+<li>检查重传包</li>
+</ul>
+<h3 id="调试场景"><a href="#调试场景" class="headerlink" title="调试场景"></a>调试场景</h3><ul>
+<li>网络连接问题</li>
+<li>HTTP请求分析</li>
+<li>WebSocket通信</li>
+<li>DNS解析问题</li>
+<li>SSL&#x2F;TLS问题</li>
+</ul>
+<h3 id="实用快捷键"><a href="#实用快捷键" class="headerlink" title="实用快捷键"></a>实用快捷键</h3><p>快捷操作：</p>
+<ul>
+<li>Ctrl + E    &#x2F;&#x2F; 开始&#x2F;停止捕获</li>
+<li>Ctrl + R    &#x2F;&#x2F; 重新开始捕获</li>
+<li>Ctrl + F    &#x2F;&#x2F; 查找</li>
+<li>Ctrl + .    &#x2F;&#x2F; 转到下一个包</li>
+<li>Ctrl + ,    &#x2F;&#x2F; 转到上一个包</li>
+</ul>
+<h3 id="调试建议"><a href="#调试建议" class="headerlink" title="调试建议"></a>调试建议</h3><ul>
+<li>先用过滤器缩小范围</li>
+<li>关注异常状态码</li>
+<li>检查响应时间</li>
+<li>分析错误包</li>
+<li>保存重要捕获</li>
+</ul>
+<h2 id="PC端和移动端调试"><a href="#PC端和移动端调试" class="headerlink" title="PC端和移动端调试"></a>PC端和移动端调试</h2><h3 id="PC-端"><a href="#PC-端" class="headerlink" title="PC 端"></a>PC 端</h3><ol>
+<li>console </li>
+<li>断点</li>
+<li>postman接口测试</li>
+<li>性能分析（performance面板，memory面板）</li>
+</ol>
+<h4 id="Performance面板"><a href="#Performance面板" class="headerlink" title="Performance面板"></a>Performance面板</h4><p>录制步骤：</p>
+<ol>
+<li>点击录制按钮（⚫）</li>
+<li>进行页面操作</li>
+<li>停止录制</li>
+<li>分析火焰图：<ul>
+<li>红色：JavaScript执行</li>
+<li>紫色：页面渲染</li>
+<li>绿色：页面绘制</li>
+<li>灰色：空闲时间</li>
+</ul>
+</li>
+</ol>
+<h4 id="Memory面板"><a href="#Memory面板" class="headerlink" title="Memory面板"></a>Memory面板</h4><p>Memory面板三种分析方式：</p>
+<ol>
+<li><p>Heap Snapshot（堆快照）</p>
+<ul>
+<li>拍摄快照</li>
+<li>对比前后变化</li>
+<li>查看内存占用</li>
+</ul>
+</li>
+<li><p>Allocation Timeline（分配时间轴）</p>
+<ul>
+<li>记录内存分配</li>
+<li>查看对象生命周期</li>
+<li>定位频繁GC</li>
+</ul>
+</li>
+<li><p>Allocation Sampling（分配采样）</p>
+<ul>
+<li>JS堆分配</li>
+<li>定位大对象</li>
+</ul>
+</li>
+</ol>
+<h4 id="常见性能问题"><a href="#常见性能问题" class="headerlink" title="常见性能问题"></a>常见性能问题</h4><p>排查要点：</p>
+<ul>
+<li>长任务阻塞</li>
+<li>频繁GC</li>
+<li>DOM操作过多</li>
+<li>图片资源过大</li>
+<li>未释放的事件监听</li>
+<li>闭包导致的内存泄露</li>
+</ul>
+<h4 id="优化建议"><a href="#优化建议" class="headerlink" title="优化建议"></a>优化建议</h4><ul>
+<li>使用防抖节流</li>
+<li>虚拟列表</li>
+<li>图片懒加载</li>
+<li>合理使用缓存</li>
+<li>及时解绑事件</li>
+<li>避免闭包滥用</li>
+<li>代码分割</li>
+<li>资源压缩</li>
+<li>CDN加速</li>
+<li>合理缓存</li>
+</ul>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><p>常用方法：</p>
+<ul>
+<li>Chrome远程调试（Android）</li>
+<li>Safari调试（iOS）</li>
+<li>vConsole（移动端调试工具）</li>
+<li>Eruda（移动端调试面板）</li>
+<li>Charles&#x2F;Fiddler（抓包）</li>
+</ul>
+<p>Charles&#x2F;Fiddler 本地文件映射（https需要额外的配置）</p>
+<h4 id="Charles配置"><a href="#Charles配置" class="headerlink" title="Charles配置"></a>Charles配置</h4><p>本地文件映射步骤：</p>
+<ol>
+<li>Tools -&gt; Map Local</li>
+<li>Add New Mapping</li>
+<li>设置：<ul>
+<li>远程URL路径</li>
+<li>本地文件路径</li>
+<li>启用&#x2F;禁用规则</li>
+</ul>
+</li>
+</ol>
+<h3 id="Fiddler配置"><a href="#Fiddler配置" class="headerlink" title="Fiddler配置"></a>Fiddler配置</h3><p>AutoResponder设置：</p>
+<ol>
+<li>切换到AutoResponder标签</li>
+<li>Enable rules</li>
+<li>添加规则：<ul>
+<li>匹配规则（正则&#x2F;通配符）</li>
+<li>选择本地文件</li>
+<li>设置响应类型</li>
+</ul>
+</li>
+</ol>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><ul>
+<li>替换线上JS&#x2F;CSS文件</li>
+<li>修改API响应数据</li>
+<li>测试不同版本</li>
+<li>调试线上问题</li>
+<li>模拟各种响应</li>
+</ul>
+</div>
+        
+  </div>
+
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/debug/" class="tag">debug</a>
+      
+    </div>
+    <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/one_hour/2025/01/02/%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BA%E7%94%B5%E4%BF%A1%E5%8F%B7%E5%AD%98%E5%82%A8%E7%9A%84%E7%9F%A5%E8%AF%86/" >数据作为电信号存储的知识点<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/one_hour/2018/02/07/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" >自动化测试<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    <div id="bottom-outer">
+  <div id="bottom-inner">
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
+    <br />
+    Powered by
+    <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
+    <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/"
+      >blank</a
+    >
+    
+    <div class="icp-info">
+      
+      <a href="" target="_blank"> </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/one_hour/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+  <script src="/one_hour/js/local-search.js"></script>
+<script type="text/javascript">      
+  var search_path = "search.xml";
+if (search_path.length == 0) {
+  search_path = "search.xml";
+}
+var path = "/one_hour/" + search_path;
+  searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+  
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/js/firework.js"></script>
+  
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+</html>

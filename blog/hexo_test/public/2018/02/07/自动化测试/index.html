@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/one_hour/img/favicon.png">
+  
+  
+      <meta name="author" content="limin">
+  
+  
+      <meta name="subtitle" content="After all,tomorrow is another day.">
+  
+  
+      <meta name="description" content="无聊的博客">
+  
+  
+  
+    <link rel="alternate" href="/one_hour/atom.xml " title="一个博客" type="application/atom+xml">
+  
+
+  
+
+  <title>自动化测试 | 一个博客</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/one_hour/css/style.css" >
+  <link rel="stylesheet" href="/one_hour/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/one_hour/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/one_hour/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/one_hour/" title="一个博客">一个博客</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">归档</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/tags/ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/about ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/one_hour/"><img src="https://github.com/foxlele2014/boring/assets/7221466/471fdf61-ccc9-4049-9c15-e035936329c3" onerror=this.onerror=null,this.src="/one_hour/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>After all, tomorrow is another day.</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://github.com/foxlele2014" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="mailto:503275769@qq.com" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">自动化测试</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="更新于 2025.01.20"><i class="far fa-calendar-check"></i> 2025.01.20</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.3k 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">6 分钟</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><ul>
+<li>部署</li>
+<li>jest+enzyme</li>
+<li>注意点</li>
+</ul>
+<h3 id="前端自动化测试实践"><a href="#前端自动化测试实践" class="headerlink" title="前端自动化测试实践"></a>前端自动化测试实践</h3><h4 id="1-测试框架介绍"><a href="#1-测试框架介绍" class="headerlink" title="1. 测试框架介绍"></a>1. 测试框架介绍</h4><h5 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h5><ol>
+<li><strong>基础配置</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jest.config.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line"><span class="attr">testEnvironment</span>: <span class="string">&#x27;jsdom&#x27;</span>,</span><br><span class="line"><span class="attr">setupFilesAfterEnv</span>: [<span class="string">&#x27;&lt;rootDir&gt;/src/setupTests.js&#x27;</span>],</span><br><span class="line"><span class="attr">moduleNameMapper</span>: &#123;</span><br><span class="line"><span class="string">&#x27;\\.(css|less|scss)$&#x27;</span>: <span class="string">&#x27;identity-obj-proxy&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;^@/(.)$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/src/$1&#x27;</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">collectCoverageFrom</span>: [<span class="string">&#x27;src//.&#123;js,jsx,ts,tsx&#125;&#x27;</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li><strong>常用匹配器</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">describe(&#x27;基础测试&#x27;, () =&gt; &#123;</span><br><span class="line">test(&#x27;相等性测试&#x27;, () =&gt; &#123;</span><br><span class="line">expect(2 + 2).toBe(4);</span><br><span class="line">expect(&#123; name: &#x27;test&#x27; &#125;).toEqual(&#123; name: &#x27;test&#x27; &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">test(&#x27;真值测试&#x27;, () =&gt; &#123;</span><br><span class="line">expect(true).toBeTruthy();</span><br><span class="line">expect(false).toBeFalsy();</span><br><span class="line">expect(null).toBeNull();</span><br><span class="line">&#125;);</span><br><span class="line">test(&#x27;包含测试&#x27;, () =&gt; &#123;</span><br><span class="line">expect([1, 2, 3]).toContain(2);</span><br><span class="line">expect(&#x27;hello&#x27;).toMatch(/llo/);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h5 id="Enzyme"><a href="#Enzyme" class="headerlink" title="Enzyme"></a>Enzyme</h5><ol>
+<li><strong>组件测试设置</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// setupTests.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; configure &#125; <span class="keyword">from</span> <span class="string">&#x27;enzyme&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Adapter</span> <span class="keyword">from</span> <span class="string">&#x27;enzyme-adapter-react-16&#x27;</span>;</span><br><span class="line"><span class="title function_">configure</span>(&#123; <span class="attr">adapter</span>: <span class="keyword">new</span> <span class="title class_">Adapter</span>() &#125;);</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li><strong>组件渲染方式</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; shallow, mount &#125; <span class="keyword">from</span> <span class="string">&#x27;enzyme&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">MyComponent</span> <span class="keyword">from</span> <span class="string">&#x27;./MyComponent&#x27;</span>;</span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;组件测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;浅渲染测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">const</span> wrapper = <span class="title function_">shallow</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span>);</span><br><span class="line"><span class="title function_">expect</span>(wrapper.<span class="title function_">find</span>(<span class="string">&#x27;.title&#x27;</span>)).<span class="title function_">toHaveLength</span>(<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;完整渲染测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span>);</span><br><span class="line"><span class="title function_">expect</span>(wrapper.<span class="title function_">find</span>(<span class="string">&#x27;button&#x27;</span>)).<span class="title function_">toHaveLength</span>(<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-测试类型"><a href="#2-测试类型" class="headerlink" title="2. 测试类型"></a>2. 测试类型</h4><h5 id="1-单元测试"><a href="#1-单元测试" class="headerlink" title="1. 单元测试"></a>1. 单元测试</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils.test.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; formatDate &#125; <span class="keyword">from</span> <span class="string">&#x27;./utils&#x27;</span>;</span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;工具函数测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;日期格式化&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&#x27;2024-01-01&#x27;</span>);</span><br><span class="line"><span class="title function_">expect</span>(<span class="title function_">formatDate</span>(date)).<span class="title function_">toBe</span>(<span class="string">&#x27;2024-01-01&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-组件测试"><a href="#2-组件测试" class="headerlink" title="2. 组件测试"></a>2. 组件测试</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Button.test.jsx</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Button</span> <span class="keyword">from</span> <span class="string">&#x27;./Button&#x27;</span>;</span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;Button组件&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;点击事件&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">const</span> onClick = jest.<span class="title function_">fn</span>();</span><br><span class="line"><span class="keyword">const</span> wrapper = <span class="title function_">shallow</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">onClick</span>=<span class="string">&#123;onClick&#125;</span> /&gt;</span></span>);</span><br><span class="line">wrapper.<span class="title function_">simulate</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line"><span class="title function_">expect</span>(onClick).<span class="title function_">toHaveBeenCalled</span>();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;禁用状态&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="keyword">const</span> wrapper = <span class="title function_">shallow</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">disabled</span> /&gt;</span></span>);</span><br><span class="line"><span class="title function_">expect</span>(wrapper.<span class="title function_">prop</span>(<span class="string">&#x27;disabled&#x27;</span>)).<span class="title function_">toBe</span>(<span class="literal">true</span>);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-异步测试"><a href="#3-异步测试" class="headerlink" title="3. 异步测试"></a>3. 异步测试</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// async.test.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; fetchData &#125; <span class="keyword">from</span> <span class="string">&#x27;./api&#x27;</span>;</span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;异步测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"><span class="title function_">test</span>(<span class="string">&#x27;异步API调用&#x27;</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line"><span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetchData</span>();</span><br><span class="line"><span class="title function_">expect</span>(data).<span class="title function_">toEqual</span>(&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;test&#x27;</span> &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="组件测试主要可以测试："><a href="#组件测试主要可以测试：" class="headerlink" title="组件测试主要可以测试："></a>组件测试主要可以测试：</h3><ul>
+<li>交互行为（点击、输入等）</li>
+<li>状态管理和更新</li>
+<li>生命周期方法</li>
+<li>异步操作（数据加载等）</li>
+<li>条件渲染逻辑</li>
+<li>样式和类名</li>
+<li>组件间通信</li>
+<li>错误边界处理</li>
+<li>性能优化（如memo、useMemo等）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Button组件测试示例</span></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;Button组件测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 交互行为测试</span></span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;点击事件测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> onClick = jest.<span class="title function_">fn</span>();</span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">onClick</span>=<span class="string">&#123;onClick&#125;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span>);</span><br><span class="line">        </span><br><span class="line">        wrapper.<span class="title function_">simulate</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">        <span class="title function_">expect</span>(onClick).<span class="title function_">toHaveBeenCalledTimes</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="title function_">expect</span>(onClick).<span class="title function_">toHaveBeenCalledWith</span>(<span class="string">&#x27;someValue&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 状态变化测试</span></span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;状态更新测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></span>);</span><br><span class="line">        wrapper.<span class="title function_">find</span>(<span class="string">&#x27;button&#x27;</span>).<span class="title function_">simulate</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">        <span class="title function_">expect</span>(wrapper.<span class="title function_">state</span>(<span class="string">&#x27;count&#x27;</span>)).<span class="title function_">toBe</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="title function_">expect</span>(wrapper.<span class="title function_">find</span>(<span class="string">&#x27;.count-display&#x27;</span>).<span class="title function_">text</span>()).<span class="title function_">toBe</span>(<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 生命周期测试</span></span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;组件生命周期&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> didMount = jest.<span class="title function_">spyOn</span>(<span class="title class_">Counter</span>.<span class="property"><span class="keyword">prototype</span></span>, <span class="string">&#x27;componentDidMount&#x27;</span>);</span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></span>);</span><br><span class="line">        <span class="title function_">expect</span>(didMount).<span class="title function_">toHaveBeenCalled</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 异步操作测试</span></span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;异步数据加载&#x27;</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">UserList</span> /&gt;</span></span>);</span><br><span class="line">        <span class="comment">// 等待异步操作完成</span></span><br><span class="line">        <span class="keyword">await</span> <span class="title function_">act</span>(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">            <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve, <span class="number">0</span>));</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="title function_">expect</span>(wrapper.<span class="title function_">find</span>(<span class="string">&#x27;.user-item&#x27;</span>)).<span class="title function_">toHaveLength</span>(<span class="number">3</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 5. 条件渲染测试</span></span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;条件渲染逻辑&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Dialog</span> <span class="attr">visible</span>=<span class="string">&#123;false&#125;</span> /&gt;</span></span>);</span><br><span class="line">        <span class="title function_">expect</span>(wrapper.<span class="title function_">find</span>(<span class="string">&#x27;.dialog&#x27;</span>)).<span class="title function_">toHaveLength</span>(<span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        wrapper.<span class="title function_">setProps</span>(&#123; <span class="attr">visible</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">        <span class="title function_">expect</span>(wrapper.<span class="title function_">find</span>(<span class="string">&#x27;.dialog&#x27;</span>)).<span class="title function_">toHaveLength</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 6. 样式测试</span></span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;样式类名测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> /&gt;</span></span>);</span><br><span class="line">        <span class="title function_">expect</span>(wrapper.<span class="title function_">hasClass</span>(<span class="string">&#x27;btn-primary&#x27;</span>)).<span class="title function_">toBe</span>(<span class="literal">true</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 测试不必要的重渲染</span></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;性能优化测试&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;验证React.memo的效果&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> renderSpy = jest.<span class="title function_">fn</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 一个使用memo的子组件</span></span><br><span class="line">        <span class="keyword">const</span> <span class="title class_">ChildComponent</span> = <span class="title class_">React</span>.<span class="title function_">memo</span>(<span class="function">(<span class="params">&#123; data &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">renderSpy</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;data&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 父组件</span></span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">ParentComponent</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">            <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">const</span> data = <span class="string">&quot;test&quot;</span>;  <span class="comment">// 不变的props</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">                <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(c =&gt; c + 1)&#125;&gt;</span></span><br><span class="line"><span class="language-xml">                        Count: &#123;count&#125;</span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">ChildComponent</span> <span class="attr">data</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">            );</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 挂载组件</span></span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">ParentComponent</span> /&gt;</span></span>);</span><br><span class="line">        <span class="title function_">expect</span>(renderSpy).<span class="title function_">toHaveBeenCalledTimes</span>(<span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 点击按钮更新父组件</span></span><br><span class="line">        wrapper.<span class="title function_">find</span>(<span class="string">&#x27;button&#x27;</span>).<span class="title function_">simulate</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">        wrapper.<span class="title function_">find</span>(<span class="string">&#x27;button&#x27;</span>).<span class="title function_">simulate</span>(<span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 验证子组件没有重新渲染</span></span><br><span class="line">        <span class="title function_">expect</span>(renderSpy).<span class="title function_">toHaveBeenCalledTimes</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 测试useMemo的缓存效果</span></span><br><span class="line">    <span class="title function_">test</span>(<span class="string">&#x27;验证useMemo的缓存效果&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> expensiveCalculation = jest.<span class="title function_">fn</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">Component</span> = (<span class="params">&#123; value &#125;</span>) =&gt; &#123;</span><br><span class="line">            <span class="keyword">const</span> result = <span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="title function_">expensiveCalculation</span>(value);</span><br><span class="line">            &#125;, [value]);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;result&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> wrapper = <span class="title function_">mount</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Component</span> <span class="attr">value</span>=<span class="string">&#123;1&#125;</span> /&gt;</span></span>);</span><br><span class="line">        <span class="title function_">expect</span>(expensiveCalculation).<span class="title function_">toHaveBeenCalledTimes</span>(<span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 使用相同的value更新</span></span><br><span class="line">        wrapper.<span class="title function_">setProps</span>(&#123; <span class="attr">value</span>: <span class="number">1</span> &#125;);</span><br><span class="line">        <span class="comment">// 验证没有重新计算</span></span><br><span class="line">        <span class="title function_">expect</span>(expensiveCalculation).<span class="title function_">toHaveBeenCalledTimes</span>(<span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 使用不同的value更新</span></span><br><span class="line">        wrapper.<span class="title function_">setProps</span>(&#123; <span class="attr">value</span>: <span class="number">2</span> &#125;);</span><br><span class="line">        <span class="comment">// 验证重新计算了</span></span><br><span class="line">        <span class="title function_">expect</span>(expensiveCalculation).<span class="title function_">toHaveBeenCalledTimes</span>(<span class="number">2</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>每个框架的特点：<br>Jest: React生态，配置简单，速度快<br>Mocha: 灵活性高，可扩展性强<br>Cypress: 专注E2E测试，可视化界面<br>Vitest: Vite项目首选，兼容Jest API<br>Karma: 真实浏览器测试，支持多浏览器<br>选择建议：</p>
+<ol>
+<li>React项目 -&gt; Jest<br>Vue3+Vite项目 -&gt; Vitest<br>需要E2E测试 -&gt; Cypress<br>Node.js项目 -&gt; Mocha<br>浏览器兼容性测试 -&gt; Karma</li>
+</ol>
+</div>
+        
+  </div>
+
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/debug/" class="tag">debug</a>
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/%E6%B5%8B%E8%AF%95/" class="tag">测试</a>
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" class="tag">自动化</a>
+      
+    </div>
+    <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/one_hour/2018/02/07/debug%E7%9A%84%E5%90%84%E7%A7%8D%E5%A7%BF%E5%8A%BF/" >debug的各种姿势<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/one_hour/2018/02/07/%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0/" >路由实现<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    <div id="bottom-outer">
+  <div id="bottom-inner">
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
+    <br />
+    Powered by
+    <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
+    <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/"
+      >blank</a
+    >
+    
+    <div class="icp-info">
+      
+      <a href="" target="_blank"> </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/one_hour/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+  <script src="/one_hour/js/local-search.js"></script>
+<script type="text/javascript">      
+  var search_path = "search.xml";
+if (search_path.length == 0) {
+  search_path = "search.xml";
+}
+var path = "/one_hour/" + search_path;
+  searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+  
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/js/firework.js"></script>
+  
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+</html>

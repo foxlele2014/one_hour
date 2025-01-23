@@ -7,7 +7,8 @@ category:
 - css
 ---
 
-[//]: # ### 块元素
+### 块元素
+
     常见的`div、p、ul、li、ol、h1~h6、`
     特点：
     - 定义`width、height`有效
@@ -36,7 +37,7 @@ category:
 - line-height
 - vertical-align：设置元素的垂直对齐方式
 该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。允许指定负长度值和百分比值。这会使元素降低而不是升高。在表单元格中，这个属性会设置单元格框中的单元格内容的对齐方式。
-![image](/one_hour/img/css/vertical_align.jpeg)
+![image](/images/vertical_align.jpeg)
 
 ### 参考
 

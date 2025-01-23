@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/one_hour/img/favicon.png">
+  
+  
+      <meta name="author" content="limin">
+  
+  
+      <meta name="subtitle" content="After all,tomorrow is another day.">
+  
+  
+      <meta name="description" content="无聊的博客">
+  
+  
+  
+    <link rel="alternate" href="/one_hour/atom.xml " title="一个博客" type="application/atom+xml">
+  
+
+  
+
+  <title>谷歌插件编写 | 一个博客</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/one_hour/css/style.css" >
+  <link rel="stylesheet" href="/one_hour/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/one_hour/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/one_hour/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/one_hour/" title="一个博客">一个博客</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">归档</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/tags/ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/about ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/one_hour/"><img src="https://github.com/foxlele2014/boring/assets/7221466/471fdf61-ccc9-4049-9c15-e035936329c3" onerror=this.onerror=null,this.src="/one_hour/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>After all, tomorrow is another day.</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://github.com/foxlele2014" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="mailto:503275769@qq.com" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">谷歌插件编写</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="发表于 2025.01.13"><i class="far fa-calendar-alt"></i> 2025.01.13</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="更新于 2025.01.13"><i class="far fa-calendar-check"></i> 2025.01.13</span>
+      </div>
+     
+    
+      <div class="post-meta-item categories">
+        
+          <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a>
+        
+      </div>
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.1k 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">4 分钟</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><ol>
+<li>配置manifest.json 文件（必需）</li>
+</ol>
+<ul>
+<li>主要是包含基础信息，权限，以及功能组件等</li>
+<li>插件的配置文件</li>
+</ul>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;GitHub Issue Creator&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;快速将选中文本添加到 GitHub Issues&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;storage&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;activeTab&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;contextMenus&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;scripting&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;host_permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;&lt;all_urls&gt;&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;content_scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;&lt;all_urls&gt;&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span>     <span class="comment">// 在哪些页面注入</span></span><br><span class="line">      <span class="attr">&quot;css&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;content-styles.css&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">// 注入的样式文件</span></span><br><span class="line">      <span class="attr">&quot;js&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;content-script.js&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span>   <span class="comment">// 注入的脚本文件</span></span><br><span class="line">      <span class="attr">&quot;run_at&quot;</span><span class="punctuation">:</span> <span class="string">&quot;document_end&quot;</span>       <span class="comment">// 在什么时候注入</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;default_popup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.html&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;service_worker&quot;</span><span class="punctuation">:</span> <span class="string">&quot;background.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;module&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;icons&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icons/icon48.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icons/icon128.png&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span> </span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>popup相关文件（可选， 假如需要点击插件图标弹出页面）</li>
+</ol>
+<ul>
+<li>popup.html 文件：插件的弹出页面</li>
+<li>popup.js 文件：插件的弹出页面逻辑</li>
+</ul>
+<ol start="3">
+<li>配置background.js 文件（可选）</li>
+</ol>
+<ul>
+<li>插件的背景脚本，用于处理插件的后台逻辑</li>
+<li>可以一直运行在后台</li>
+<li>菜单右键，快捷键等功能处理</li>
+</ul>
+<ol start="4">
+<li>配置content-script.js 文件（可选，也需要配置到manifest.json 中）</li>
+</ol>
+<ul>
+<li>插件的页面脚本，用于处理插件的页面逻辑</li>
+<li>可以访问页面DOM</li>
+<li>可以访问页面JS API</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>manifest.json (配置)<br>    ↓<br>background.js (后台逻辑)<br>    ↓<br>popup.html&#x2F;js (用户界面) ←→ content-script.js (网页交互)</p>
+<h2 id="API-相关"><a href="#API-相关" class="headerlink" title="API 相关"></a>API 相关</h2><ol>
+<li>chrome.storage 类似localStorage， 但是可以跨域， 跨设备， 跨会话（local本地存储，sync同步存储，managed托管存储，大小是100kb，存储操作时异步的）</li>
+<li>chrome.runtime.sendMessage 和 chrome.runtime.onMessage.addListener 用于在插件和后台脚本之间通信（类似Electron渲染进程和主进程）</li>
+<li>chrome.runtime.onInstalled.addListener 用于在插件安装时执行一些操作</li>
+<li>chrome.runtime.onStartup.addListener 用于在插件启动时执行一些操作</li>
+<li>chrome.runtime.onConnect.addListener 用于在插件和后台脚本之间建立连接</li>
+<li>chrome.runtime.onSuspend.addListener 用于在插件休眠时执行一些操作</li>
+<li>chrome.windows.create 用于创建新窗口</li>
+<li>chrome.windows.onClicked.addListener 用于监听新窗口的点击事件</li>
+<li>chrome.contextMenus.create 用于创建右键菜单</li>
+</ol>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ol>
+<li>安装&#x2F;更新时</li>
+</ol>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onInstalled</span>.<span class="title function_">addListener</span>(<span class="function">(<span class="params">details</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (details.<span class="property">reason</span> === <span class="string">&#x27;install&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 首次安装时的初始化</span></span><br><span class="line">    <span class="comment">// 例如：创建右键菜单、设置默认配置等</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (details.<span class="property">reason</span> === <span class="string">&#x27;update&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 更新时的处理</span></span><br><span class="line">    <span class="comment">// 例如：迁移旧数据、更新配置等</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>启动时</li>
+</ol>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onStartup</span>.<span class="title function_">addListener</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 启动时的处理</span></span><br><span class="line">  <span class="comment">// 例如：检查更新、恢复状态等</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>激活&#x2F;休眠</li>
+</ol>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// background.js 在 Service Worker 模式下</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onSuspend</span>.<span class="title function_">addListener</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Service Worker 即将被终止时的清理工作</span></span><br><span class="line">  <span class="comment">// 保存状态、清理资源等</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>激活的时机</li>
+</ol>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下事件会唤醒 Service Worker：</span></span><br><span class="line"><span class="comment">// 1. 扩展安装或更新时</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onInstalled</span>.<span class="title function_">addListener</span>(<span class="function">(<span class="params">details</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Service Worker 被安装/更新激活&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 接收到消息时</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onMessage</span>.<span class="title function_">addListener</span>(<span class="function">(<span class="params">message, sender, sendResponse</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Service Worker 被消息激活&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 右键菜单被点击时</span></span><br><span class="line">chrome.<span class="property">contextMenus</span>.<span class="property">onClicked</span>.<span class="title function_">addListener</span>(<span class="function">(<span class="params">info, tab</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Service Worker 被菜单点击激活&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 浏览器启动时</span></span><br><span class="line">chrome.<span class="property">runtime</span>.<span class="property">onStartup</span>.<span class="title function_">addListener</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Service Worker 被浏览器启动激活&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="github-issue-插件（主要是为了方便我记录一些文字，然后一键创建github-issue）"><a href="#github-issue-插件（主要是为了方便我记录一些文字，然后一键创建github-issue）" class="headerlink" title="github issue 插件（主要是为了方便我记录一些文字，然后一键创建github issue）"></a>github issue 插件（主要是为了方便我记录一些文字，然后一键创建github issue）</h2><ol>
+<li>基础配置</li>
+</ol>
+<p>  manifest.json  (插件配置文件)<br>  ├── 定义插件权限 (permissions)<br>  ├── 注册后台脚本 (background.js)<br>  ├── 定义弹出窗口 (popup.html)<br>  └── 配置图标等基本信息</p>
+<ol start="2">
+<li>设置功能</li>
+</ol>
+<p>  popup.html (设置界面)<br>  └── popup.js (设置逻辑)<br>      ├── 保存 GitHub Token<br>      ├── 保存仓库所有者<br>      └── 保存仓库名称</p>
+<ol start="2">
+<li>核心功能</li>
+</ol>
+<p>  background.js (后台脚本)<br>  ├── 创建右键菜单<br>  ├── 处理菜单点击事件<br>  ├── 创建新 Issue 窗口<br>  └── 打开 Issue 选择器窗口</p>
+<ol start="3">
+<li>创建新issue</li>
+</ol>
+<p>  create-issue.html (创建界面)<br>  └── create-issue.js (创建逻辑)<br>      ├── 加载选中的文本<br>      ├── 设置 Issue 标题<br>      ├── 加载标签列表<br>      └── 提交创建请求</p>
+<ol start="4">
+<li>添加到已有的issue</li>
+</ol>
+<p>  issue-selector.html (选择界面)<br>  └── issue-selector.js (选择和评论逻辑)<br>      ├── 加载已有 Issues 列表<br>      ├── 搜索过滤功能<br>      ├── 显示评论表单<br>      └── 提交评论请求</p>
+<ol start="5">
+<li>数据流向</li>
+</ol>
+<p>  选中文本 → background.js → chrome.storage → 功能窗口 → GitHub API</p>
+<p>这个是菜单右键实现的。可以做成那种悬浮在选中文字上边，就出现工具栏的话，就需要用到content-script.js 了。</p>
+</div>
+        
+  </div>
+
+    <div class="post_tags">
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/%E8%B0%B7%E6%AD%8C%E6%8F%92%E4%BB%B6/" class="tag">谷歌插件</a>
+      
+        <i class="fas fa-tag"></i> <a href="/one_hour/tags/cursor/" class="tag">cursor</a>
+      
+    </div>
+    <div class="post-nav">
+      
+        <div class="post-nav-prev post-nav-item">
+            <a href="/one_hour/2025/01/13/%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D%E8%AE%B0%E5%BD%951/" >英语单词记录1<i class="fa fa-chevron-left"></i></a>
+        </div>
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/one_hour/2025/01/13/cron%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%AE%B0%E5%BD%95/" >cron时间格式的记录<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    <div id="bottom-outer">
+  <div id="bottom-inner">
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
+    <br />
+    Powered by
+    <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
+    <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/"
+      >blank</a
+    >
+    
+    <div class="icp-info">
+      
+      <a href="" target="_blank"> </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/one_hour/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+  <script src="/one_hour/js/local-search.js"></script>
+<script type="text/javascript">      
+  var search_path = "search.xml";
+if (search_path.length == 0) {
+  search_path = "search.xml";
+}
+var path = "/one_hour/" + search_path;
+  searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+  
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/js/firework.js"></script>
+  
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+</html>
