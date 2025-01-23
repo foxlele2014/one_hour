@@ -1,2 +1,11 @@
+# Hexo
+db.json
+*.log
+public/
+.deploy*/
 blog/hexo_test/public/
+blog/hexo_test/.deploy_git/
 blog/hexo_test/node_modules/
+
+# Node
+node_modules/
