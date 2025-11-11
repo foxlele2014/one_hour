@@ -160,7 +160,7 @@
         <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+        <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
       </div>
      
     
@@ -173,10 +173,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">6 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">695 字</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+          <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                
       </div>
      
@@ -189,6 +189,56 @@
 <li>原理</li>
 <li>解决方法</li>
 </ul>
+<h3 id="概览（同源策略）"><a href="#概览（同源策略）" class="headerlink" title="概览（同源策略）"></a>概览（同源策略）</h3><ul>
+<li>同源策略（Same-Origin Policy）：只有协议、主机、端口三者都相同才算同源（scheme:&#x2F;&#x2F;host:port）。</li>
+<li>浏览器限制跨源的 DOM 读取与部分请求，防止恶意脚本窃取数据，但允许某些资源加载（图片、script、link 等）.</li>
+</ul>
+<h3 id="常见解决方法（简明）"><a href="#常见解决方法（简明）" class="headerlink" title="常见解决方法（简明）"></a>常见解决方法（简明）</h3><ol>
+<li>CORS（推荐）<ul>
+<li>通过服务器在响应头添加 Access-Control-Allow-* 系列允许跨域请求。</li>
+<li>简单请求：GET&#x2F;POST（Content-Type 为简单类型）直接发送；复杂请求会触发预检（OPTIONS）。</li>
+<li>常用头：<ul>
+<li>Access-Control-Allow-Origin: <a target="_blank" rel="noopener" href="https://example.com/">https://example.com</a> 或 *</li>
+<li>Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS</li>
+<li>Access-Control-Allow-Headers: X-Requested-With,Content-Type,Authorization</li>
+<li>Access-Control-Allow-Credentials: true （若发送 cookie，不能与 * 一起使用）</li>
+</ul>
+</li>
+<li>Express 示例：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">use</span>(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;https://your.site&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;GET,POST,PUT,DELETE,OPTIONS&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;Content-Type,Authorization&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>, <span class="string">&#x27;true&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&#x27;OPTIONS&#x27;</span>) <span class="keyword">return</span> res.<span class="title function_">sendStatus</span>(<span class="number">204</span>);</span><br><span class="line">  <span class="title function_">next</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>JSONP（仅限 GET，老方法）<ul>
+<li>通过 <script> 标签请求服务端返回一段调用回调的 JS。</li>
+<li>安全/功能受限，不支持 POST、Headers 等。</li>
+</ul>
+</li>
+<li>代理（同源代理）<ul>
+<li>前端请求同源的后端接口，后端转发到目标 API（常用于开发或绕过不支持 CORS 的第三方）。</li>
+<li>Nginx 简单 proxy_pass 示例：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /api/ &#123;</span><br><span class="line">  proxy_pass https://api.example.com/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>window.postMessage（跨窗口/iframe 通信）<ul>
+<li>页面与 iframe、子窗口之间安全传递消息，需校验 origin。</li>
+<li>使用场景：跨域 iframe 通信、OAuth 回调等。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送</span></span><br><span class="line">otherWindow.<span class="title function_">postMessage</span>(&#123; <span class="attr">type</span>:<span class="string">&#x27;ok&#x27;</span> &#125;, <span class="string">&#x27;https://target.com&#x27;</span>);</span><br><span class="line"><span class="comment">// 接收</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (e.<span class="property">origin</span> !== <span class="string">&#x27;https://target.com&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// 处理 e.data</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>document.domain（仅限二级域名相同的场景，逐步废弃/风险）</li>
+<li>WebSocket / Server-Sent Events：与 HTTP 不同的连接模型，有自己的跨源策略（通常由服务器决定）.</li>
+</ol>
+<h3 id="预检（Preflight）"><a href="#预检（Preflight）" class="headerlink" title="预检（Preflight）"></a>预检（Preflight）</h3><ul>
+<li>复杂请求会先发 OPTIONS 请求，服务器需返回允许的方法、头以及允许来源。</li>
+<li>常见问题：浏览器控制台显示 401/403/404 或缺少 Access-Control-Allow-*。</li>
+</ul>
+<h3 id="带凭证请求（Cookies-Authorization）"><a href="#带凭证请求（Cookies-Authorization）" class="headerlink" title="带凭证请求（Cookies / Authorization）"></a>带凭证请求（Cookies / Authorization）</h3><ul>
+<li>前端需设置 fetch/axios withCredentials: true 或 fetch 的 credentials: 'include'。</li>
+<li>服务器需返回 Access-Control-Allow-Credentials: true，且 Access-Control-Allow-Origin 不能为 '*'。</li>
+</ul>
+<h3 id="安全与实践建议"><a href="#安全与实践建议" class="headerlink" title="安全与实践建议"></a>安全与实践建议</h3><ul>
+<li>仅允许受信任的域名，避免使用 Access-Control-Allow-Origin: * 配合凭证。</li>
+<li>尽量在服务器端做鉴权与速率限制，代理比客户端绕过更安全可控。</li>
+<li>检查浏览器控制台和网络面板的预检与响应头定位问题。</li>
+</ul>
+<p>小结：优先用 CORS + 合理服务端配置；不支持时用代理或 window.postMessage 等替代方案，根据场景权衡安全与兼容。</p>
 </div>
         
   </div>

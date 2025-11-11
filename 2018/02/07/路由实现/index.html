@@ -160,7 +160,7 @@
         <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+        <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
       </div>
      
     
@@ -173,10 +173,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">9 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.1k 字</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+          <i class="far fa-clock"></i> <span class="post-count">4 分钟</span>
                                
       </div>
      
@@ -192,6 +192,49 @@
 <li>实现</li>
 <li>注意点</li>
 </ul>
+<h3 id="路由实现概述"><a href="#路由实现概述" class="headerlink" title="路由实现概述"></a>路由实现概述</h3><p>前端路由用于在单页应用(SPA)中根据 URL 改变显示不同的视图而不重载页面。常见实现方式有两类：基于 hash 的路由和基于 History API 的路由。两者原理不同，各有优缺点。</p>
+<h3 id="两种路由方式对比"><a href="#两种路由方式对比" class="headerlink" title="两种路由方式对比"></a>两种路由方式对比</h3><ul>
+<li>Hash 路由（#）<ul>
+<li>原理：监听 location.hash 的变化（hashchange 事件），hash 后面的字符串表示路由状态。</li>
+<li>优点：兼容性好，服务器无需特殊配置（因为 URL 的 hash 不发送到服务器）。</li>
+<li>缺点：URL 中会带 #，对 SEO 不友好（搜索引擎对 hash 路由抓取有限）。</li>
+</ul>
+</li>
+<li>History 路由（pushState &#x2F; popstate）<ul>
+<li>原理：使用 history.pushState&#x2F;replaceState 修改浏览器地址栏并借助 popstate 处理前进&#x2F;后退，URL 看起来像正常路径。</li>
+<li>优点：URL 友好、可用于 SEO（配合服务端渲染或服务器路由回退）。</li>
+<li>缺点：服务器需要配置回退到 SPA 的入口页面（通常返回 index.html），以避免刷新 404。</li>
+</ul>
+</li>
+</ul>
+<h3 id="简单实现示例"><a href="#简单实现示例" class="headerlink" title="简单实现示例"></a>简单实现示例</h3><ul>
+<li>简单 Hash 路由（最小实现）：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filepath:</span></span><br><span class="line"><span class="comment">// ...existing code...</span></span><br><span class="line"><span class="keyword">const</span> routes = &#123;</span><br><span class="line">  <span class="string">&#x27;/&#x27;</span>: <span class="function">() =&gt;</span> <span class="title function_">renderHome</span>(),</span><br><span class="line">  <span class="string">&#x27;/about&#x27;</span>: <span class="function">() =&gt;</span> <span class="title function_">renderAbout</span>(),</span><br><span class="line">  <span class="string">&#x27;/post/:id&#x27;</span>: <span class="function"><span class="params">params</span> =&gt;</span> <span class="title function_">renderPost</span>(params.<span class="property">id</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">parseHash</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> location.<span class="property">hash</span>.<span class="title function_">slice</span>(<span class="number">1</span>) || <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">matchRoute</span>(<span class="params">path</span>) &#123;</span><br><span class="line">  <span class="comment">// 简单匹配：优先静态，再尝试带参数的模式（可用更完善的 path-to-regex）</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> pattern <span class="keyword">in</span> routes) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pattern.<span class="title function_">includes</span>(<span class="string">&#x27;:&#x27;</span>)) &#123;</span><br><span class="line">      <span class="keyword">const</span> regex = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;^&#x27;</span> + pattern.<span class="title function_">replace</span>(<span class="regexp">/:\w+/g</span>, <span class="string">&#x27;([^/]+)&#x27;</span>) + <span class="string">&#x27;$&#x27;</span>);</span><br><span class="line">      <span class="keyword">const</span> m = path.<span class="title function_">match</span>(regex);</span><br><span class="line">      <span class="keyword">if</span> (m) &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = (pattern.<span class="title function_">match</span>(<span class="regexp">/:\w+/g</span>) || []).<span class="title function_">map</span>(<span class="function"><span class="params">k</span> =&gt;</span> k.<span class="title function_">slice</span>(<span class="number">1</span>));</span><br><span class="line">        <span class="keyword">const</span> params = <span class="title class_">Object</span>.<span class="title function_">fromEntries</span>(keys.<span class="title function_">map</span>(<span class="function">(<span class="params">k, i</span>) =&gt;</span> [k, <span class="built_in">decodeURIComponent</span>(m[i+<span class="number">1</span>])]));</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">handler</span>: routes[pattern], params &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pattern === path) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">handler</span>: routes[pattern], <span class="attr">params</span>: &#123;&#125; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onHashChange</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> path = <span class="title function_">parseHash</span>();</span><br><span class="line">  <span class="keyword">const</span> matched = <span class="title function_">matchRoute</span>(path);</span><br><span class="line">  <span class="keyword">if</span> (matched) matched.<span class="title function_">handler</span>(matched.<span class="property">params</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="title function_">renderNotFound</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;hashchange&#x27;</span>, onHashChange);</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, onHashChange);</span><br></pre></td></tr></table></figure></li>
+<li>基于 History API 的简单路由：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filepath:</span></span><br><span class="line"><span class="comment">// ...existing code...</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">navigateTo</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  history.<span class="title function_">pushState</span>(<span class="literal">null</span>, <span class="string">&#x27;&#x27;</span>, url);</span><br><span class="line">  <span class="title function_">onLocationChange</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">replaceTo</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  history.<span class="title function_">replaceState</span>(<span class="literal">null</span>, <span class="string">&#x27;&#x27;</span>, url);</span><br><span class="line">  <span class="title function_">onLocationChange</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onLocationChange</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> path = location.<span class="property">pathname</span> || <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> matched = <span class="title function_">matchRoute</span>(path); <span class="comment">// reuse matchRoute（需支持不含#的路径）</span></span><br><span class="line">  <span class="keyword">if</span> (matched) matched.<span class="title function_">handler</span>(matched.<span class="property">params</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="title function_">renderNotFound</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;popstate&#x27;</span>, onLocationChange);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> a = e.<span class="property">target</span>.<span class="title function_">closest</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!a) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> isExternal = a.<span class="property">host</span> !== location.<span class="property">host</span> || a.<span class="title function_">hasAttribute</span>(<span class="string">&#x27;target&#x27;</span>) || a.<span class="title function_">hasAttribute</span>(<span class="string">&#x27;download&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!isExternal) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>();</span><br><span class="line">    <span class="title function_">navigateTo</span>(a.<span class="property">pathname</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, onLocationChange);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="路由匹配与参数解析"><a href="#路由匹配与参数解析" class="headerlink" title="路由匹配与参数解析"></a>路由匹配与参数解析</h3><ul>
+<li>推荐使用稳定的路径匹配库（如 path-to-regexp、route-parser），避免手写正则带来的边界问题。</li>
+<li>注意对参数做 decodeURIComponent&#x2F;encodeURIComponent，处理空段、尾斜杠一致性。</li>
+</ul>
+<h3 id="服务端配置（History-路由必需）"><a href="#服务端配置（History-路由必需）" class="headerlink" title="服务端配置（History 路由必需）"></a>服务端配置（History 路由必需）</h3><ul>
+<li>所有非静态资源的请求应返回 SPA 的入口页（index.html），由前端路由决定视图。</li>
+<li>对于静态资源（JS&#x2F;CSS&#x2F;图片）应保留正常静态处理。<br>若支持 SSR，请在服务器端做对应路由渲染并返回预渲染 HTML 提升 SEO。</li>
+</ul>
+<h3 id="边界与注意点"><a href="#边界与注意点" class="headerlink" title="边界与注意点"></a>边界与注意点</h3><ul>
+<li>SEO 与爬虫：Hash 路由对 SEO 不友好；使用 History + SSR 或预渲染可改善。</li>
+<li>刷新问题：History 路由刷新需服务器回退；Hash 路由无需服务器调整。</li>
+<li>滚动恢复：处理导航时保存&#x2F;恢复滚动位置（浏览器默认可能不同）。</li>
+<li>访问控制：导航守卫（同步&#x2F;异步）用于鉴权、重定向。</li>
+<li>性能与内存：避免在路由切换时泄露事件监听器或定时器。</li>
+<li>URL 编码：注意路径与查询的编码&#x2F;解码、重复斜杠、尾随斜杠的规范化。</li>
+<li>后退&#x2F;替换：用 replaceState 做无需历史记录的替换（如登录后替换回上一个状态）。</li>
+</ul>
+<h3 id="实践建议"><a href="#实践建议" class="headerlink" title="实践建议"></a>实践建议</h3><ul>
+<li>小项目或兼容性要求高：hash 路由快速简单。</li>
+<li>生产级 SPA：优先 history 路由 + 服务端配置或 SSR。</li>
+<li>使用成熟路由库（Vue Router &#x2F; React Router &#x2F; router5 等）来减少坑与提升功能（懒加载、嵌套路由、导航守卫、滚动行为等）。</li>
+<li>提前考虑基路径(base)、404&#x2F;重定向策略与国际化路由设计。</li>
+</ul>
+<p>小结：理解 hash 与 history 的原理与权衡，再根据项目需求选择实现方式与工具，能避免常见的刷新、SEO、服务器配置等问题。</p>
 </div>
         
   </div>

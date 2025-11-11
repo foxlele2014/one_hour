@@ -160,7 +160,7 @@
         <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+        <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
       </div>
      
     
@@ -173,10 +173,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">4 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">564 字</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+          <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                
       </div>
      
@@ -188,6 +188,66 @@
         <div><ul>
 <li>快速排序</li>
 </ul>
+<h3 id="常见基础算法速览（简明）"><a href="#常见基础算法速览（简明）" class="headerlink" title="常见基础算法速览（简明）"></a>常见基础算法速览（简明）</h3><ul>
+<li>快速排序（Quick Sort）<ul>
+<li>思路：分治，选基准 pivot，把数组分为小于 pivot &#x2F; 等于 &#x2F; 大于，然后递归排序。</li>
+<li>平均时间复杂度：O(n log n)，最坏 O(n^2)（可随机化或三数取中减少概率）。</li>
+<li>原地实现常用，空间 O(log n) 递归栈。</li>
+</ul>
+</li>
+</ul>
+<p>示例（JS）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">quickSort</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.<span class="property">length</span> &lt;= <span class="number">1</span>) <span class="keyword">return</span> arr;</span><br><span class="line">  <span class="keyword">const</span> pivot = arr[<span class="title class_">Math</span>.<span class="title function_">floor</span>(arr.<span class="property">length</span> / <span class="number">2</span>)];</span><br><span class="line">  <span class="keyword">const</span> left = [], mid = [], right = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> x <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; pivot) left.<span class="title function_">push</span>(x);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x === pivot) mid.<span class="title function_">push</span>(x);</span><br><span class="line">    <span class="keyword">else</span> right.<span class="title function_">push</span>(x);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">quickSort</span>(left).<span class="title function_">concat</span>(mid, <span class="title function_">quickSort</span>(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>归并排序（Merge Sort）</p>
+<ul>
+<li>思路：分而治之，递归拆半，合并时做有序合并。</li>
+<li>时间复杂度：O(n log n)，稳定；空间复杂度 O(n)。</li>
+</ul>
+</li>
+<li><p>堆排序（Heap Sort）</p>
+<ul>
+<li>利用二叉堆（最大堆）选择最大元素，原地排序，时间 O(n log n)，不稳定。</li>
+</ul>
+</li>
+<li><p>二分查找（Binary Search）</p>
+<ul>
+<li>前提：有序数组。</li>
+<li>时间复杂度：O(log n)。</li>
+</ul>
+</li>
+</ul>
+<p>示例（JS，迭代）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">binarySearch</span>(<span class="params">arr, target</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> l = <span class="number">0</span>, r = arr.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">    <span class="keyword">const</span> m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (arr[m] === target) <span class="keyword">return</span> m;</span><br><span class="line">    <span class="keyword">if</span> (arr[m] &lt; target) l = m + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> r = m - <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>图的遍历：DFS &#x2F; BFS</p>
+<ul>
+<li>DFS（深度优先）：递归或栈实现，适合拓扑、连通性、回溯问题。</li>
+<li>BFS（宽度优先）：队列实现，适合最短步数（无权图）。</li>
+</ul>
+</li>
+<li><p>常见数据结构速记</p>
+<ul>
+<li>数组、链表、栈、队列、哈希表（Map&#x2F;Set）、二叉树、堆、并查集、Trie、图（邻接表&#x2F;矩阵）。</li>
+</ul>
+</li>
+<li><p>算法复杂度与常见陷阱</p>
+<ul>
+<li>关注时间复杂度与空间复杂度，注意常数项与递归深度。</li>
+<li>输入规模边界（空集、重复、大量重复值、极端有序&#x2F;逆序）要单独考虑。</li>
+<li>优先写清晰正确的解法，再考虑微观优化（位运算、预分配、原地变更）。</li>
+</ul>
+</li>
+<li><p>练习建议</p>
+<ul>
+<li>从经典题目入手：排序、二分、滑动窗口、哈希映射、DFS&#x2F;BFS、双指针、动态规划基础。</li>
+<li>理解常用模板（递归、二分、滑窗口、前缀和、差分、堆）并能变形应用。</li>
+</ul>
+</li>
+</ul>
+<p>小结：掌握排序、查找、图遍历与基本数据结构，理解复杂度与边界情况，是攻克中等算法题的基石。</p>
 </div>
         
   </div>

@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <link rel="icon" href="/one_hour/img/favicon.png">
+  
+  
+      <meta name="author" content="limin">
+  
+  
+      <meta name="subtitle" content="After all,tomorrow is another day.">
+  
+  
+      <meta name="description" content="无聊的博客">
+  
+  
+  
+    <link rel="alternate" href="/one_hour/atom.xml " title="一个博客" type="application/atom+xml">
+  
+
+  
+
+  <title>远程桌面服务搭建 | 一个博客</title>
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/one_hour/css/style.css" >
+  <link rel="stylesheet" href="/one_hour/css/partial/dark.css" >
+
+  
+  
+  
+
+  
+    
+      <link rel="stylesheet" href="/one_hour/css/partial/highlight/atom-one-light.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/css/iconfont.css">
+    
+  
+
+  
+    <script src="/one_hour/js/todark.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+</html>
+    
+<div class="nav index" style="height: 60px;">
+    <div class="title animated fadeInDown">
+        <div class="layui-container">
+                <div class="nav-title"><a href="/one_hour/" title="一个博客">一个博客</a></div>
+            <div class="nav-list">
+                <button> <span class=""></span><span style="display: block;"></span><span class=""></span> </button>
+                <ul class="layui-nav" lay-filter="">
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/archives/ ">
+                            <i class=" fas fa-archive " style="color: rgb(10 189 227);"></i>
+                            <span class="layui-nav-item-name">归档</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/tags/ ">
+                            <i class=" fas fa-hashtag " style="color: rgb(254 202 87);"></i>
+                            <span class="layui-nav-item-name">标签</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/categories ">
+                            <i class=" far fa-folder-open " style="color: rgb(29 209 161);"></i>
+                            <span class="layui-nav-item-name">分类</span>
+                        </a>
+                    </li>
+                    
+                        
+                        
+                        
+                        
+                    <li class="layui-nav-item">
+                        <a href="/one_hour/about ">
+                            <i class=" fab fa-grav " style="color: rgb(154 106 247);"></i>
+                            <span class="layui-nav-item-name">关于</span>
+                        </a>
+                    </li>
+                    
+                    
+                        <li class="layui-nav-item" id="btn-toggle-dark">🌙</li>
+                    
+                    <span class="layui-nav-bar" style="left: 342px; top: 78px; width: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<header class="header">
+        
+            <div class="logo">
+                    <a href="/one_hour/"><img src="https://github.com/foxlele2014/boring/assets/7221466/471fdf61-ccc9-4049-9c15-e035936329c3" onerror=this.onerror=null,this.src="/one_hour/img/loading.gif"></a>
+            </div>
+         
+    </div>
+     
+
+            <div class="motto">
+                <span>After all, tomorrow is another day.</span>
+            </div>
+    
+    
+            <div class="social">
+                
+                        <a class="social-icon" href="https://github.com/foxlele2014" target="_blank" title="Github">
+                            <i class="iconfont icon-GitHub" aria-hidden="true"></i>
+                          </a>
+                 
+                        <a class="social-icon" href="mailto:503275769@qq.com" target="_blank" title="Email">
+                            <i class="iconfont icon-email" aria-hidden="true"></i>
+                          </a>
+                 
+            </div>
+     
+</header>
+
+    
+<article id="post">
+  <div class="post-title">远程桌面服务搭建</div>
+  
+<div class="post-meta">
+    
+    
+      <div class="post-meta-item date">
+        <span title="发表于 2025.01.20"><i class="far fa-calendar-alt"></i> 2025.01.20</span>
+      </div>
+      <div class="post-meta-item updated">
+        <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
+      </div>
+     
+     
+    
+     <div class="post-meta-item wordcount">
+        
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">938 字</span>
+           
+        
+          <i class="far fa-clock"></i> <span class="post-count">3 分钟</span>
+                               
+      </div>
+     
+</div>
+
+
+  
+  <div class="content">
+        <div><ul>
+<li>novnc</li>
+<li>guacamole</li>
+</ul>
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>VNC 是远程桌面协议家族（RFB），常用服务端有 TigerVNC、x11vnc 等。noVNC 提供基于 Web 的 VNC 客户端（通过 WebSocket + canvas），Guacamole 是一个更完整的网关，支持 VNC&#x2F;RDP&#x2F;SSH 并提供 Web 界面与认证后端（可用 Docker 部署）。</p>
+<h3 id="常见方案对比"><a href="#常见方案对比" class="headerlink" title="常见方案对比"></a>常见方案对比</h3><ul>
+<li>noVNC：轻量、直接把 VNC 流量通过 websockify 转成 WebSocket，适合需要快速在浏览器打开远程桌面的场景。</li>
+<li>Guacamole：企业级网关，支持多协议、认证、会话管理、录制&#x2F;剪贴板&#x2F;文件传输（通过扩展），适合集中化接入。</li>
+</ul>
+<h3 id="Ubuntu-上的快速示例（最小化）"><a href="#Ubuntu-上的快速示例（最小化）" class="headerlink" title="Ubuntu 上的快速示例（最小化）"></a>Ubuntu 上的快速示例（最小化）</h3><ol>
+<li>安装 VNC 服务（TigerVNC）并创建用户桌面：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y tigervnc-standalone-server xfce4</span><br><span class="line"><span class="comment"># 为用户设置 vnc 密码</span></span><br><span class="line">vncpasswd</span><br><span class="line"><span class="comment"># 启动（示例）：</span></span><br><span class="line">vncserver :1 -geometry 1280x800 -depth 24</span><br></pre></td></tr></table></figure></li>
+<li>使用 noVNC（websockify）暴露到浏览器：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 noVNC (示例)</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/novnc/noVNC.git</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/novnc/websockify.git noVNC/utils/websockify</span><br><span class="line"><span class="comment"># 启动 noVNC，连接到本地 VNC :1（5901）</span></span><br><span class="line">./noVNC/utils/novnc_proxy --vnc localhost:5901 --listen 6080</span><br><span class="line"><span class="comment"># 然后在浏览器访问 http://server:6080/vnc.html</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Guacamole（推荐用-Docker-快速部署）"><a href="#Guacamole（推荐用-Docker-快速部署）" class="headerlink" title="Guacamole（推荐用 Docker 快速部署）"></a>Guacamole（推荐用 Docker 快速部署）</h3><p>使用官方 Docker 镜像和 MySQL&#x2F;Postgres 后端的最小 docker-compose 示例（省略持久化&#x2F;细节）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">guacd:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">guacamole/guacd</span></span><br><span class="line">  <span class="attr">guacamole:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">guacamole/guacamole</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">guacd</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_HOSTNAME:</span> <span class="string">db</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">guacamole_db</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">guacamole_user</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">secret</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.7</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">rootpw</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">guacamole_db</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">guacamole_user</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">secret</span></span><br></pre></td></tr></table></figure>
+<p>启动后访问 guacamole 容器提供的 web 界面，配置 VNC 连接并启用用户&#x2F;权限。</p>
+<h3 id="安全与运维要点"><a href="#安全与运维要点" class="headerlink" title="安全与运维要点"></a>安全与运维要点</h3><ul>
+<li>永远为 VNC 连接设置强密码；默认 VNC 协议无加密，建议通过 TLS 或 SSH 隧道转发 VNC（或使用 noVNC + nginx TLS 反向代理）。</li>
+<li>若使用 noVNC，使用 websockify 的 TLS 或在前端用 Nginx&#x2F;Traefik 做 HTTPS 终端并限制访问（认证&#x2F;防火墙）。</li>
+<li>Guacamole 提供认证与会话控制，但仍需放在 HTTPS 和受限网络后面；为 Guacamole 数据库启用备份与最小权限用户。</li>
+<li>防火墙：仅开放必要端口（如 6080&#x2F;8443 给 Web，VNC 原生端口建议仅内部可达）。</li>
+<li>性能：降低色深、启用压缩、调整分辨率可改善带宽占用；HTTP&#x2F;2&#x2F;3&#x2F;负载均衡用于大规模访问场景。</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>简单场景：TigerVNC + noVNC 快速可用，适合临时或轻量化需求。</li>
+<li>企业&#x2F;集中管理：Guacamole 更完整，支持多协议与认证&#x2F;审计。</li>
+<li>部署时优先考虑加密（HTTPS&#x2F;TLS&#x2F;SSH 隧道）、认证与防火墙策略，并在生产环境使用持久化存储与监控。</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>novnc使用虚拟机来建立多账号访问的时候，会很卡。<br>但是guacamole创建的服务，可以在一台电脑上，创建多个账号，使用rdp协议来达到同时可以多个人使用不同账号连接这台电脑使用服务。</p>
+<p>TODO:具体的细节之后再分享。</p>
+<p>（背景：需求：通过网页输入链接来达到访问某台服务器的服务，而且支持多账号访问同一个服务器的不同服务。且最好能使用一台电脑就能做这个事情。<br>之后一开始我接手的时候，他们定好了要使用novnc来实现。且他们使用创建多个虚拟机+novnc来访问，但是这样很卡；这期间还做了很多关于novnc进入页面时的自动登录；密码管理，域账号管理等；后来他们觉得novnc的这个方案还是不可行，所以选择了guacamole的方案。但是怎么可以做到访问多个账号呢。就是需要一个应用将windows类似破解一样，让它支持rdp访问支持同时在线。）</p>
+</div>
+        
+  </div>
+
+    <div class="post_tags">
+      
+    </div>
+    <div class="post-nav">
+      
+      
+        <div class="post-nav-next post-nav-item">
+            <a href="/one_hour/2025/01/13/%E4%BA%BA%E7%94%9F%E5%A6%82%E9%80%86%E6%97%85%EF%BC%8C%E6%88%91%E4%BA%A6%E6%98%AF%E8%A1%8C%E4%BA%BA/" >人生如逆旅，我亦是行人<i class="fa fa-chevron-right"></i></a>
+        </div>
+      
+    </div>
+      
+
+
+
+
+</article>
+
+    
+<a id="gotop" href="javascript:" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    
+
+
+
+
+
+
+    <div id="bottom-outer">
+  <div id="bottom-inner">
+    © 2025 <i class="fa fa-heart" id="heart"></i> limin
+    <br />
+    Powered by
+    <a target="_blank" rel="noopener" href="http://hexo.io">hexo</a> | Theme is
+    <a target="_blank" rel="noopener" href="https://github.com/a2396837/hexo-theme-blank/"
+      >blank</a
+    >
+    
+    <div class="icp-info">
+      
+      <a href="" target="_blank"> </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.min.js"></script>
+
+
+
+  
+    <script src="/one_hour/js/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  
+
+ 
+
+  <script src="/one_hour/js/local-search.js"></script>
+<script type="text/javascript">      
+  var search_path = "search.xml";
+if (search_path.length == 0) {
+  search_path = "search.xml";
+}
+var path = "/one_hour/" + search_path;
+  searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+  
+
+
+  <script>
+    window.lazyLoadOptions = {
+      elements_selector: 'img',
+      threshold: 0
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script>   
+  
+
+
+  <script>
+    var images = $('img').not('.nav-logo img').not('.card img').not($('a>img')).not('.reward-content img')
+    images.each(function (i, o) {
+      var lazyloadSrc = $(o).attr('data-src') ? $(o).attr('data-src') : $(o).attr('src')
+      $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${$(o).attr('alt')}" class="fancybox"></a>`)
+    })
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+  <script>
+        $().fancybox({
+      selector: '[data-fancybox]',
+      loop: true,
+      transitionEffect: 'slide',
+      protect: true,
+      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
+    })
+  </script>   
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/gh/a2396837/CDN@latest/js/firework.js"></script>
+  
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js"></script>
+<script>
+!function (e, t, a) {
+  var initCopyCode = function(){
+    var copyHtml = '';
+    copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+    copyHtml += '  <i class="fa fa-clipboard"></i><span>复制</span>';
+    copyHtml += '</button>';
+    $(".highlight .code pre").before(copyHtml);
+    new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+  }
+  initCopyCode();
+}(window, document);
+</script>  
+  
+
+<script>
+  var btntop = $('#gotop');
+  btntop.on('click', function (e) {
+    e.preventDefault();
+    $('html, body').animate({ scrollTop: 0 }, '300');
+  });
+
+  var $table = $('.content table').not($('figure.highlight > table'))
+$table.each(function () {
+  $(this).wrap('<div class="table-wrap"></div>')
+})
+</script>
+
+
+</html>

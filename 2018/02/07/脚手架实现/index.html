@@ -160,7 +160,7 @@
         <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+        <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
       </div>
      
     
@@ -173,10 +173,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">7 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">1.1k 字</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+          <i class="far fa-clock"></i> <span class="post-count">4 分钟</span>
                                
       </div>
      
@@ -185,12 +185,59 @@
 
   
   <div class="content">
-        <div><ul>
-<li>实现原理</li>
-<li>hexo</li>
-<li>metalsmith</li>
-<li>yeoman</li>
+        <div><h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>脚手架（scaffold &#x2F; scaffolding）是用来快速生成项目骨架、约定文件和初始配置的工具。常见目标：生成目录结构、模板文件、默认配置、安装依赖、初始化版本控制等，帮助团队保持一致性并提升开发效率。</p>
+<h3 id="实现原理（核心要素）"><a href="#实现原理（核心要素）" class="headerlink" title="实现原理（核心要素）"></a>实现原理（核心要素）</h3><ul>
+<li>模板引擎：用 ejs &#x2F; handlebars &#x2F; mustache 等渲染模板文件，替换占位符。</li>
+<li>交互与配置：用 inquirer &#x2F; prompts 获取用户输入（项目名、license、包管理器等）。</li>
+<li>文件操作：复制&#x2F;渲染模板到目标目录（fs-extra、globby）。</li>
+<li>依赖安装：可选择自动执行 npm&#x2F;yarn&#x2F;pnpm install（child_process.exec）。</li>
+<li>初始化 VCS：可选 git init、commit。</li>
+<li>扩展与插件：提供 hooks 或插件接口，支持后续扩展（如生成 CI、Dockerfile）。</li>
+<li>幂等与安全：检测目标路径是否为空或冲突，提供覆盖&#x2F;跳过策略。</li>
 </ul>
+<h3 id="常见脚手架工具简介"><a href="#常见脚手架工具简介" class="headerlink" title="常见脚手架工具简介"></a>常见脚手架工具简介</h3><ul>
+<li>Hexo<ul>
+<li>主要是静态博客框架，包含 scaffold 概念（source&#x2F;_posts&#x2F;scaffolds），<code>hexo new</code> 使用 scaffold 生成带 front-matter 的文章&#x2F;页面模板。</li>
+<li>使用场景：博客内容模板化（post、page、draft），主题&#x2F;插件生态。</li>
+</ul>
+</li>
+<li>Metalsmith<ul>
+<li>轻量文件管道静态站点生成器，通过插件链处理文件（读取 -&gt; transform -&gt; write）。</li>
+<li>可用于构建自定义脚手架或作为生成步骤的一部分。</li>
+</ul>
+</li>
+<li>Yeoman<ul>
+<li>流行的项目脚手架生态，基于 generator（npm 包）定义交互、文件模板和写入步骤。</li>
+<li>特点：强交互、蓝图式生成、社区 generator 丰富（React&#x2F;Angular&#x2F;Vue 等）。</li>
+<li>常用命令：yo <generator>，发布为 npm 包，使用 yeoman-generator API 处理 prompts、写入、安装依赖。</li>
+</ul>
+</li>
+</ul>
+<h3 id="简单实现示例（最小-CLI-脚手架）"><a href="#简单实现示例（最小-CLI-脚手架）" class="headerlink" title="简单实现示例（最小 CLI 脚手架）"></a>简单实现示例（最小 CLI 脚手架）</h3><p>示例功能：询问项目名，复制模板并渲染 package.json，选择是否安装依赖。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs-extra&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">&#x27;inquirer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> ejs = <span class="built_in">require</span>(<span class="string">&#x27;ejs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; execSync &#125; = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name, install &#125; = <span class="keyword">await</span> inquirer.<span class="title function_">prompt</span>([</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;name&#x27;</span>, <span class="attr">message</span>: <span class="string">&#x27;Project name&#x27;</span>, <span class="attr">default</span>: <span class="string">&#x27;my-app&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;install&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;confirm&#x27;</span>, <span class="attr">message</span>: <span class="string">&#x27;Install dependencies?&#x27;</span>, <span class="attr">default</span>: <span class="literal">true</span> &#125;</span><br><span class="line">  ]);</span><br><span class="line">  <span class="keyword">const</span> target = path.<span class="title function_">resolve</span>(process.<span class="title function_">cwd</span>(), name);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">await</span> fs.<span class="title function_">pathExists</span>(target)) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Target exists. Aborting.&#x27;</span>);</span><br><span class="line">    process.<span class="title function_">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">await</span> fs.<span class="title function_">copy</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;templates&#x27;</span>), target);</span><br><span class="line">  <span class="keyword">const</span> pkgTpl = <span class="keyword">await</span> fs.<span class="title function_">readFile</span>(path.<span class="title function_">join</span>(target, <span class="string">&#x27;package.json.ejs&#x27;</span>), <span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line">  <span class="keyword">await</span> fs.<span class="title function_">writeFile</span>(path.<span class="title function_">join</span>(target, <span class="string">&#x27;package.json&#x27;</span>), ejs.<span class="title function_">render</span>(pkgTpl, &#123; name &#125;));</span><br><span class="line">  <span class="keyword">if</span> (install) &#123;</span><br><span class="line">    <span class="title function_">execSync</span>(<span class="string">&#x27;npm install&#x27;</span>, &#123; <span class="attr">cwd</span>: target, <span class="attr">stdio</span>: <span class="string">&#x27;inherit&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Scaffold created at&#x27;</span>, target);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">run</span>();</span><br></pre></td></tr></table></figure>
+<p>说明：模板文件可放 templates&#x2F; 下，使用 package.json.ejs 等占位渲染。</p>
+<h3 id="Yeoman-generator-最小骨架"><a href="#Yeoman-generator-最小骨架" class="headerlink" title="Yeoman generator 最小骨架"></a>Yeoman generator 最小骨架</h3><ul>
+<li>目录结构：generator-my&#x2F;generators&#x2F;app&#x2F;index.js、templates&#x2F;**</li>
+<li>index.js 使用 this.prompt、this.fs.copyTpl、this.npmInstall 等 API。</li>
+</ul>
+<p>示例（核心片段）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Generator</span> = <span class="built_in">require</span>(<span class="string">&#x27;yeoman-generator&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">class</span> <span class="title class_">extends</span> <span class="title class_">Generator</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">prompting</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">answers</span> = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">prompt</span>([&#123; <span class="attr">name</span>: <span class="string">&#x27;name&#x27;</span>, <span class="attr">message</span>: <span class="string">&#x27;Project name&#x27;</span> &#125;]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">writing</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">fs</span>.<span class="title function_">copyTpl</span>(</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">templatePath</span>(<span class="string">&#x27;**/*&#x27;</span>),</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">destinationPath</span>(<span class="variable language_">this</span>.<span class="property">answers</span>.<span class="property">name</span>),</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">answers</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">install</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">npmInstall</span>([], &#123;&#125;, &#123; <span class="attr">cwd</span>: <span class="variable language_">this</span>.<span class="title function_">destinationPath</span>(<span class="variable language_">this</span>.<span class="property">answers</span>.<span class="property">name</span>) &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hexo-scaffold-快速说明"><a href="#Hexo-scaffold-快速说明" class="headerlink" title="Hexo scaffold 快速说明"></a>Hexo scaffold 快速说明</h3><ul>
+<li>把模板放在主题或站点的 scaffolds 目录（如 scaffolds&#x2F;post），内容为 front-matter 模板。</li>
+<li>使用：hexo new “title” 会基于 scaffolds&#x2F;post 生成文章文件。</li>
+</ul>
+<h3 id="注意点与最佳实践"><a href="#注意点与最佳实践" class="headerlink" title="注意点与最佳实践"></a>注意点与最佳实践</h3><ul>
+<li>可配置性：提供选项（语言、框架、样式、测试），避免硬编码。</li>
+<li>可复现性：生成后记录依赖版本、提供 lock 文件。</li>
+<li>幂等与安全：遇文件冲突提供交互或 –force 选项，避免无意覆盖。</li>
+<li>模块化模板：拆分可复用片段（LICENSE、CI、Dockerfile）。</li>
+<li>测试：为 generator 添加集成测试（如 Yeoman Test，或用临时目录断言文件生成）。</li>
+<li>发布与文档：把 CLI 做为 bin 导出，文档写清使用示例与选项，发布到 npm。</li>
+<li>性能：避免在模板中执行大量同步阻塞操作，异步 IO 更友好。</li>
+<li>安全：慎用模板中的任意代码执行，避免注入风险。</li>
+</ul>
+<p>小结：脚手架的核心是「交互+模板+文件写入+可选安装&#x2F;初始化」，工具层面可选 Yeoman、自己用 Node 实现、或结合静态站生成器（Hexo&#x2F;Metalsmith）完成更复杂的流水线。根据项目复杂度选择更成熟的生态（Yeoman）或轻量可控的自实现方案。</p>
 </div>
         
   </div>
