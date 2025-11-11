@@ -160,7 +160,7 @@
         <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+        <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
       </div>
      
     
@@ -173,10 +173,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">8 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">853 字</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+          <i class="far fa-clock"></i> <span class="post-count">3 分钟</span>
                                
       </div>
      
@@ -191,6 +191,71 @@
 <li>jpeg</li>
 <li>gif</li>
 </ul>
+<h3 id="常见图片格式对比（简明"><a href="#常见图片格式对比（简明" class="headerlink" title="常见图片格式对比（简明)"></a>常见图片格式对比（简明)</h3><ul>
+<li><p>PNG</p>
+<ul>
+<li>特点：无损压缩，支持真彩色（24bit&#x2F;32bit）与 alpha 透明（PNG-24&#x2F;PNG-32）；也有索引色的 PNG-8（256 色）。</li>
+<li>适用：带透明背景的图像、矢量导出后的位图、需要无损的界面元素、截图（保留文本清晰）。</li>
+<li>缺点：同等视觉质量下体积通常大于有损格式（照片类）.</li>
+</ul>
+</li>
+<li><p>JPG &#x2F; JPEG</p>
+<ul>
+<li>特点：有损压缩，适合连续色调和照片；支持渐进式（progressive）编码以提升首屏感知速度；不支持 alpha 透明。</li>
+<li>适用：照片、风景、复杂色彩的图片。</li>
+<li>缺点：反复有损压缩会损失细节；不适合带文字&#x2F;锐利边缘的图形.</li>
+</ul>
+</li>
+<li><p>GIF</p>
+<ul>
+<li>特点：调色板限制（最多 256 色），支持帧动画（轻量动画常用）；无真彩色。</li>
+<li>适用：短动画、低色数图标动画或兼容极老浏览器的需求。</li>
+<li>缺点：颜色受限、体积效率差；静态图不推荐.</li>
+</ul>
+</li>
+<li><p>SVG</p>
+<ul>
+<li>特点：矢量格式，基于 XML，可缩放无损；可内联、可交互、可动画（CSS&#x2F;JS）。</li>
+<li>适用：图标、logo、图表、简单插图与响应式场景。</li>
+<li>缺点：复杂照片不适合；需注意内联 JS&#x2F;CSS 的安全性与文件大小.</li>
+</ul>
+</li>
+<li><p>WebP</p>
+<ul>
+<li>特点：Google 提出的现代格式，支持有损&#x2F;无损压缩和透明、动画，通常比 PNG&#x2F;JPEG 更小。</li>
+<li>适用：网页图片优化首选之一（兼容性需检查或提供后备）。</li>
+<li>缺点：部分老浏览器不支持，需提供回退格式或使用 <picture>。</li>
+</ul>
+</li>
+<li><p>AVIF</p>
+<ul>
+<li>特点：基于 AV1 编码，压缩效率高（常优于 WebP），支持有损&#x2F;无损与透明。</li>
+<li>适用：追求极致带宽节省的场景。</li>
+<li>缺点：编码慢、编码工具&#x2F;浏览器支持逐步完善，需要回退策略。</li>
+</ul>
+</li>
+<li><p>APNG &#x2F; 有关动画替代</p>
+<ul>
+<li>APNG &#x3D; PNG 的动画扩展，支持真彩色与透明，比 GIF 质量好，但兼容性需确认。</li>
+<li>对于复杂动画可以考虑 WebP 动画或视频播放（mp4&#x2F;webm）以节省体积。</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么时候用哪个（简要决策树）"><a href="#什么时候用哪个（简要决策树）" class="headerlink" title="什么时候用哪个（简要决策树）"></a>什么时候用哪个（简要决策树）</h3><ul>
+<li>图标 &#x2F; logo &#x2F; 矢量图：SVG</li>
+<li>需要透明（且为图形或界面元素）：PNG（或 WebP&#x2F;AVIF 支持时优先）</li>
+<li>照片类：JPEG（或使用 WebP&#x2F;AVIF 以更小体积）</li>
+<li>简单动画（低色数）：GIF；需质量&#x2F;透明且现代浏览器：WebP 动画 &#x2F; APNG</li>
+<li>追求最佳压缩：优先考虑 AVIF -&gt; WebP -&gt; JPEG&#x2F;PNG 回退</li>
+</ul>
+<h3 id="实践建议"><a href="#实践建议" class="headerlink" title="实践建议"></a>实践建议</h3><ul>
+<li>使用现代格式（WebP&#x2F;AVIF）并通过 <picture> 提供回退，或在构建链中做格式检测&#x2F;回退。</li>
+<li>对照片使用质量调整（JPEG quality 70–85 常为折中）；对图形使用无损或 PNG-8（若色数允许）。</li>
+<li>对 SVG 做精简（svgo），对位图做压缩（imagemagick &#x2F; mozjpeg &#x2F; cwebp &#x2F; svgo &#x2F; avifenc）。</li>
+<li>使用响应式图片（srcset&#x2F;sizes）根据视口加载合适尺寸，避免过大图片浪费带宽。</li>
+<li>考虑懒加载与 CDN 加速，保留正确的色彩配置与元数据（必要时移除以减小体积）。</li>
+</ul>
+<p>小结：根据图片类型（照片&#x2F;图形&#x2F;动画）、是否需要透明、兼容性和体积目标来选格式。优先用矢量保存可缩放资产；在带宽敏感场景下优先现代格式并做好回退与构建优化。</p>
 </div>
         
   </div>

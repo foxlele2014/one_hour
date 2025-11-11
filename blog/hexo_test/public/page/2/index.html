@@ -155,7 +155,7 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
-            <a href="/one_hour/2018/02/07/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">跨域问题</a>
+            <a href="/one_hour/2018/02/07/%E8%84%9A%E6%89%8B%E6%9E%B6%E5%AE%9E%E7%8E%B0/">脚手架实现</a>
           </div>
           <div class="post-meta">
             
@@ -164,7 +164,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
               </div>
              
             
@@ -177,10 +177,105 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">6 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.1k 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">4 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>脚手架（scaffold &#x2F; scaffolding）是用来快速生成项目骨架、约定文件和初始配置的工具。常见目标：生成目录结构、模板文件、默认配置、安装依赖、初始化版本控制等，帮助团队保持一致性并提升开发效率。</p>
+<h3 id="实现原理（核心要素）"><a href="#实现原理（核心要素）" class="headerlink" title="实现原理（核心要素）"></a>实现原理（核心要素）</h3><ul>
+<li>模板引擎：用 ejs &#x2F; handlebars &#x2F; mustache 等渲染模板文件，替换占位符。</li>
+<li>交互与配置：用 inquirer &#x2F; prompts 获取用户输入（项目名、license、包管理器等）。</li>
+<li>文件操作：复制&#x2F;渲染模板到目标目录（fs-extra、globby）。</li>
+<li>依赖安装：可选择自动执行 npm&#x2F;yarn&#x2F;pnpm install（child_process.exec）。</li>
+<li>初始化 VCS：可选 git init、commit。</li>
+<li>扩展与插件：提供 hooks 或插件接口，支持后续扩展（如生成 CI、Dockerfile）。</li>
+<li>幂等与安全：检测目标路径是否为空或冲突，提供覆盖&#x2F;跳过策略。</li>
+</ul>
+<h3 id="常见脚手架工具简介"><a href="#常见脚手架工具简介" class="headerlink" title="常见脚手架工具简介"></a>常见脚手架工具简介</h3><ul>
+<li>Hexo<ul>
+<li>主要是静态博客框架，包含 scaffold 概念（source&#x2F;_posts&#x2F;scaffolds），<code>hexo new</code> 使用 scaffold 生成带 front-matter 的文章&#x2F;页面模板。</li>
+<li>使用场景：博客内容模板化（post、page、draft），主题&#x2F;插件生态。</li>
+</ul>
+</li>
+<li>Metalsmith<ul>
+<li>轻量文件管道静态站点生成器，通过插件链处理文件（读取 -&gt; transform -&gt; write）。</li>
+<li>可用于构建自定义脚手架或作为生成步骤的一部分。</li>
+</ul>
+</li>
+<li>Yeoman<ul>
+<li>流行的项目脚手架生态，基于 generator（npm 包）定义交互、文件模板和写入步骤。</li>
+<li>特点：强交互、蓝图式生成、社区 generator 丰富（React&#x2F;Angular&#x2F;Vue 等）。</li>
+<li>常用命令：yo <generator>，发布为 npm 包，使用 yeoman-generator API 处理 prompts、写入、安装依赖。</li>
+</ul>
+</li>
+</ul>
+<h3 id="简单实现示例（最小-CLI-脚手架）"><a href="#简单实现示例（最小-CLI-脚手架）" class="headerlink" title="简单实现示例（最小 CLI 脚手架）"></a>简单实现示例（最小 CLI 脚手架）</h3><p>示例功能：询问项目名，复制模板并渲染 package.json，选择是否安装依赖。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs-extra&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">&#x27;inquirer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> ejs = <span class="built_in">require</span>(<span class="string">&#x27;ejs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; execSync &#125; = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">run</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name, install &#125; = <span class="keyword">await</span> inquirer.<span class="title function_">prompt</span>([</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;name&#x27;</span>, <span class="attr">message</span>: <span class="string">&#x27;Project name&#x27;</span>, <span class="attr">default</span>: <span class="string">&#x27;my-app&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">name</span>: <span class="string">&#x27;install&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;confirm&#x27;</span>, <span class="attr">message</span>: <span class="string">&#x27;Install dependencies?&#x27;</span>, <span class="attr">default</span>: <span class="literal">true</span> &#125;</span><br><span class="line">  ]);</span><br><span class="line">  <span class="keyword">const</span> target = path.<span class="title function_">resolve</span>(process.<span class="title function_">cwd</span>(), name);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">await</span> fs.<span class="title function_">pathExists</span>(target)) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Target exists. Aborting.&#x27;</span>);</span><br><span class="line">    process.<span class="title function_">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">await</span> fs.<span class="title function_">copy</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;templates&#x27;</span>), target);</span><br><span class="line">  <span class="keyword">const</span> pkgTpl = <span class="keyword">await</span> fs.<span class="title function_">readFile</span>(path.<span class="title function_">join</span>(target, <span class="string">&#x27;package.json.ejs&#x27;</span>), <span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line">  <span class="keyword">await</span> fs.<span class="title function_">writeFile</span>(path.<span class="title function_">join</span>(target, <span class="string">&#x27;package.json&#x27;</span>), ejs.<span class="title function_">render</span>(pkgTpl, &#123; name &#125;));</span><br><span class="line">  <span class="keyword">if</span> (install) &#123;</span><br><span class="line">    <span class="title function_">execSync</span>(<span class="string">&#x27;npm install&#x27;</span>, &#123; <span class="attr">cwd</span>: target, <span class="attr">stdio</span>: <span class="string">&#x27;inherit&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Scaffold created at&#x27;</span>, target);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">run</span>();</span><br></pre></td></tr></table></figure>
+<p>说明：模板文件可放 templates&#x2F; 下，使用 package.json.ejs 等占位渲染。</p>
+<h3 id="Yeoman-generator-最小骨架"><a href="#Yeoman-generator-最小骨架" class="headerlink" title="Yeoman generator 最小骨架"></a>Yeoman generator 最小骨架</h3><ul>
+<li>目录结构：generator-my&#x2F;generators&#x2F;app&#x2F;index.js、templates&#x2F;**</li>
+<li>index.js 使用 this.prompt、this.fs.copyTpl、this.npmInstall 等 API。</li>
+</ul>
+<p>示例（核心片段）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Generator</span> = <span class="built_in">require</span>(<span class="string">&#x27;yeoman-generator&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">class</span> <span class="title class_">extends</span> <span class="title class_">Generator</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">prompting</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">answers</span> = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">prompt</span>([&#123; <span class="attr">name</span>: <span class="string">&#x27;name&#x27;</span>, <span class="attr">message</span>: <span class="string">&#x27;Project name&#x27;</span> &#125;]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">writing</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">fs</span>.<span class="title function_">copyTpl</span>(</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">templatePath</span>(<span class="string">&#x27;**/*&#x27;</span>),</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">destinationPath</span>(<span class="variable language_">this</span>.<span class="property">answers</span>.<span class="property">name</span>),</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">answers</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">install</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">npmInstall</span>([], &#123;&#125;, &#123; <span class="attr">cwd</span>: <span class="variable language_">this</span>.<span class="title function_">destinationPath</span>(<span class="variable language_">this</span>.<span class="property">answers</span>.<span class="property">name</span>) &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hexo-scaffold-快速说明"><a href="#Hexo-scaffold-快速说明" class="headerlink" title="Hexo scaffold 快速说明"></a>Hexo scaffold 快速说明</h3><ul>
+<li>把模板放在主题或站点的 scaffolds 目录（如 scaffolds&#x2F;post），内容为 front-matter 模板。</li>
+<li>使用：hexo new “title” 会基于 scaffolds&#x2F;post 生成文章文件。</li>
+</ul>
+<h3 id="注意点与最佳实践"><a href="#注意点与最佳实践" class="headerlink" title="注意点与最佳实践"></a>注意点与最佳实践</h3><ul>
+<li>可配置性：提供选项（语言、框架、样式、测试），避免硬编码。</li>
+<li>可复现性：生成后记录依赖版本、提供 lock 文件。</li>
+<li>幂等与安全：遇文件冲突提供交互或 –force 选项，避免无意覆盖。</li>
+<li>模块化模板：拆分可复用片段（LICENSE、CI、Dockerfile）。</li>
+<li>测试：为 generator 添加集成测试（如 Yeoman Test，或用临时目录断言文件生成）。</li>
+<li>发布与文档：把 CLI 做为 bin 导出，文档写清使用示例与选项，发布到 npm。</li>
+<li>性能：避免在模板中执行大量同步阻塞操作，异步 IO 更友好。</li>
+<li>安全：慎用模板中的任意代码执行，避免注入风险。</li>
+</ul>
+<p>小结：脚手架的核心是「交互+模板+文件写入+可选安装&#x2F;初始化」，工具层面可选 Yeoman、自己用 Node 实现、或结合静态站生成器（Hexo&#x2F;Metalsmith）完成更复杂的流水线。根据项目复杂度选择更成熟的生态（Yeoman）或轻量可控的自实现方案。</p>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
+            <a href="/one_hour/2018/02/07/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">跨域问题</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/javascript/">javascript</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">695 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                        
               </div>
              
@@ -191,6 +286,56 @@
 <li>原理</li>
 <li>解决方法</li>
 </ul>
+<h3 id="概览（同源策略）"><a href="#概览（同源策略）" class="headerlink" title="概览（同源策略）"></a>概览（同源策略）</h3><ul>
+<li>同源策略（Same-Origin Policy）：只有协议、主机、端口三者都相同才算同源（scheme:&#x2F;&#x2F;host:port）。</li>
+<li>浏览器限制跨源的 DOM 读取与部分请求，防止恶意脚本窃取数据，但允许某些资源加载（图片、script、link 等）.</li>
+</ul>
+<h3 id="常见解决方法（简明）"><a href="#常见解决方法（简明）" class="headerlink" title="常见解决方法（简明）"></a>常见解决方法（简明）</h3><ol>
+<li>CORS（推荐）<ul>
+<li>通过服务器在响应头添加 Access-Control-Allow-* 系列允许跨域请求。</li>
+<li>简单请求：GET&#x2F;POST（Content-Type 为简单类型）直接发送；复杂请求会触发预检（OPTIONS）。</li>
+<li>常用头：<ul>
+<li>Access-Control-Allow-Origin: <a target="_blank" rel="noopener" href="https://example.com/">https://example.com</a> 或 *</li>
+<li>Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS</li>
+<li>Access-Control-Allow-Headers: X-Requested-With,Content-Type,Authorization</li>
+<li>Access-Control-Allow-Credentials: true （若发送 cookie，不能与 * 一起使用）</li>
+</ul>
+</li>
+<li>Express 示例：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">use</span>(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;https://your.site&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;GET,POST,PUT,DELETE,OPTIONS&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;Content-Type,Authorization&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">header</span>(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>, <span class="string">&#x27;true&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&#x27;OPTIONS&#x27;</span>) <span class="keyword">return</span> res.<span class="title function_">sendStatus</span>(<span class="number">204</span>);</span><br><span class="line">  <span class="title function_">next</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>JSONP（仅限 GET，老方法）<ul>
+<li>通过 <script> 标签请求服务端返回一段调用回调的 JS。</li>
+<li>安全/功能受限，不支持 POST、Headers 等。</li>
+</ul>
+</li>
+<li>代理（同源代理）<ul>
+<li>前端请求同源的后端接口，后端转发到目标 API（常用于开发或绕过不支持 CORS 的第三方）。</li>
+<li>Nginx 简单 proxy_pass 示例：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /api/ &#123;</span><br><span class="line">  proxy_pass https://api.example.com/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>window.postMessage（跨窗口/iframe 通信）<ul>
+<li>页面与 iframe、子窗口之间安全传递消息，需校验 origin。</li>
+<li>使用场景：跨域 iframe 通信、OAuth 回调等。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送</span></span><br><span class="line">otherWindow.<span class="title function_">postMessage</span>(&#123; <span class="attr">type</span>:<span class="string">&#x27;ok&#x27;</span> &#125;, <span class="string">&#x27;https://target.com&#x27;</span>);</span><br><span class="line"><span class="comment">// 接收</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (e.<span class="property">origin</span> !== <span class="string">&#x27;https://target.com&#x27;</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// 处理 e.data</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>document.domain（仅限二级域名相同的场景，逐步废弃/风险）</li>
+<li>WebSocket / Server-Sent Events：与 HTTP 不同的连接模型，有自己的跨源策略（通常由服务器决定）.</li>
+</ol>
+<h3 id="预检（Preflight）"><a href="#预检（Preflight）" class="headerlink" title="预检（Preflight）"></a>预检（Preflight）</h3><ul>
+<li>复杂请求会先发 OPTIONS 请求，服务器需返回允许的方法、头以及允许来源。</li>
+<li>常见问题：浏览器控制台显示 401/403/404 或缺少 Access-Control-Allow-*。</li>
+</ul>
+<h3 id="带凭证请求（Cookies-Authorization）"><a href="#带凭证请求（Cookies-Authorization）" class="headerlink" title="带凭证请求（Cookies / Authorization）"></a>带凭证请求（Cookies / Authorization）</h3><ul>
+<li>前端需设置 fetch/axios withCredentials: true 或 fetch 的 credentials: 'include'。</li>
+<li>服务器需返回 Access-Control-Allow-Credentials: true，且 Access-Control-Allow-Origin 不能为 '*'。</li>
+</ul>
+<h3 id="安全与实践建议"><a href="#安全与实践建议" class="headerlink" title="安全与实践建议"></a>安全与实践建议</h3><ul>
+<li>仅允许受信任的域名，避免使用 Access-Control-Allow-Origin: * 配合凭证。</li>
+<li>尽量在服务器端做鉴权与速率限制，代理比客户端绕过更安全可控。</li>
+<li>检查浏览器控制台和网络面板的预检与响应头定位问题。</li>
+</ul>
+<p>小结：优先用 CORS + 合理服务端配置；不支持时用代理或 window.postMessage 等替代方案，根据场景权衡安全与兼容。</p>
 
              
           </div>
@@ -615,7 +760,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
               </div>
              
             
@@ -628,10 +773,10 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">19 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">569 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                        
               </div>
              
@@ -642,6 +787,34 @@
 <li>经典问题for循环</li>
 <li>函数式编程、柯里化</li>
 </ul>
+<h3 id="闭包（Closure）简介"><a href="#闭包（Closure）简介" class="headerlink" title="闭包（Closure）简介"></a>闭包（Closure）简介</h3><p>闭包是函数与其词法环境的组合。函数能访问定义时所在作用域的变量，即便在其外部被调用，这就是闭包的核心。</p>
+<h3 id="经典问题：for-循环与闭包"><a href="#经典问题：for-循环与闭包" class="headerlink" title="经典问题：for 循环与闭包"></a>经典问题：for 循环与闭包</h3><p>问题：用 var 的 for 创建回调，会发现回调打印的都是循环结束后的 i 值。</p>
+<p>示例（有问题）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> funcs = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  funcs.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i); &#125;);</span><br><span class="line">&#125;</span><br><span class="line">funcs.<span class="title function_">forEach</span>(<span class="function"><span class="params">f</span> =&gt;</span> <span class="title function_">f</span>()); <span class="comment">// 输出 3 3 3</span></span><br></pre></td></tr></table></figure>
+<p>解决方式：</p>
+<ol>
+<li>使用 let（块级作用域）：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> funcs = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  funcs.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i); &#125;);</span><br><span class="line">&#125;</span><br><span class="line">funcs.<span class="title function_">forEach</span>(<span class="function"><span class="params">f</span> =&gt;</span> <span class="title function_">f</span>()); <span class="comment">// 输出 0 1 2</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用 IIFE（立即调用函数表达式）创造闭包：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> funcs = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  (<span class="keyword">function</span>(<span class="params">j</span>)&#123;</span><br><span class="line">    funcs.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(j); &#125;);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br><span class="line">funcs.<span class="title function_">forEach</span>(<span class="function"><span class="params">f</span> =&gt;</span> <span class="title function_">f</span>()); <span class="comment">// 输出 0 1 2</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>使用函数工厂：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">makeLogger</span>(<span class="params">j</span>)&#123; <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(j); &#125;; &#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  funcs.<span class="title function_">push</span>(<span class="title function_">makeLogger</span>(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="函数式编程与柯里化（Currying）"><a href="#函数式编程与柯里化（Currying）" class="headerlink" title="函数式编程与柯里化（Currying）"></a>函数式编程与柯里化（Currying）</h3><p>柯里化是把多个参数的函数转换为一系列单参数函数的技术，便于部分应用和复用。</p>
+<p>例：手动柯里化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> add5 = <span class="title function_">add</span>(<span class="number">5</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">add5</span>(<span class="number">3</span>)); <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+<p>通用柯里化辅助：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">curry</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">curried</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (args.<span class="property">length</span> &gt;= fn.<span class="property">length</span>) <span class="keyword">return</span> fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">...more</span>) &#123; <span class="keyword">return</span> curried.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args.<span class="title function_">concat</span>(more)); &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">a,b,c</span>)&#123; <span class="keyword">return</span> a+b+c; &#125;</span><br><span class="line"><span class="keyword">const</span> cs = <span class="title function_">curry</span>(sum);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">cs</span>(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<p>应用场景</p>
+<p>事件处理器生成、配置化函数、部分应用（预设常用参数）。<br>用闭包保存私有状态（例如计数器、缓存、惰性初始化）。</p>
+<p>注意事项</p>
+<p>闭包会保留外部变量的引用，可能导致内存无法及时释放，避免无意中持有大量数据。<br>在循环或大量创建闭包时考虑性能与内存。</p>
+<p>小结</p>
+<p>闭包是强大的工具：解决异步&#x2F;回调作用域问题，实现数据封装与函数式模式（如柯里化、部分应用）。合理使用 let、IIFE 和函数工厂能避免常见陷阱</p>
 
              
           </div>
@@ -661,7 +834,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
               </div>
              
             
@@ -674,10 +847,10 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">6 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">514 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                        
               </div>
              
@@ -688,6 +861,45 @@
 <li>冒泡</li>
 <li>捕获</li>
 <li>target、currentTarget</li>
+</ul>
+<h3 id="事件流简介"><a href="#事件流简介" class="headerlink" title="事件流简介"></a>事件流简介</h3><p>浏览器事件有三个阶段：</p>
+<ol>
+<li>捕获（capturing）：从 window 向目标元素向下传播（很少用）。</li>
+<li>目标（target）：到达目标元素并触发其监听器。</li>
+<li>冒泡（bubbling）：从目标元素向上冒泡到 window（大多数事件支持冒泡）.</li>
+</ol>
+<p>默认 addEventListener 注册的监听器在冒泡阶段触发。可通过第三个参数切换到捕获阶段或传入配置对象。</p>
+<p>示例：捕获 vs 冒泡</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;outer&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> outer = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;outer&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"><span class="keyword">const</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;btn&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 捕获阶段监听</span></span></span><br><span class="line"><span class="language-javascript">outer.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;outer capture&#x27;</span>), &#123; <span class="attr">capture</span>: <span class="literal">true</span> &#125;);</span></span><br><span class="line"><span class="language-javascript"><span class="comment">// 冒泡阶段监听</span></span></span><br><span class="line"><span class="language-javascript">outer.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;outer bubble&#x27;</span>));</span></span><br><span class="line"><span class="language-javascript">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;button handler&#x27;</span>));</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>target 与 currentTarget</p>
+<ul>
+<li>event.target：事件最初的触发源（可能是子元素）。</li>
+<li>event.currentTarget：当前正在处理事件的元素（监听器绑定的元素）.</li>
+</ul>
+<p>停止传播</p>
+<ul>
+<li>event.stopPropagation()：阻止后续的捕获或冒泡。</li>
+<li>event.stopImmediatePropagation()：还会阻止当前元素上后续的其他监听器执行。</li>
+</ul>
+<p>事件委托（推荐）<br>把子元素的事件处理器绑定到父元素，利用冒泡统一处理，减少监听器数量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 委托示例：处理多个 .item 的点击</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#list&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> item = e.<span class="property">target</span>.<span class="title function_">closest</span>(<span class="string">&#x27;.item&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!item) <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// 处理 item</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>监听器选项（常用）</p>
+<ul>
+<li>capture: true&#x2F;false（捕获或冒泡）</li>
+<li>once: true（自动只触发一次后移除）</li>
+<li>passive: true（提示浏览器不会调用 preventDefault，用于触摸&#x2F;滚动性能）</li>
+</ul>
+<p>示例：被动监听器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchstart&#x27;</span>, onTouch, &#123; <span class="attr">passive</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>（passive:true 时调用 e.preventDefault() 无效）</p>
+<p>实用建议</p>
+<ul>
+<li>优先使用事件委托处理大量相似子元素的事件。</li>
+<li>仅在需要时使用捕获。</li>
+<li>在触摸&#x2F;滚动事件上考虑 passive 提升性能。</li>
+<li>使用 stopPropagation&#x2F;stopImmediatePropagation 小心，避免破坏委托和第三方库逻辑。</li>
 </ul>
 
              
@@ -708,7 +920,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
               </div>
              
             
@@ -721,10 +933,10 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">4 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">564 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                        
               </div>
              
@@ -734,6 +946,66 @@
                   <ul>
 <li>快速排序</li>
 </ul>
+<h3 id="常见基础算法速览（简明）"><a href="#常见基础算法速览（简明）" class="headerlink" title="常见基础算法速览（简明）"></a>常见基础算法速览（简明）</h3><ul>
+<li>快速排序（Quick Sort）<ul>
+<li>思路：分治，选基准 pivot，把数组分为小于 pivot &#x2F; 等于 &#x2F; 大于，然后递归排序。</li>
+<li>平均时间复杂度：O(n log n)，最坏 O(n^2)（可随机化或三数取中减少概率）。</li>
+<li>原地实现常用，空间 O(log n) 递归栈。</li>
+</ul>
+</li>
+</ul>
+<p>示例（JS）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">quickSort</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.<span class="property">length</span> &lt;= <span class="number">1</span>) <span class="keyword">return</span> arr;</span><br><span class="line">  <span class="keyword">const</span> pivot = arr[<span class="title class_">Math</span>.<span class="title function_">floor</span>(arr.<span class="property">length</span> / <span class="number">2</span>)];</span><br><span class="line">  <span class="keyword">const</span> left = [], mid = [], right = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> x <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; pivot) left.<span class="title function_">push</span>(x);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x === pivot) mid.<span class="title function_">push</span>(x);</span><br><span class="line">    <span class="keyword">else</span> right.<span class="title function_">push</span>(x);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">quickSort</span>(left).<span class="title function_">concat</span>(mid, <span class="title function_">quickSort</span>(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>归并排序（Merge Sort）</p>
+<ul>
+<li>思路：分而治之，递归拆半，合并时做有序合并。</li>
+<li>时间复杂度：O(n log n)，稳定；空间复杂度 O(n)。</li>
+</ul>
+</li>
+<li><p>堆排序（Heap Sort）</p>
+<ul>
+<li>利用二叉堆（最大堆）选择最大元素，原地排序，时间 O(n log n)，不稳定。</li>
+</ul>
+</li>
+<li><p>二分查找（Binary Search）</p>
+<ul>
+<li>前提：有序数组。</li>
+<li>时间复杂度：O(log n)。</li>
+</ul>
+</li>
+</ul>
+<p>示例（JS，迭代）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">binarySearch</span>(<span class="params">arr, target</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> l = <span class="number">0</span>, r = arr.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">    <span class="keyword">const</span> m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (arr[m] === target) <span class="keyword">return</span> m;</span><br><span class="line">    <span class="keyword">if</span> (arr[m] &lt; target) l = m + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> r = m - <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>图的遍历：DFS &#x2F; BFS</p>
+<ul>
+<li>DFS（深度优先）：递归或栈实现，适合拓扑、连通性、回溯问题。</li>
+<li>BFS（宽度优先）：队列实现，适合最短步数（无权图）。</li>
+</ul>
+</li>
+<li><p>常见数据结构速记</p>
+<ul>
+<li>数组、链表、栈、队列、哈希表（Map&#x2F;Set）、二叉树、堆、并查集、Trie、图（邻接表&#x2F;矩阵）。</li>
+</ul>
+</li>
+<li><p>算法复杂度与常见陷阱</p>
+<ul>
+<li>关注时间复杂度与空间复杂度，注意常数项与递归深度。</li>
+<li>输入规模边界（空集、重复、大量重复值、极端有序&#x2F;逆序）要单独考虑。</li>
+<li>优先写清晰正确的解法，再考虑微观优化（位运算、预分配、原地变更）。</li>
+</ul>
+</li>
+<li><p>练习建议</p>
+<ul>
+<li>从经典题目入手：排序、二分、滑动窗口、哈希映射、DFS&#x2F;BFS、双指针、动态规划基础。</li>
+<li>理解常用模板（递归、二分、滑窗口、前缀和、差分、堆）并能变形应用。</li>
+</ul>
+</li>
+</ul>
+<p>小结：掌握排序、查找、图遍历与基本数据结构，理解复杂度与边界情况，是攻克中等算法题的基石。</p>
 
              
           </div>
@@ -1022,55 +1294,6 @@
 <li>记录所有安全事件</li>
 <li>定期审计日志</li>
 <li>实现实时监控和报警</li>
-</ul>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/one_hour/2018/02/07/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">在浏览器输入URL后发生了什么</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E7%A7%91%E6%99%AE/">科普</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">21 字</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <ul>
-<li>相对路径、绝对路径</li>
-<li>http(请求头、状态码)</li>
-<li>dns</li>
-<li>tcp三次握手</li>
-<li></li>
 </ul>
 
              

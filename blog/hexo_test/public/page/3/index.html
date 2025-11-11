@@ -155,7 +155,7 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
-            <a href="/one_hour/2018/02/07/%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/">图片格式的区别</a>
+            <a href="/one_hour/2018/02/07/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5URL%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">在浏览器输入URL后发生了什么</a>
           </div>
           <div class="post-meta">
             
@@ -164,7 +164,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
               </div>
              
             
@@ -177,10 +177,122 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">8 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.1k 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">4 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <ul>
+<li>相对路径、绝对路径</li>
+<li>http(请求头、状态码)</li>
+<li>dns</li>
+<li>tcp三次握手</li>
+</ul>
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>用户在浏览器输入 URL（或点击链接）后，浏览器会把高层的“请求页面”行为拆成若干步骤：解析 URL、DNS 查询、建立传输层连接（TCP &#x2F; TLS）、发送 HTTP 请求、接收响应后处理缓存与重定向、下载资源并执行解析&#x2F;渲染、最终呈现并触发页面事件（DOMContentLoaded、load）。下面按序简要说明要点与常见优化点。</p>
+<h3 id="1-URL-与路径解析"><a href="#1-URL-与路径解析" class="headerlink" title="1. URL 与路径解析"></a>1. URL 与路径解析</h3><ul>
+<li>绝对 URL：包含协议、主机和路径（如 <a target="_blank" rel="noopener" href="https://example.com/path%EF%BC%89%E3%80%82">https://example.com/path）。</a></li>
+<li>相对 URL：基于当前文档的 location 或 <base> 标签解析（如 ..&#x2F;img.png）。</li>
+<li>协议相对（&#x2F;&#x2F;example.com）继承当前协议（较少用）。</li>
+<li>路径解析影响请求 Host、Referer、同源策略。</li>
+</ul>
+<h3 id="2-DNS-解析"><a href="#2-DNS-解析" class="headerlink" title="2. DNS 解析"></a>2. DNS 解析</h3><ul>
+<li>浏览器&#x2F;操作系统首先查询域名到 IP：先查本地缓存，再系统 DNS 缓存&#x2F;hosts、最后向递归 DNS 服务器查询。</li>
+<li>可以被 DNS 缓存、CDN 和解析加速（DNS 预解析 dns-prefetch）.</li>
+</ul>
+<h3 id="3-建立连接：TCP-三次握手"><a href="#3-建立连接：TCP-三次握手" class="headerlink" title="3. 建立连接：TCP 三次握手"></a>3. 建立连接：TCP 三次握手</h3><ul>
+<li>客户端发送 SYN -&gt; 服务器 SYN+ACK -&gt; 客户端 ACK，建立可靠连接。</li>
+<li>之后可通过该连接发送请求（TCP 有拥塞控制、慢启动）。</li>
+<li>HTTP&#x2F;1.1 通常复用 keep-alive 连接；HTTP&#x2F;2 在单连接上多路复用多个请求。</li>
+</ul>
+<h3 id="4-TLS（HTTPS）握手（若使用-https）"><a href="#4-TLS（HTTPS）握手（若使用-https）" class="headerlink" title="4. TLS（HTTPS）握手（若使用 https）"></a>4. TLS（HTTPS）握手（若使用 https）</h3><ul>
+<li>在 TCP 建立后进行 TLS 握手：协商协议版本、交换证书、公钥，生成对称密钥。</li>
+<li>握手完成后加密的应用层数据传输开始（会增加连接延迟，通常通过 TLS 复用、session resumption 优化）.</li>
+</ul>
+<h3 id="5-发送-HTTP-请求"><a href="#5-发送-HTTP-请求" class="headerlink" title="5. 发送 HTTP 请求"></a>5. 发送 HTTP 请求</h3><ul>
+<li>客户端构造请求行 + 请求头（Host、User-Agent、Accept、Cookie、Referer 等），然后可有请求体（POST&#x2F;PUT）。</li>
+<li>示例（简略）：<br>GET &#x2F;path&#x2F;resource HTTP&#x2F;1.1<br>Host: example.com<br>Accept: text&#x2F;html</li>
+<li>可能遇到重定向（3xx）或鉴权（401&#x2F;403）.</li>
+</ul>
+<h3 id="6-服务端响应与状态码"><a href="#6-服务端响应与状态码" class="headerlink" title="6. 服务端响应与状态码"></a>6. 服务端响应与状态码</h3><ul>
+<li>响应包含状态码、响应头、以及可选的响应体。</li>
+<li>常见状态码：200（成功）、301&#x2F;302（重定向）、304（未修改，使用缓存）、4xx（客户端错误）、5xx（服务器错误）。</li>
+<li>缓存相关头：Cache-Control、Expires、ETag、Last-Modified。若命中 304，浏览器可使用本地缓存资源。</li>
+</ul>
+<h3 id="7-浏览器接收响应与缓存策略"><a href="#7-浏览器接收响应与缓存策略" class="headerlink" title="7. 浏览器接收响应与缓存策略"></a>7. 浏览器接收响应与缓存策略</h3><ul>
+<li>浏览器依据响应头决定是否缓存、如何验证缓存（协商缓存：If-Modified-Since &#x2F; If-None-Match）。</li>
+<li>Service Worker 可拦截请求并自定义缓存&#x2F;离线策略。</li>
+<li>CDN 可在边缘缓存静态资源减少延迟。</li>
+</ul>
+<h3 id="8-浏览器解析与渲染流水线"><a href="#8-浏览器解析与渲染流水线" class="headerlink" title="8. 浏览器解析与渲染流水线"></a>8. 浏览器解析与渲染流水线</h3><ul>
+<li>HTML -&gt; 解析器构建 DOM 树。</li>
+<li>CSS -&gt; 构建 CSSOM。</li>
+<li>DOM + CSSOM -&gt; 合成 render tree（只包含可见节点）。</li>
+<li>Layout（reflow）：计算每个节点的几何位置与大小。</li>
+<li>Paint：把节点绘制成图层像素。</li>
+<li>Composite：合并图层到屏幕。</li>
+<li>JS 脚本会在解析 HTML 时执行（普通 <script> 会阻塞解析；使用 async/defer 可避免阻塞或推迟执行）。</li>
+<li>图片、脚本、样式表是外部资源，按优先级并行/串行下载（受同源并发限制、HTTP/2 多路复用影响）.</li>
+</ul>
+<h3 id="9-页面生命周期事件与指标"><a href="#9-页面生命周期事件与指标" class="headerlink" title="9. 页面生命周期事件与指标"></a>9. 页面生命周期事件与指标</h3><ul>
+<li>DOMContentLoaded：DOM 构建完成且无需等待样式/图片完成（脚本阻塞则会延迟）。</li>
+<li>load：页面所有资源完成加载。</li>
+<li>性能指标：FP（First Paint）、FCP（First Contentful Paint）、LCP（Largest Contentful Paint）、TTI（Time to Interactive）.</li>
+</ul>
+<h3 id="10-优化与工程实践要点"><a href="#10-优化与工程实践要点" class="headerlink" title="10. 优化与工程实践要点"></a>10. 优化与工程实践要点</h3><ul>
+<li>合理使用 CDN 与缓存策略，减少 DNS/连接/首字节延迟（TTFB）。</li>
+<li>使用 HTTP/2/3 减少连接成本、多路复用与头部压缩。</li>
+<li>减少阻塞脚本，使用 async/defer，优先加载关键 CSS（critical CSS）。</li>
+<li>合并/压缩资源，使用图片现代格式与响应式图片，启用 gzip/brotli 压缩。</li>
+<li>使用 Prefetch、Preconnect、DNS-Prefetch、Preload 等 hint 优化关键资源加载。</li>
+<li>在调试时用 DevTools Network 面板：查看请求/响应头、时间线、缓存命中、重定向链。</li>
+</ul>
+<h3 id="11-安全与协议相关"><a href="#11-安全与协议相关" class="headerlink" title="11. 安全与协议相关"></a>11. 安全与协议相关</h3><ul>
+<li>同源策略限制跨域 JS/DOM 访问；CORS 决定跨域资源是否可被脚本访问。</li>
+<li>HTTPS 保证传输加密与证书验证；HSTS 强制 HTTPS。</li>
+<li>Cookie/Set-Cookie 头与 SameSite、HttpOnly、Secure 等影响安全与跨站行为。</li>
+</ul>
+<p>小结<br>用户在地址栏输入 URL 后的流程是多阶段、跨层（DNS → 传输 → 应用 → 渲染）的流水线。理解每一层的延迟来源与优化手段（DNS、连接、TLS、TTFB、渲染阻塞）有助于定位性能瓶颈并改进用户体验。</p>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
+            <a href="/one_hour/2018/02/07/%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/">图片格式的区别</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
+              </div>
+             
+            
+              <div class="post-meta-item categories">
+                
+                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/%E7%A7%91%E6%99%AE/">科普</a>
+                
+              </div>
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">853 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">3 分钟</span>
                                        
               </div>
              
@@ -193,6 +305,71 @@
 <li>jpeg</li>
 <li>gif</li>
 </ul>
+<h3 id="常见图片格式对比（简明"><a href="#常见图片格式对比（简明" class="headerlink" title="常见图片格式对比（简明)"></a>常见图片格式对比（简明)</h3><ul>
+<li><p>PNG</p>
+<ul>
+<li>特点：无损压缩，支持真彩色（24bit&#x2F;32bit）与 alpha 透明（PNG-24&#x2F;PNG-32）；也有索引色的 PNG-8（256 色）。</li>
+<li>适用：带透明背景的图像、矢量导出后的位图、需要无损的界面元素、截图（保留文本清晰）。</li>
+<li>缺点：同等视觉质量下体积通常大于有损格式（照片类）.</li>
+</ul>
+</li>
+<li><p>JPG &#x2F; JPEG</p>
+<ul>
+<li>特点：有损压缩，适合连续色调和照片；支持渐进式（progressive）编码以提升首屏感知速度；不支持 alpha 透明。</li>
+<li>适用：照片、风景、复杂色彩的图片。</li>
+<li>缺点：反复有损压缩会损失细节；不适合带文字&#x2F;锐利边缘的图形.</li>
+</ul>
+</li>
+<li><p>GIF</p>
+<ul>
+<li>特点：调色板限制（最多 256 色），支持帧动画（轻量动画常用）；无真彩色。</li>
+<li>适用：短动画、低色数图标动画或兼容极老浏览器的需求。</li>
+<li>缺点：颜色受限、体积效率差；静态图不推荐.</li>
+</ul>
+</li>
+<li><p>SVG</p>
+<ul>
+<li>特点：矢量格式，基于 XML，可缩放无损；可内联、可交互、可动画（CSS&#x2F;JS）。</li>
+<li>适用：图标、logo、图表、简单插图与响应式场景。</li>
+<li>缺点：复杂照片不适合；需注意内联 JS&#x2F;CSS 的安全性与文件大小.</li>
+</ul>
+</li>
+<li><p>WebP</p>
+<ul>
+<li>特点：Google 提出的现代格式，支持有损&#x2F;无损压缩和透明、动画，通常比 PNG&#x2F;JPEG 更小。</li>
+<li>适用：网页图片优化首选之一（兼容性需检查或提供后备）。</li>
+<li>缺点：部分老浏览器不支持，需提供回退格式或使用 <picture>。</li>
+</ul>
+</li>
+<li><p>AVIF</p>
+<ul>
+<li>特点：基于 AV1 编码，压缩效率高（常优于 WebP），支持有损&#x2F;无损与透明。</li>
+<li>适用：追求极致带宽节省的场景。</li>
+<li>缺点：编码慢、编码工具&#x2F;浏览器支持逐步完善，需要回退策略。</li>
+</ul>
+</li>
+<li><p>APNG &#x2F; 有关动画替代</p>
+<ul>
+<li>APNG &#x3D; PNG 的动画扩展，支持真彩色与透明，比 GIF 质量好，但兼容性需确认。</li>
+<li>对于复杂动画可以考虑 WebP 动画或视频播放（mp4&#x2F;webm）以节省体积。</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么时候用哪个（简要决策树）"><a href="#什么时候用哪个（简要决策树）" class="headerlink" title="什么时候用哪个（简要决策树）"></a>什么时候用哪个（简要决策树）</h3><ul>
+<li>图标 &#x2F; logo &#x2F; 矢量图：SVG</li>
+<li>需要透明（且为图形或界面元素）：PNG（或 WebP&#x2F;AVIF 支持时优先）</li>
+<li>照片类：JPEG（或使用 WebP&#x2F;AVIF 以更小体积）</li>
+<li>简单动画（低色数）：GIF；需质量&#x2F;透明且现代浏览器：WebP 动画 &#x2F; APNG</li>
+<li>追求最佳压缩：优先考虑 AVIF -&gt; WebP -&gt; JPEG&#x2F;PNG 回退</li>
+</ul>
+<h3 id="实践建议"><a href="#实践建议" class="headerlink" title="实践建议"></a>实践建议</h3><ul>
+<li>使用现代格式（WebP&#x2F;AVIF）并通过 <picture> 提供回退，或在构建链中做格式检测&#x2F;回退。</li>
+<li>对照片使用质量调整（JPEG quality 70–85 常为折中）；对图形使用无损或 PNG-8（若色数允许）。</li>
+<li>对 SVG 做精简（svgo），对位图做压缩（imagemagick &#x2F; mozjpeg &#x2F; cwebp &#x2F; svgo &#x2F; avifenc）。</li>
+<li>使用响应式图片（srcset&#x2F;sizes）根据视口加载合适尺寸，避免过大图片浪费带宽。</li>
+<li>考虑懒加载与 CDN 加速，保留正确的色彩配置与元数据（必要时移除以减小体积）。</li>
+</ul>
+<p>小结：根据图片类型（照片&#x2F;图形&#x2F;动画）、是否需要透明、兼容性和体积目标来选格式。优先用矢量保存可缩放资产；在带宽敏感场景下优先现代格式并做好回退与构建优化。</p>
 
              
           </div>
@@ -212,7 +389,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
               </div>
              
             
@@ -225,10 +402,10 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">28 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">736 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">3 分钟</span>
                                        
               </div>
              
@@ -236,9 +413,40 @@
           <div class="content">
             
                   <h3 id="border实现三角小图标"><a href="#border实现三角小图标" class="headerlink" title="border实现三角小图标"></a>border实现三角小图标</h3><ul>
-<li>原理</li>
+<li>原理<br>通过设置元素宽高为 0，然后利用四个边框（border）的宽度与颜色，其中将不需要的两条边设为透明，就能得到不同方向的三角形。因为边框会在元素为 0x0 时相互交汇，形成斜边。</li>
 </ul>
-<h3 id="display-none-visibility-hidden-区别，以及使用visibility实现神奇的效果"><a href="#display-none-visibility-hidden-区别，以及使用visibility实现神奇的效果" class="headerlink" title="display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果"></a>display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果</h3>
+<p>示例（向上三角）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;tri-up&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tri-up</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-left</span>:<span class="number">10px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-right</span>:<span class="number">10px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-bottom</span>:<span class="number">10px</span> solid <span class="number">#333</span>; <span class="comment">/* 三角颜色 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他方向：</p>
+<p>向下：把 border-top 设为有色，左右透明。<br>向左：把 border-right 设为有色，上下透明。<br>向右：把 border-left 设为有色，上下透明。<br>用在伪元素上（常用于提示箭头）：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>:relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">  <span class="attribute">content</span>:<span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="attribute">position</span>:absolute;</span><br><span class="line">  <span class="attribute">left</span>:<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>:<span class="built_in">translateX</span>(-<span class="number">50%</span>);</span><br><span class="line">  <span class="attribute">bottom</span>:-<span class="number">6px</span>; <span class="comment">/* 根据需要调整位置 */</span></span><br><span class="line">  <span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-left</span>:<span class="number">6px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-right</span>:<span class="number">6px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-top</span>:<span class="number">6px</span> solid <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.75</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>补充技巧：</p>
+<p>用 em&#x2F;rem 可以做相对尺寸的三角，随文本缩放。<br>如果需要可抗锯齿的斜角效果，考虑用 clip-path 或 transform: rotate() 的正方形截取。</p>
+<h3 id="display-none-visibility-hidden-区别，以及使用visibility实现神奇的效果"><a href="#display-none-visibility-hidden-区别，以及使用visibility实现神奇的效果" class="headerlink" title="display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果"></a>display:none;visibility:hidden;区别，以及使用visibility实现神奇的效果</h3><h4 id="layout（布局）"><a href="#layout（布局）" class="headerlink" title="layout（布局）"></a>layout（布局）</h4><ul>
+<li>display:none：元素从文档流中移除，不占用空间。</li>
+<li>visibility:hidden：元素不可见，但保留原有占位空间。</li>
+</ul>
+<h4 id="交互与焦点"><a href="#交互与焦点" class="headerlink" title="交互与焦点"></a>交互与焦点</h4><ul>
+<li>display:none 的元素无法被选中、点击或聚焦（不可交互）。</li>
+<li>visibility:hidden 同样不可见且通常不可交互（也不能聚焦），但占位存在。</li>
+</ul>
+<h4 id="动画与过渡"><a href="#动画与过渡" class="headerlink" title="动画与过渡"></a>动画与过渡</h4><ul>
+<li>display 属性不能过渡（无法平滑动画）。</li>
+<li>visibility 可以与 opacity 联动，配合 transition 实现渐隐&#x2F;渐现效果（常用技巧）。</li>
+</ul>
+<p>渐显 &#x2F; 渐隐的常用实现（只用 CSS，无 JS 回调）：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.modal</span>&#123;</span><br><span class="line">  <span class="attribute">opacity</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">visibility</span>:hidden;</span><br><span class="line">  <span class="attribute">transition</span>: opacity .<span class="number">25s</span> ease, visibility <span class="number">0s</span> linear .<span class="number">25s</span>; <span class="comment">/* 隐藏时延迟 visibility */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.modal</span><span class="selector-class">.show</span>&#123;</span><br><span class="line">  <span class="attribute">opacity</span>:<span class="number">1</span>;</span><br><span class="line">  <span class="attribute">visibility</span>:visible;</span><br><span class="line">  <span class="attribute">transition-delay</span>:<span class="number">0s</span>,<span class="number">0s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释：当加上 .show，visibility 立刻变为 visible，opacity 过渡到 1；当移除 .show，opacity 先过渡到 0（.25s），visibility 在 0.25s 后才变为 hidden，从而实现平滑消失并在消失后移除占位&#x2F;交互。</p>
+<p>pointer-events 辅助</p>
+<p>有时希望元素不可见但仍阻止点击，可结合 pointer-events: none 或 auto。<br>表格折叠</p>
+<p>visibility:collapse 对表格行&#x2F;列有特殊语义，可折叠格子（支持性检查）。</p>
+<h4 id="实用场景举例"><a href="#实用场景举例" class="headerlink" title="实用场景举例"></a>实用场景举例</h4><p>想在页面保持布局不变但暂时隐藏某区域（例如保持栅格高度），使用 visibility:hidden。<br>想彻底移除元素（不占位、减少文档流影响），使用 display:none。<br>想做淡入淡出动画：用 visibility + opacity（并配合 transition-delay）或用 JS 在 transitionend 后再改 display。<br>小结</p>
+<p>display 控制是否参与布局；visibility 控制是否可见但不影响布局空间。<br>动画用 visibility+opacity 比直接切换 display 更平滑；若需无缝交互控制，可配合 pointer-events 或在动画结束后用 JS 切换 display。</p>
+
              
           </div>
         </div>

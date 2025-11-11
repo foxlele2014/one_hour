@@ -160,7 +160,7 @@
         <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
       </div>
       <div class="post-meta-item updated">
-        <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+        <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
       </div>
      
     
@@ -173,10 +173,10 @@
     
      <div class="post-meta-item wordcount">
         
-          <i class="fas fa-pencil-alt"></i> <span class="post-count">19 字</span>
+          <i class="fas fa-pencil-alt"></i> <span class="post-count">569 字</span>
            
         
-          <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+          <i class="far fa-clock"></i> <span class="post-count">2 分钟</span>
                                
       </div>
      
@@ -189,6 +189,34 @@
 <li>经典问题for循环</li>
 <li>函数式编程、柯里化</li>
 </ul>
+<h3 id="闭包（Closure）简介"><a href="#闭包（Closure）简介" class="headerlink" title="闭包（Closure）简介"></a>闭包（Closure）简介</h3><p>闭包是函数与其词法环境的组合。函数能访问定义时所在作用域的变量，即便在其外部被调用，这就是闭包的核心。</p>
+<h3 id="经典问题：for-循环与闭包"><a href="#经典问题：for-循环与闭包" class="headerlink" title="经典问题：for 循环与闭包"></a>经典问题：for 循环与闭包</h3><p>问题：用 var 的 for 创建回调，会发现回调打印的都是循环结束后的 i 值。</p>
+<p>示例（有问题）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> funcs = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  funcs.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i); &#125;);</span><br><span class="line">&#125;</span><br><span class="line">funcs.<span class="title function_">forEach</span>(<span class="function"><span class="params">f</span> =&gt;</span> <span class="title function_">f</span>()); <span class="comment">// 输出 3 3 3</span></span><br></pre></td></tr></table></figure>
+<p>解决方式：</p>
+<ol>
+<li>使用 let（块级作用域）：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> funcs = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  funcs.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(i); &#125;);</span><br><span class="line">&#125;</span><br><span class="line">funcs.<span class="title function_">forEach</span>(<span class="function"><span class="params">f</span> =&gt;</span> <span class="title function_">f</span>()); <span class="comment">// 输出 0 1 2</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用 IIFE（立即调用函数表达式）创造闭包：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> funcs = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  (<span class="keyword">function</span>(<span class="params">j</span>)&#123;</span><br><span class="line">    funcs.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(j); &#125;);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br><span class="line">funcs.<span class="title function_">forEach</span>(<span class="function"><span class="params">f</span> =&gt;</span> <span class="title function_">f</span>()); <span class="comment">// 输出 0 1 2</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>使用函数工厂：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">makeLogger</span>(<span class="params">j</span>)&#123; <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(j); &#125;; &#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  funcs.<span class="title function_">push</span>(<span class="title function_">makeLogger</span>(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="函数式编程与柯里化（Currying）"><a href="#函数式编程与柯里化（Currying）" class="headerlink" title="函数式编程与柯里化（Currying）"></a>函数式编程与柯里化（Currying）</h3><p>柯里化是把多个参数的函数转换为一系列单参数函数的技术，便于部分应用和复用。</p>
+<p>例：手动柯里化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">b</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> add5 = <span class="title function_">add</span>(<span class="number">5</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">add5</span>(<span class="number">3</span>)); <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+<p>通用柯里化辅助：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">curry</span>(<span class="params">fn</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">curried</span>(<span class="params">...args</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (args.<span class="property">length</span> &gt;= fn.<span class="property">length</span>) <span class="keyword">return</span> fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">...more</span>) &#123; <span class="keyword">return</span> curried.<span class="title function_">apply</span>(<span class="variable language_">this</span>, args.<span class="title function_">concat</span>(more)); &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">a,b,c</span>)&#123; <span class="keyword">return</span> a+b+c; &#125;</span><br><span class="line"><span class="keyword">const</span> cs = <span class="title function_">curry</span>(sum);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">cs</span>(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<p>应用场景</p>
+<p>事件处理器生成、配置化函数、部分应用（预设常用参数）。<br>用闭包保存私有状态（例如计数器、缓存、惰性初始化）。</p>
+<p>注意事项</p>
+<p>闭包会保留外部变量的引用，可能导致内存无法及时释放，避免无意中持有大量数据。<br>在循环或大量创建闭包时考虑性能与内存。</p>
+<p>小结</p>
+<p>闭包是强大的工具：解决异步&#x2F;回调作用域问题，实现数据封装与函数式模式（如柯里化、部分应用）。合理使用 let、IIFE 和函数工厂能避免常见陷阱</p>
 </div>
         
   </div>

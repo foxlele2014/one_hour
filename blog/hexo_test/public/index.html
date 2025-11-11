@@ -155,6 +155,73 @@
     
       <div class="recent-post-item">
           <div class="post-title ">
+            <a href="/one_hour/2025/01/20/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E4%B9%8Bvnc%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">远程桌面服务搭建</a>
+          </div>
+          <div class="post-meta">
+            
+            
+              <div class="post-meta-item date">
+                <span title="发表于 2025.01.20"><i class="far fa-calendar-alt"></i> 2025.01.20</span>
+              </div>
+              <div class="post-meta-item updated">
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
+              </div>
+             
+             
+            
+             <div class="post-meta-item wordcount">
+                
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">938 字</span>
+                   
+                
+                  <i class="far fa-clock"></i> <span class="post-count">3 分钟</span>
+                                       
+              </div>
+             
+        </div>
+          <div class="content">
+            
+                  <ul>
+<li>novnc</li>
+<li>guacamole</li>
+</ul>
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>VNC 是远程桌面协议家族（RFB），常用服务端有 TigerVNC、x11vnc 等。noVNC 提供基于 Web 的 VNC 客户端（通过 WebSocket + canvas），Guacamole 是一个更完整的网关，支持 VNC&#x2F;RDP&#x2F;SSH 并提供 Web 界面与认证后端（可用 Docker 部署）。</p>
+<h3 id="常见方案对比"><a href="#常见方案对比" class="headerlink" title="常见方案对比"></a>常见方案对比</h3><ul>
+<li>noVNC：轻量、直接把 VNC 流量通过 websockify 转成 WebSocket，适合需要快速在浏览器打开远程桌面的场景。</li>
+<li>Guacamole：企业级网关，支持多协议、认证、会话管理、录制&#x2F;剪贴板&#x2F;文件传输（通过扩展），适合集中化接入。</li>
+</ul>
+<h3 id="Ubuntu-上的快速示例（最小化）"><a href="#Ubuntu-上的快速示例（最小化）" class="headerlink" title="Ubuntu 上的快速示例（最小化）"></a>Ubuntu 上的快速示例（最小化）</h3><ol>
+<li>安装 VNC 服务（TigerVNC）并创建用户桌面：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y tigervnc-standalone-server xfce4</span><br><span class="line"><span class="comment"># 为用户设置 vnc 密码</span></span><br><span class="line">vncpasswd</span><br><span class="line"><span class="comment"># 启动（示例）：</span></span><br><span class="line">vncserver :1 -geometry 1280x800 -depth 24</span><br></pre></td></tr></table></figure></li>
+<li>使用 noVNC（websockify）暴露到浏览器：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 noVNC (示例)</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/novnc/noVNC.git</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/novnc/websockify.git noVNC/utils/websockify</span><br><span class="line"><span class="comment"># 启动 noVNC，连接到本地 VNC :1（5901）</span></span><br><span class="line">./noVNC/utils/novnc_proxy --vnc localhost:5901 --listen 6080</span><br><span class="line"><span class="comment"># 然后在浏览器访问 http://server:6080/vnc.html</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Guacamole（推荐用-Docker-快速部署）"><a href="#Guacamole（推荐用-Docker-快速部署）" class="headerlink" title="Guacamole（推荐用 Docker 快速部署）"></a>Guacamole（推荐用 Docker 快速部署）</h3><p>使用官方 Docker 镜像和 MySQL&#x2F;Postgres 后端的最小 docker-compose 示例（省略持久化&#x2F;细节）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">guacd:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">guacamole/guacd</span></span><br><span class="line">  <span class="attr">guacamole:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">guacamole/guacamole</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">guacd</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_HOSTNAME:</span> <span class="string">db</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">guacamole_db</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">guacamole_user</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">secret</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.7</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">rootpw</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">guacamole_db</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">guacamole_user</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">secret</span></span><br></pre></td></tr></table></figure>
+<p>启动后访问 guacamole 容器提供的 web 界面，配置 VNC 连接并启用用户&#x2F;权限。</p>
+<h3 id="安全与运维要点"><a href="#安全与运维要点" class="headerlink" title="安全与运维要点"></a>安全与运维要点</h3><ul>
+<li>永远为 VNC 连接设置强密码；默认 VNC 协议无加密，建议通过 TLS 或 SSH 隧道转发 VNC（或使用 noVNC + nginx TLS 反向代理）。</li>
+<li>若使用 noVNC，使用 websockify 的 TLS 或在前端用 Nginx&#x2F;Traefik 做 HTTPS 终端并限制访问（认证&#x2F;防火墙）。</li>
+<li>Guacamole 提供认证与会话控制，但仍需放在 HTTPS 和受限网络后面；为 Guacamole 数据库启用备份与最小权限用户。</li>
+<li>防火墙：仅开放必要端口（如 6080&#x2F;8443 给 Web，VNC 原生端口建议仅内部可达）。</li>
+<li>性能：降低色深、启用压缩、调整分辨率可改善带宽占用；HTTP&#x2F;2&#x2F;3&#x2F;负载均衡用于大规模访问场景。</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>简单场景：TigerVNC + noVNC 快速可用，适合临时或轻量化需求。</li>
+<li>企业&#x2F;集中管理：Guacamole 更完整，支持多协议与认证&#x2F;审计。</li>
+<li>部署时优先考虑加密（HTTPS&#x2F;TLS&#x2F;SSH 隧道）、认证与防火墙策略，并在生产环境使用持久化存储与监控。</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>novnc使用虚拟机来建立多账号访问的时候，会很卡。<br>但是guacamole创建的服务，可以在一台电脑上，创建多个账号，使用rdp协议来达到同时可以多个人使用不同账号连接这台电脑使用服务。</p>
+<p>TODO:具体的细节之后再分享。</p>
+<p>（背景：需求：通过网页输入链接来达到访问某台服务器的服务，而且支持多账号访问同一个服务器的不同服务。且最好能使用一台电脑就能做这个事情。<br>之后一开始我接手的时候，他们定好了要使用novnc来实现。且他们使用创建多个虚拟机+novnc来访问，但是这样很卡；这期间还做了很多关于novnc进入页面时的自动登录；密码管理，域账号管理等；后来他们觉得novnc的这个方案还是不可行，所以选择了guacamole的方案。但是怎么可以做到访问多个账号呢。就是需要一个应用将windows类似破解一样，让它支持rdp访问支持同时在线。）</p>
+
+             
+          </div>
+        </div>
+      <div class="post-footer">
+        
+    </div>
+    
+      <div class="recent-post-item">
+          <div class="post-title ">
             <a href="/one_hour/2025/01/13/%E4%BA%BA%E7%94%9F%E5%A6%82%E9%80%86%E6%97%85%EF%BC%8C%E6%88%91%E4%BA%A6%E6%98%AF%E8%A1%8C%E4%BA%BA/">人生如逆旅，我亦是行人</a>
           </div>
           <div class="post-meta">
@@ -902,7 +969,7 @@
                 <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
               </div>
               <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
+                <span title="更新于 2025.11.11"><i class="far fa-calendar-check"></i> 2025.11.11</span>
               </div>
              
             
@@ -915,10 +982,10 @@
             
              <div class="post-meta-item wordcount">
                 
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">9 字</span>
+                  <i class="fas fa-pencil-alt"></i> <span class="post-count">1.1k 字</span>
                    
                 
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
+                  <i class="far fa-clock"></i> <span class="post-count">4 分钟</span>
                                        
               </div>
              
@@ -932,54 +999,49 @@
 <li>实现</li>
 <li>注意点</li>
 </ul>
-
-             
-          </div>
-        </div>
-      <div class="post-footer">
-        
-    </div>
-    
-      <div class="recent-post-item">
-          <div class="post-title ">
-            <a href="/one_hour/2018/02/07/%E8%84%9A%E6%89%8B%E6%9E%B6%E5%AE%9E%E7%8E%B0/">脚手架实现</a>
-          </div>
-          <div class="post-meta">
-            
-            
-              <div class="post-meta-item date">
-                <span title="发表于 2018.02.07"><i class="far fa-calendar-alt"></i> 2018.02.07</span>
-              </div>
-              <div class="post-meta-item updated">
-                <span title="更新于 2024.03.06"><i class="far fa-calendar-check"></i> 2024.03.06</span>
-              </div>
-             
-            
-              <div class="post-meta-item categories">
-                
-                  <i class="fas fa-inbox article-meta__icon"></i> <a href="/one_hour/categories/javascript/">javascript</a>
-                
-              </div>
-             
-            
-             <div class="post-meta-item wordcount">
-                
-                  <i class="fas fa-pencil-alt"></i> <span class="post-count">7 字</span>
-                   
-                
-                  <i class="far fa-clock"></i> <span class="post-count">1 分钟</span>
-                                       
-              </div>
-             
-        </div>
-          <div class="content">
-            
-                  <ul>
-<li>实现原理</li>
-<li>hexo</li>
-<li>metalsmith</li>
-<li>yeoman</li>
+<h3 id="路由实现概述"><a href="#路由实现概述" class="headerlink" title="路由实现概述"></a>路由实现概述</h3><p>前端路由用于在单页应用(SPA)中根据 URL 改变显示不同的视图而不重载页面。常见实现方式有两类：基于 hash 的路由和基于 History API 的路由。两者原理不同，各有优缺点。</p>
+<h3 id="两种路由方式对比"><a href="#两种路由方式对比" class="headerlink" title="两种路由方式对比"></a>两种路由方式对比</h3><ul>
+<li>Hash 路由（#）<ul>
+<li>原理：监听 location.hash 的变化（hashchange 事件），hash 后面的字符串表示路由状态。</li>
+<li>优点：兼容性好，服务器无需特殊配置（因为 URL 的 hash 不发送到服务器）。</li>
+<li>缺点：URL 中会带 #，对 SEO 不友好（搜索引擎对 hash 路由抓取有限）。</li>
 </ul>
+</li>
+<li>History 路由（pushState &#x2F; popstate）<ul>
+<li>原理：使用 history.pushState&#x2F;replaceState 修改浏览器地址栏并借助 popstate 处理前进&#x2F;后退，URL 看起来像正常路径。</li>
+<li>优点：URL 友好、可用于 SEO（配合服务端渲染或服务器路由回退）。</li>
+<li>缺点：服务器需要配置回退到 SPA 的入口页面（通常返回 index.html），以避免刷新 404。</li>
+</ul>
+</li>
+</ul>
+<h3 id="简单实现示例"><a href="#简单实现示例" class="headerlink" title="简单实现示例"></a>简单实现示例</h3><ul>
+<li>简单 Hash 路由（最小实现）：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filepath:</span></span><br><span class="line"><span class="comment">// ...existing code...</span></span><br><span class="line"><span class="keyword">const</span> routes = &#123;</span><br><span class="line">  <span class="string">&#x27;/&#x27;</span>: <span class="function">() =&gt;</span> <span class="title function_">renderHome</span>(),</span><br><span class="line">  <span class="string">&#x27;/about&#x27;</span>: <span class="function">() =&gt;</span> <span class="title function_">renderAbout</span>(),</span><br><span class="line">  <span class="string">&#x27;/post/:id&#x27;</span>: <span class="function"><span class="params">params</span> =&gt;</span> <span class="title function_">renderPost</span>(params.<span class="property">id</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">parseHash</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> location.<span class="property">hash</span>.<span class="title function_">slice</span>(<span class="number">1</span>) || <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">matchRoute</span>(<span class="params">path</span>) &#123;</span><br><span class="line">  <span class="comment">// 简单匹配：优先静态，再尝试带参数的模式（可用更完善的 path-to-regex）</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> pattern <span class="keyword">in</span> routes) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pattern.<span class="title function_">includes</span>(<span class="string">&#x27;:&#x27;</span>)) &#123;</span><br><span class="line">      <span class="keyword">const</span> regex = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;^&#x27;</span> + pattern.<span class="title function_">replace</span>(<span class="regexp">/:\w+/g</span>, <span class="string">&#x27;([^/]+)&#x27;</span>) + <span class="string">&#x27;$&#x27;</span>);</span><br><span class="line">      <span class="keyword">const</span> m = path.<span class="title function_">match</span>(regex);</span><br><span class="line">      <span class="keyword">if</span> (m) &#123;</span><br><span class="line">        <span class="keyword">const</span> keys = (pattern.<span class="title function_">match</span>(<span class="regexp">/:\w+/g</span>) || []).<span class="title function_">map</span>(<span class="function"><span class="params">k</span> =&gt;</span> k.<span class="title function_">slice</span>(<span class="number">1</span>));</span><br><span class="line">        <span class="keyword">const</span> params = <span class="title class_">Object</span>.<span class="title function_">fromEntries</span>(keys.<span class="title function_">map</span>(<span class="function">(<span class="params">k, i</span>) =&gt;</span> [k, <span class="built_in">decodeURIComponent</span>(m[i+<span class="number">1</span>])]));</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="attr">handler</span>: routes[pattern], params &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pattern === path) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">handler</span>: routes[pattern], <span class="attr">params</span>: &#123;&#125; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onHashChange</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> path = <span class="title function_">parseHash</span>();</span><br><span class="line">  <span class="keyword">const</span> matched = <span class="title function_">matchRoute</span>(path);</span><br><span class="line">  <span class="keyword">if</span> (matched) matched.<span class="title function_">handler</span>(matched.<span class="property">params</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="title function_">renderNotFound</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;hashchange&#x27;</span>, onHashChange);</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, onHashChange);</span><br></pre></td></tr></table></figure></li>
+<li>基于 History API 的简单路由：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filepath:</span></span><br><span class="line"><span class="comment">// ...existing code...</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">navigateTo</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  history.<span class="title function_">pushState</span>(<span class="literal">null</span>, <span class="string">&#x27;&#x27;</span>, url);</span><br><span class="line">  <span class="title function_">onLocationChange</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">replaceTo</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  history.<span class="title function_">replaceState</span>(<span class="literal">null</span>, <span class="string">&#x27;&#x27;</span>, url);</span><br><span class="line">  <span class="title function_">onLocationChange</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onLocationChange</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> path = location.<span class="property">pathname</span> || <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> matched = <span class="title function_">matchRoute</span>(path); <span class="comment">// reuse matchRoute（需支持不含#的路径）</span></span><br><span class="line">  <span class="keyword">if</span> (matched) matched.<span class="title function_">handler</span>(matched.<span class="property">params</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="title function_">renderNotFound</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;popstate&#x27;</span>, onLocationChange);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> a = e.<span class="property">target</span>.<span class="title function_">closest</span>(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!a) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> isExternal = a.<span class="property">host</span> !== location.<span class="property">host</span> || a.<span class="title function_">hasAttribute</span>(<span class="string">&#x27;target&#x27;</span>) || a.<span class="title function_">hasAttribute</span>(<span class="string">&#x27;download&#x27;</span>);</span><br><span class="line">  <span class="keyword">if</span> (!isExternal) &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>();</span><br><span class="line">    <span class="title function_">navigateTo</span>(a.<span class="property">pathname</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, onLocationChange);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="路由匹配与参数解析"><a href="#路由匹配与参数解析" class="headerlink" title="路由匹配与参数解析"></a>路由匹配与参数解析</h3><ul>
+<li>推荐使用稳定的路径匹配库（如 path-to-regexp、route-parser），避免手写正则带来的边界问题。</li>
+<li>注意对参数做 decodeURIComponent&#x2F;encodeURIComponent，处理空段、尾斜杠一致性。</li>
+</ul>
+<h3 id="服务端配置（History-路由必需）"><a href="#服务端配置（History-路由必需）" class="headerlink" title="服务端配置（History 路由必需）"></a>服务端配置（History 路由必需）</h3><ul>
+<li>所有非静态资源的请求应返回 SPA 的入口页（index.html），由前端路由决定视图。</li>
+<li>对于静态资源（JS&#x2F;CSS&#x2F;图片）应保留正常静态处理。<br>若支持 SSR，请在服务器端做对应路由渲染并返回预渲染 HTML 提升 SEO。</li>
+</ul>
+<h3 id="边界与注意点"><a href="#边界与注意点" class="headerlink" title="边界与注意点"></a>边界与注意点</h3><ul>
+<li>SEO 与爬虫：Hash 路由对 SEO 不友好；使用 History + SSR 或预渲染可改善。</li>
+<li>刷新问题：History 路由刷新需服务器回退；Hash 路由无需服务器调整。</li>
+<li>滚动恢复：处理导航时保存&#x2F;恢复滚动位置（浏览器默认可能不同）。</li>
+<li>访问控制：导航守卫（同步&#x2F;异步）用于鉴权、重定向。</li>
+<li>性能与内存：避免在路由切换时泄露事件监听器或定时器。</li>
+<li>URL 编码：注意路径与查询的编码&#x2F;解码、重复斜杠、尾随斜杠的规范化。</li>
+<li>后退&#x2F;替换：用 replaceState 做无需历史记录的替换（如登录后替换回上一个状态）。</li>
+</ul>
+<h3 id="实践建议"><a href="#实践建议" class="headerlink" title="实践建议"></a>实践建议</h3><ul>
+<li>小项目或兼容性要求高：hash 路由快速简单。</li>
+<li>生产级 SPA：优先 history 路由 + 服务端配置或 SSR。</li>
+<li>使用成熟路由库（Vue Router &#x2F; React Router &#x2F; router5 等）来减少坑与提升功能（懒加载、嵌套路由、导航守卫、滚动行为等）。</li>
+<li>提前考虑基路径(base)、404&#x2F;重定向策略与国际化路由设计。</li>
+</ul>
+<p>小结：理解 hash 与 history 的原理与权衡，再根据项目需求选择实现方式与工具，能避免常见的刷新、SEO、服务器配置等问题。</p>
 
              
           </div>
